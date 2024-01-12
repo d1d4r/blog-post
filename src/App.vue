@@ -1,8 +1,8 @@
 <template>
-  <LeftSidebar />
+  <LayoutWrapper />
 </template>
 <script setup>
-import LeftSidebar from "@/layouts/LeftSidebar.vue";
+import LayoutWrapper from "@/layouts/LayoutWrapper.vue";
 </script>
 
 <style scoped></style>
