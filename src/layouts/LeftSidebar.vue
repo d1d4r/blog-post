@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="drawer drawer-open">
+  <div class="drawer ">
     
     
     <slot></slot>

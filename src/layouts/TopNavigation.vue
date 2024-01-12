@@ -4,8 +4,8 @@
       <LeftSidebar>
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content">
-          <label for="my-drawer-4" class="drawer-button">
-            <div tabindex="0" class="btn btn-ghost btn-circle drawer-button">
+          <label for="my-drawer-4" class=" drawer-button">
+            <div tabindex="0" class="btn btn-ghost btn-circle ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-5 h-5"
