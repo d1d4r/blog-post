@@ -8,7 +8,8 @@
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
 
     <div class="drawer-content m-5">
-      <MainContent />
+      <!-- <MainContent /> -->
+      <slot></slot>
     </div>
 
     <div class="drawer-side">
@@ -38,24 +39,38 @@
           </div>
         </label>
 
-        <li><a>profile</a></li>
-        <li><a>My feed</a></li>
-        <li><a>HOW TO?</a></li>
-        <li><a>bookmarks</a></li>
+        <router-link
+          v-for="route in routes"
+          :key="route.name"
+          :to="`${route.path}`"
+          class="p-3 hover:bg-base-300 rounded-md text-[15px]"
+        >
+          <li>{{ route.name }}</li>
+        </router-link>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
-// import { useDrawer } from "@/stores/openDrawer";
-import MainContent from "@/layouts/MainContent.vue";
+import { ref } from "vue";
 
-//const { drawer, toggleDrawer } = useDrawer();
-
-// const isDrawerOpen = ref(false);
-
-// const toggle = () => {
-//   isDrawerOpen.value = !isDrawerOpen.value;
-// };
+const routes = ref([
+  {
+    name: "Profile",
+    path: "/Profile",
+  },
+  {
+    name: "My feed",
+    path: "/my-feed",
+  },
+  {
+    name: "HOWTO",
+    path: "/how-to",
+  },
+  {
+    name: "bookmarks",
+    path: "/bookmarks",
+  },
+]);
 </script>
 <style lang=""></style>

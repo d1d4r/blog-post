@@ -1,13 +1,32 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import ProfileView from "@/views/ProfileView.vue";
+import  HowTo  from "@/views/Howto.vue";
+import  MyFeedView  from "@/views/MyFeedView.vue";
+import  BookMarks  from "@/views/BookMarks.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: HomeView
-    // },
+    {
+      path: "/profile",
+      name: "Profile",
+      component: ProfileView,
+    },
+    {
+      path: "/my-feed",
+      name: "My feed",
+      component: MyFeedView,
+    },
+    {
+      path: "/how-to",
+      name: "HOWTO",
+      component: HowTo,
+    },
+    {
+      path: "/bookmarks",
+      name: "bookmarks",
+      component: BookMarks,
+    },
     // {
     //   path: '/about',
     //   name: 'about',
@@ -16,7 +35,7 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue')
     // }
-  ]
-})
+  ],
+});
 
-export default router
+export default router;

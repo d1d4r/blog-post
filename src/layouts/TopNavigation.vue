@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="navbar bg-base-100 border-b">
+  <div class="navbar bg-base-300 ">
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
@@ -70,8 +70,6 @@
   </div>
 </template>
 <script setup>
-import { useDrawer } from "@/stores/openDrawer";
 
-const { toggleDrawer } = useDrawer();
 </script>
 <style lang=""></style>

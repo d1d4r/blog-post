@@ -1,7 +1,5 @@
 <template lang="">
-  <div>this is main content</div>
+  <main ><router-view></router-view></main>
 </template>
-<script>
-export default {};
-</script>
+<script setup></script>
 <style lang=""></style>

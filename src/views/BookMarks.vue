@@ -1,7 +1,6 @@
 <template lang="">
   <div>Bookmarks page</div>
 </template>
-<script>
-export default {};
+<script setup>
 </script>
 <style lang=""></style>
