@@ -57,7 +57,7 @@ import { ref } from "vue";
 const routes = ref([
   {
     name: "Profile",
-    path: "/Profile",
+    path: "/profile",
   },
   {
     name: "My feed",
