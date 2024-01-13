@@ -1,9 +1,6 @@
 <template lang="">
-  <div>
-    <TopNavigation />
-    
-    <MainContent />
-  </div>
+  <TopNavigation />
+  <LeftSidebar />
 </template>
 <script setup>
 import LeftSidebar from "@/layouts/LeftSidebar.vue";

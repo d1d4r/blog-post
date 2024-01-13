@@ -1,11 +1,10 @@
 <template lang="">
-  <div class="navbar bg-base-100">
+  <div class="navbar bg-base-100 border-b">
     <div class="navbar-start">
-      <LeftSidebar>
-        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+      <div id="tel" class="block">
         <div class="drawer-content">
-          <label for="my-drawer-4" class=" drawer-button">
-            <div tabindex="0" class="btn btn-ghost btn-circle ">
+          <label for="my-drawer-4" class="drawer-button sm:hidden">
+            <div tabindex="0" class="btn btn-ghost btn-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-5 h-5"
@@ -23,11 +22,14 @@
             </div>
           </label>
         </div>
-      </LeftSidebar>
+      </div>
+      <!-- <LeftSidebar>
+        
+      </LeftSidebar> -->
     </div>
     <!-- <div class="navbar-center">
       <a class="text-xl btn btn-ghost">daisyUI</a>
-    </div> 
+    </div> -->
     <div class="navbar-end">
       <button class="btn btn-ghost btn-circle">
         <svg
@@ -64,10 +66,12 @@
           <span class="badge badge-xs badge-primary indicator-item"></span>
         </div>
       </button>
-    </div>-->
+    </div>
   </div>
 </template>
 <script setup>
-import LeftSidebar from "@/layouts/LeftSidebar.vue";
+import { useDrawer } from "@/stores/openDrawer";
+
+const { toggleDrawer } = useDrawer();
 </script>
 <style lang=""></style>

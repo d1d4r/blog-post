@@ -1,5 +1,5 @@
 <template lang="">
-  <div>this is main content</div>
+  <div>Bookmarks page</div>
 </template>
 <script>
 export default {};
