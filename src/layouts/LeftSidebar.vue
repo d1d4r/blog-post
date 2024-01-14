@@ -21,7 +21,10 @@
       <ul class="min-h-full p-4 menu w-80 bg-base-200 text-base-content">
         <!-- Sidebar content here -->
         <label for="my-drawer-4" class="drawer-button sm:hidden">
-          <div tabindex="0" class="btn btn-ghost btn-circle">
+          <div
+            tabindex="0"
+            class="btn btn-ghost btn-circle active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="w-5 h-5"
