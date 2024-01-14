@@ -16,6 +16,11 @@ const router = createRouter({
       component: ProfileView,
     },
     {
+      path: "/profile",
+      name: "Profile",
+      component: ProfileView,
+    },
+    {
       path: "/my-feed",
       name: "My feed",
       component: MyFeedView,

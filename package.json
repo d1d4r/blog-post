@@ -10,7 +10,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "clsx": "^2.1.0",
     "pinia": "^2.1.7",
+    "tailwind-merge": "^2.2.0",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },

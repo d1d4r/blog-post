@@ -18,13 +18,15 @@
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <ul class="min-h-full p-4 menu w-80 bg-base-200 text-base-content">
+      <ul
+        :class="
+          'min-h-full p-4 menu bg-base-200 text-base-content ' +
+          (isExpanded ? 'w-20' : 'w-80')
+        "
+      >
         <!-- Sidebar content here -->
         <label for="my-drawer-4" class="drawer-button sm:hidden">
-          <div
-            tabindex="0"
-            class="btn btn-ghost btn-circle active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
-          >
+          <div tabindex="0" class="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="w-5 h-5"
@@ -50,12 +52,19 @@
         >
           <li>{{ route.name }}</li>
         </router-link>
+        <button class="btn  bg-white w-10" @click="toggle">x</button>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
 import { ref } from "vue";
+
+const isExpanded = ref(false);
+
+const toggle = () => {
+  isExpanded.value = !isExpanded.value;
+};
 
 const routes = ref([
   {
