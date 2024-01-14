@@ -6,15 +6,28 @@
     </ul>
   </div>
   <form>
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" />
-    </div>
-    <div class="mb-3">
-      <label for="content" class="form-label">Content</label>
-      <textarea class="form-control" id="content" rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <label class="form-control">
+      <div class="label">
+        <span class="label-text">Your bio</span>
+      </div>
+      <input
+        type="text"
+        placeholder="Type here"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </label>
+
+    <label class="form-control">
+      <div class="label">
+        <span class="label-text">Your bio</span>
+      </div>
+      <textarea
+        class="textarea textarea-bordered h-24"
+        placeholder="Bio"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
   </form>
 </template>
 <script setup></script>
