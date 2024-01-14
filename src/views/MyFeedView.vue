@@ -1,26 +1,13 @@
 <template lang="">
-  <div class="grid">
-    <CardPost v-for="item in items" :key="item.id" />
+  <div
+    class="flex flex-wrap justify-evenly gap-7 "
+  >
+    <CardPost v-for="item in 200" :key="item.id" />
   </div>
 </template>
 <script setup>
 import CardPost from "@/components/CardPost.vue";
-const items = [
-  {
-    id: 1,
-    title: "title 1",
-    content: "content 1",
-  },
-  {
-    id: 2,
-    title: "title 2",
-    content: "content 2",
-  },
-  {
-    id: 3,
-    title: "title 3",
-    content: "content 3",
-  },
-];
+
 </script>
 <style lang=""></style>
+<!-- border-solid border-red-200 border-[1px] -->

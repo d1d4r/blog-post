@@ -5,6 +5,7 @@ import MyFeedView from "@/views/MyFeedView.vue";
 import BookMarks from "@/views/BookMarks.vue";
 import RootView from "@/views/RootView.vue";
 import NotFound from "@/views/NotFound.vue";
+import CreatePost from "@/views/CreatePost.vue";
 //import LayoutWrapper from "@/layouts/LayoutWrapper.vue";
 
 const router = createRouter({
@@ -19,6 +20,13 @@ const router = createRouter({
       path: "/profile",
       name: "Profile",
       component: ProfileView,
+     
+    },
+    {
+      path: "/profile/create",
+      name: "create",
+      component: CreatePost,
+     
     },
     {
       path: "/my-feed",

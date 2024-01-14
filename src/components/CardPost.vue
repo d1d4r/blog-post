@@ -1,6 +1,7 @@
 <template lang="">
+    
   <div
-    class="card w-80 bg-base-100 shadow-xl border-solid m-auto lg:m-0 border-[1px] border-sky-500"
+    class="card w-72 bg-base-100 shadow-xl border-solid m-auto lg:m-0 border-[1px] border-sky-500"
   >
     <div class="card-body">
       <h2 class="card-title">Shoes!</h2>
