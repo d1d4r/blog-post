@@ -1,5 +1,7 @@
 <template lang="">
-  <div class="card w-96 bg-base-100 shadow-xl">
+  <div
+    class="card w-80 bg-base-100 shadow-xl border-solid m-auto lg:m-0 border-[1px] border-sky-500"
+  >
     <div class="card-body">
       <h2 class="card-title">Shoes!</h2>
       <p>If a dog chews shoes whose shoes does he choose?</p>
@@ -12,7 +14,5 @@
     </figure>
   </div>
 </template>
-<script setup>
-
-</script>
+<script setup></script>
 <style lang=""></style>

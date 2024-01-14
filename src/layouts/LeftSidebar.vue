@@ -4,7 +4,7 @@
       >Open drawer</label
     >
   </div> -->
-  <div class="drawer sm:drawer-open">
+  <div class="drawer md:drawer-open">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
 
     <div class="drawer-content m-5">
