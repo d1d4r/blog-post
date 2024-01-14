@@ -1,10 +1,7 @@
 <template lang="">
-    <div>
-        feed page
-    </div>
+  <CardPost />
 </template>
 <script setup>
+import CardPost from "@/components/CardPost.vue";
 </script>
-<style lang="">
-    
-</style>
+<style lang=""></style>

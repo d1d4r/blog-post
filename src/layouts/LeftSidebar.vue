@@ -50,7 +50,10 @@
           :to="`${route.path}`"
           class="p-3 hover:bg-base-300 rounded-md text-[15px]"
         >
-          <li>{{ isExpanded ? "icon" : route.name }}</li>
+          <li > {{ route.name }}</li>
+         
+          
+          
         </router-link>
 
         <div>
@@ -61,7 +64,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6 "
+              class="w-6 h-6"
             >
               <path
                 stroke-linecap="round"
@@ -70,12 +73,7 @@
               />
             </svg>
           </label>
-          <input
-            id="expand"
-            type="checkbox"
-            @click="toggle"
-            class="hidden"
-          />
+          <input id="expand" type="checkbox" @click="toggle" class="hidden" />
         </div>
       </ul>
     </div>
@@ -83,6 +81,10 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import save from "@/assets/save.svg";
+import howto from "@/assets/howto.svg";
+import profile from "@/assets/profile.svg";
+import post from "@/assets/post.svg";
 
 const isExpanded = ref(false);
 
@@ -94,18 +96,22 @@ const routes = ref([
   {
     name: "Profile ",
     path: "/profile",
+    icon: profile,
   },
   {
     name: "feed",
     path: "/my-feed",
+    icon: post,
   },
   {
     name: "HOWTO ",
     path: "/how-to",
+    icon: howto,
   },
   {
     name: "bookmarks ",
     path: "/bookmarks",
+    icon: save,
   },
 ]);
 </script>
