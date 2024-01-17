@@ -16,6 +16,19 @@
         class="input input-bordered w-full max-w-xs"
       />
     </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">Pick the category</span>
+      </div>
+      <select class="select select-bordered" >
+        <option disabled selected>Pick one</option>
+        <option>Star Wars</option>
+        <option>Harry Potter</option>
+        <option>Lord of the Rings</option>
+        <option>Planet of the Apes</option>
+        <option>Star Trek</option>
+      </select>
+    </label>
 
     <label class="form-control">
       <div class="label">

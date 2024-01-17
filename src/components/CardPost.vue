@@ -10,6 +10,7 @@
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
       </figure>
+      
       <router-link
         :to="`/my-feed/blogpost/${props.item.id}`"
         class="hover:underline"
