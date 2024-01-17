@@ -5,22 +5,23 @@
     <div class="card-body">
       <figure>
         <img
-          :src="props.blogPostItems.image"
+          :src="props.item.image"
           alt="Shoes"
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
       </figure>
-      <router-link to="my-feed/1" class="hover:underline">
-        <h2 class="card-title p-2">{{ props.blogPostItems.title }}</h2>
+      <router-link :to="`my-feed/${props.item.id}`" class="hover:underline">
+        <h2 class="card-title p-2">{{ props.item.title }}</h2>
       </router-link>
-      <h2 class="pl-2 text-sm">{{ props.blogPostItems.date }}</h2>
+      <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>
       <figure>
-        <img :src="props.blogPostItems.image" alt="Shoes" class="rounded-xl" />
+        <img :src="props.item.image" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="card-actions justify-end p-3">
         <div
           class="badge badge-outline"
-          :v-for="tag in props.blogPostItems[0].tags"
+          v-for="tag in props.item.tags"
+          :key="tag"
         >
           {{ tag }}
         </div>
@@ -31,11 +32,12 @@
 <script setup>
 import { defineProps } from "vue";
 const props = defineProps({
-  blogPostItems: {
-    type: Array,
+  item: {
+    type: Object,
     required: true,
   },
 });
+console.log("🚀 ~ props:", props);
 </script>
 <style scoped>
 figure {

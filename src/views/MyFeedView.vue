@@ -1,6 +1,6 @@
 <template lang="">
   <div class="flex flex-wrap justify-evenly gap-7">
-    <CardPost v-for="item in blogPostItems" :key="item.id" :blogPostItems="blogPostItems" />
+    <CardPost v-for="item in blogPostItems" :key="item.id" :item="item" />
   </div>
 </template>
 <script setup>
