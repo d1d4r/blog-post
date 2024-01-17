@@ -6,6 +6,7 @@ import BookMarks from "@/views/BookMarks.vue";
 import RootView from "@/views/RootView.vue";
 import NotFound from "@/views/NotFound.vue";
 import CreatePost from "@/views/CreatePost.vue";
+import BlogPost from "@/views/BlogPost.vue";
 //import LayoutWrapper from "@/layouts/LayoutWrapper.vue";
 
 const router = createRouter({
@@ -30,6 +31,13 @@ const router = createRouter({
       path: "/my-feed",
       name: "My feed",
       component: MyFeedView,
+      children: [
+        {
+          path: "/:id",
+          name: "blogpost",
+          component: BlogPost,
+        },
+      ],
     },
     {
       path: "/how-to",
