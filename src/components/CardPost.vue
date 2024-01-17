@@ -10,7 +10,10 @@
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
       </figure>
-      <router-link :to="`my-feed/${props.item.id}`" class="hover:underline">
+      <router-link
+        :to="`/my-feed/blogpost/${props.item.id}`"
+        class="hover:underline"
+      >
         <h2 class="card-title p-2">{{ props.item.title }}</h2>
       </router-link>
       <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>

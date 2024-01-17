@@ -31,13 +31,17 @@ const router = createRouter({
       path: "/my-feed",
       name: "My feed",
       component: MyFeedView,
-      children: [
-        {
-          path: "/:id",
-          name: "blogpost",
-          component: BlogPost,
-        },
-      ],
+     
+    },
+    {
+      path: "/my-feed/blogpost/:id",
+      name: "blogpost",
+      component: BlogPost,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: NotFound,
     },
     {
       path: "/how-to",
