@@ -5,31 +5,38 @@
     <div class="card-body">
       <figure>
         <img
-          src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+          :src="props.blogPostItems.image"
           alt="Shoes"
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
       </figure>
-      <h2 class="card-title p-2">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate,
-        totam.
-      </h2>
-      <h2 class="pl-2 text-sm">2h ago</h2>
+      <router-link to="my-feed/1" class="hover:underline">
+        <h2 class="card-title p-2">{{ props.blogPostItems.title }}</h2>
+      </router-link>
+      <h2 class="pl-2 text-sm">{{ props.blogPostItems.date }}</h2>
       <figure>
-        <img
-          src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-          alt="Shoes"
-          class="rounded-xl"
-        />
+        <img :src="props.blogPostItems.image" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="card-actions justify-end p-3">
-        <div class="badge badge-outline">Fashion</div>
-        <div class="badge badge-outline">Products</div>
+        <div
+          class="badge badge-outline"
+          :v-for="tag in props.blogPostItems[0].tags"
+        >
+          {{ tag }}
+        </div>
       </div>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { defineProps } from "vue";
+const props = defineProps({
+  blogPostItems: {
+    type: Array,
+    required: true,
+  },
+});
+</script>
 <style scoped>
 figure {
   @apply justify-start p-2;

@@ -1,6 +1,6 @@
 <template lang="">
   <div class="flex flex-wrap justify-evenly gap-7">
-    <CardPost v-for="item in blogPostItems" :key="item.id" />
+    <CardPost v-for="item in blogPostItems" :key="item.id" :blogPostItems="blogPostItems" />
   </div>
 </template>
 <script setup>
@@ -19,7 +19,7 @@ const blogPostItems = [
     id: 2,
 
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    date: "2h ago",
+    date: "3h ago",
     image:
       "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
     tags: ["Fashion", "Products"],
@@ -27,7 +27,7 @@ const blogPostItems = [
   {
     id: 3,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    date: "2h ago",
+    date: "4h ago",
     image:
       "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
     tags: ["Fashion", "Products"],
