@@ -7,20 +7,19 @@
   <div class="drawer md:drawer-open">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
 
-    <div class="drawer-content m-5">
+    <div class="m-5 drawer-content">
       <!-- <MainContent /> -->
       <slot></slot>
     </div>
 
-    <div class="drawer-side p-0">
+    <div class="p-0 border-r border-r-base-300 drawer-side">
       <label
         for="my-drawer-4"
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
       <ul
-        :class="
-          'min-h-full  menu bg-base-200 text-base-content p-4 ' +
+        :class="'min-h-full  menu bg-base-200 text-base-content p-4 ' +
           (isExpanded ? 'w-20' : 'w-80')
         "
       >
@@ -50,10 +49,7 @@
           :to="`${route.path}`"
           class="p-3 hover:bg-base-300 rounded-md text-[15px]"
         >
-          <li > {{ route.name }}</li>
-         
-          
-          
+          <li>{{ route.name }}</li>
         </router-link>
 
         <div>

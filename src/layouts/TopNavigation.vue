@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="navbar bg-base-300">
+  <div class="border-b border-b-base-300 navbar bg-base-100">
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
