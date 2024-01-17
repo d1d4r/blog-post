@@ -13,20 +13,18 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "Profile",
+      name: "root",
       component: ProfileView,
     },
     {
       path: "/profile",
       name: "Profile",
       component: ProfileView,
-     
     },
     {
       path: "/profile/create",
       name: "create",
       component: CreatePost,
-     
     },
     {
       path: "/my-feed",
