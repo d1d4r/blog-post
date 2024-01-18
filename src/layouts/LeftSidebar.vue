@@ -26,7 +26,7 @@
       >
         <!-- Sidebar content here -->
         <label for="my-drawer-4" class="drawer-button sm:hidden">
-          <div tabindex="0" class="btn btn-ghost btn-circle">
+          <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
             <svg
               class="swap-on fill-current w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@
           :to="`${route.path}`"
           class="p-3 hover:bg-base-300 rounded-md text-[15px]"
         >
-          <li>{{ route.name }}</li>
+          <li >{{ route.name }}</li>
         </router-link>
 
         <div>
