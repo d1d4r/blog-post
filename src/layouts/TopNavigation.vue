@@ -26,9 +26,6 @@
           </label>
         </div>
       </div>
-      <!-- <LeftSidebar>
-        
-      </LeftSidebar> -->
     </div>
     <!-- <div class="navbar-center">
       <a class="text-xl btn btn-ghost">daisyUI</a>
