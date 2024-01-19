@@ -1,4 +1,3 @@
-import { db } from "./index.js";
 
 class post {
   constructor(app) {
