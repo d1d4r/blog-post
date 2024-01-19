@@ -1,4 +1,3 @@
-
 class post {
   constructor(app) {
     this.db = db;
