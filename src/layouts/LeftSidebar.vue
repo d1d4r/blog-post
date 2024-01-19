@@ -20,7 +20,7 @@
           (isExpanded ? 'w-20' : 'w-80')
         "
       >
-        <!-- Sidebar content here -->
+        
         <label for="my-drawer-4" class="drawer-button sm:hidden">
           <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
             <svg
@@ -45,6 +45,7 @@
         >
           <li >{{ route.name }}</li>
         </router-link>
+      
 
         <div>
           <label for="expand" class="btn">
