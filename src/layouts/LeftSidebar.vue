@@ -1,9 +1,5 @@
 <template lang="">
-  <!-- <div class="drawer-content">
-    <label for="my-drawer-4" class="drawer-button btn btn-primary"
-      >Open drawer</label
-    >
-  </div> -->
+  
   <div class="drawer md:drawer-open">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
 
