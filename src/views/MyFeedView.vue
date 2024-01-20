@@ -1,10 +1,39 @@
 <template lang="">
   <div class="flex flex-wrap justify-evenly gap-7">
-    <CardPost v-for="item in blogPostItems" :key="item.id" :item="item" />
+    <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
   </div>
 </template>
 <script setup>
 import CardPost from "@/components/CardPost.vue";
+import Post from "@/service/firestore/post.js";
+import { app } from "@/firebase/index.js";
+import { reactive, onMounted } from "vue";
+
+const post = new Post(app);
+
+const state = reactive({
+  posts: [],
+  headers: [],
+  loading: false,
+  error: null,
+});
+
+onMounted(async () => {
+  try {
+    state.loading = true;
+    state.posts = await post.getAll();
+    console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
+    state.loading = false;
+  } catch (error) {
+    console.log("🚀 ~ onMounted ~ error:", error)
+    state.error = error;
+  } finally {
+    state.loading = false;
+  }
+  //state.posts = await post.getAll();
+});
+
+// console.log(await post.getAll());
 
 const blogPostItems = [
   {

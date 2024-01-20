@@ -1,12 +1,21 @@
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 class Post {
-  
   constructor(app) {
-    this.db = app.firestore();
+    this.db = getFirestore(app);
+    //console.log("🚀 ~ Post ~ constructor ~ this.db :", this.db);
   }
 
   async getAll() {
-    const posts = await this.db.collection("Posts").get();
-    return posts.docs.map((post) => post.data());
+    const querySnapshot = await getDocs(collection(this.db, "Posts"));
+    const posts = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+     
+      ...doc.data(),
+    }));
+    //console.log("🚀 ~ Post ~ posts ~ doc.data():", querySnapshot.docs.data);
+
+    return posts;
   }
 
   async get(id) {
@@ -27,3 +36,5 @@ class Post {
     await this.db.collection("Posts").doc(id).delete();
   }
 }
+
+export default Post;
