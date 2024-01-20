@@ -13,14 +13,24 @@
       <input
         type="text"
         placeholder="Type here"
-        class="input input-bordered w-full max-w-xs"
+        class="w-full max-w-xs input input-bordered"
       />
     </label>
-    <label class="form-control w-full max-w-xs">
+    <label class="w-full max-w-xs form-control">
+      <div class="label">
+        <span class="label-text">Pick a file</span>
+      </div>
+      <input
+        type="file"
+        accept="image/png, image/jpeg"
+        class="w-full max-w-xs file-input file-input-bordered"
+      />
+    </label>
+    <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick the category</span>
       </div>
-      <select class="select select-bordered" >
+      <select class="select select-bordered">
         <option disabled selected>Pick one</option>
         <option>Star Wars</option>
         <option>Harry Potter</option>
@@ -35,12 +45,12 @@
         <span class="label-text">Your bio</span>
       </div>
       <textarea
-        class="textarea textarea-bordered h-24"
+        class="h-24 textarea textarea-bordered"
         placeholder="Bio"
       ></textarea>
     </label>
 
-    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <button type="submit" class="mt-3 btn btn-primary">Submit</button>
   </form>
 </template>
 <script setup></script>
