@@ -1,4 +1,10 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
 class Post {
   constructor(app) {
@@ -10,7 +16,7 @@ class Post {
     const querySnapshot = await getDocs(collection(this.db, "Posts"));
     const posts = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-     
+
       ...doc.data(),
     }));
     //console.log("🚀 ~ Post ~ posts ~ doc.data():", querySnapshot.docs.data);
@@ -19,8 +25,17 @@ class Post {
   }
 
   async get(id) {
-    const post = await this.db.collection("Posts").doc(id).get();
-    return post.data();
+    const docRef = doc(this.db, "Posts", id);
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return [];
+    }
+    // const post = await this.db.collection("Posts").doc(id).get();
+    // return post.data();
   }
 
   async create(data) {
