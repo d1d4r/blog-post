@@ -5,12 +5,13 @@
     <div class="card-body">
       <figure>
         <img
+          
           :src="props.item.image"
           alt="Shoes"
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
       </figure>
-      
+
       <router-link
         :to="`/my-feed/blogpost/${props.item.id}`"
         class="hover:underline"
@@ -19,7 +20,12 @@
       </router-link>
       <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>
       <figure>
-        <img :src="props.item.image" alt="Shoes" class="rounded-xl" />
+        <img
+        loading="lazy"
+          :src="props.item.image"
+          alt="Shoes"
+          class="rounded-xl"
+        />
       </figure>
       <div class="card-actions justify-end p-3">
         <div
@@ -41,7 +47,6 @@ const props = defineProps({
     required: true,
   },
 });
-
 </script>
 <style scoped>
 figure {
