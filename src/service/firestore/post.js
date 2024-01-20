@@ -1,6 +1,7 @@
-class post {
+class Post {
+  
   constructor(app) {
-    this.db = db;
+    this.db = app.firestore();
   }
 
   async getAll() {
