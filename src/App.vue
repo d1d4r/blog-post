@@ -1,6 +1,6 @@
 <template>
   <!-- <RootView /> -->
-   <LayoutWrapper /> 
+  <LayoutWrapper />
 </template>
 <script setup>
 import LayoutWrapper from "@/layouts/LayoutWrapper.vue";

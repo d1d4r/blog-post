@@ -1,10 +1,15 @@
 <template lang="">
   <div class="flex flex-wrap justify-evenly gap-7" v-if="!state.loading">
-    <CardPost  v-for="item in state.posts" :key="item.id" :item="item" />
+    <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
   </div>
   <div class="flex flex-wrap justify-evenly gap-7" v-if="state.loading">
-    <SkeletonCardPost  v-for="item in 200" :key="item.id"  />
+    <SkeletonCardPost v-for="item in 200" :key="item.id" />
   </div>
+  <!-- <div class="toast toast-top toast-end">
+    <div class="alert alert-success">
+      <span>Message sent successfully.</span>
+    </div>
+  </div> -->
 </template>
 <script setup>
 import CardPost from "@/components/CardPost.vue";
@@ -29,17 +34,16 @@ onMounted(async () => {
     console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
     state.loading = false;
   } catch (error) {
-    console.log("🚀 ~ onMounted ~ error:", error)
+    console.log("🚀 ~ onMounted ~ error:", error);
     state.error = error;
   } finally {
     state.loading = false;
   }
-  //state.posts = await post.getAll();
 });
-
-// console.log(await post.getAll());
-
-const blogPostItems = [
+</script>
+<style lang=""></style>
+<!-- border-solid border-red-200 border-[1px] -->
+<!-- const blogPostItems = [
   {
     id: 1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
@@ -65,7 +69,4 @@ const blogPostItems = [
       "https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg",
     tags: ["Fashion", "Products"],
   },
-];
-</script>
-<style lang=""></style>
-<!-- border-solid border-red-200 border-[1px] -->
+]; -->
