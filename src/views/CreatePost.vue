@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="text-sm breadcrumbs">
     <ul>
       <li><router-link to="/profile">Profile</router-link></li>
@@ -17,9 +17,7 @@
         class="w-full max-w-xs file-input file-input-bordered"
         @change="handleFileChange"
       />
-      <button class="btn btn-primary" >
-        Upload
-      </button>
+      <button class="btn btn-primary">Upload</button>
     </label>
   </form>
   <form @submit="handleSubmit">
@@ -47,11 +45,9 @@
         required
       >
         <option disabled selected>Pick one</option>
-        <option>Star Wars</option>
-        <option>Harry Potter</option>
-        <option>Lord of the Rings</option>
-        <option>Planet of the Apes</option>
-        <option>Star Trek</option>
+        <option v-for="category in categories" :key="category">
+          {{ category }}
+        </option>
       </select>
     </label>
 
@@ -69,10 +65,11 @@
 
     <div class="space-x-2">
       <button type="submit" class="mt-3 btn btn-primary">Submit</button>
-      <button type="reset" class="mt-3 btn btn-secondary">cancel</button>
+      <button type="reset" class="mt-3 btn btn-secondary">Cancel</button>
     </div>
   </form>
 </template>
+
 <script setup>
 import { reactive, ref } from "vue";
 import { app } from "../firebase";
@@ -84,6 +81,14 @@ const router = useRouter();
 const post = new Post(app);
 const uploadPostImage = new UploadPostImage(app);
 
+const categories = [
+  "web development",
+  "frontend development",
+  "js",
+  "vuejs",
+  "firebase",
+];
+
 const formData = reactive({
   title: "",
   imageUrl: "",
@@ -93,30 +98,24 @@ const formData = reactive({
 
 const fileData = reactive({
   file: null,
-  
 });
-
-const postId = ref(null);
 
 const handleFileSubmit = async (e) => {
   e.preventDefault();
   const { progress, downloadURL } = await uploadPostImage.upload(fileData.file);
   formData.imageUrl = downloadURL;
-  //fileData.progress = progress;
-  // console.log("🚀 ~ handleFileSubmit ~ downloadURL:", downloadURL);
-  // console.log("🚀 ~ handleFileSubmit ~ progress:", progress);
-  // console.log("🚀 ~ handleFileSubmit ~ fileData.file:", fileData.file);
 };
 
 const handleFileChange = (e) => {
   fileData.file = e.target.files[0];
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   console.log("🚀 ~ handleSubmit ~ formData.file:", formData);
-  postId.value = post.create(formData);
-  router.push(`/my-feed`);
+  const postId = await post.create(formData);
+  router.push(`/my-feed/${postId}`);
 };
 </script>
-<style lang=""></style>
+
+<style></style>
