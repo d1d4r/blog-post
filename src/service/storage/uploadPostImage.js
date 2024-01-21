@@ -14,22 +14,29 @@ class UploadPostImage {
     const storageRef = ref(this.storage, `posts/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-      },
-      (error) => {
-        console.log(error);
-      },
-      async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          
-        console.log("File available at", downloadURL);
-      }
-    );
+    let progress = 0;
+    let downloadURL = "";
+
+    await new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          //console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        },
+        async () => {
+          downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          //console.log("File available at", downloadURL);
+          resolve();
+        }
+      );
+    });
+
+    return { progress, downloadURL };
   }
 }
 
