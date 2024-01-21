@@ -66,9 +66,30 @@
       <button type="reset" class="mt-3 btn btn-secondary">cancel</button>
     </div>
   </form>
+
+  <div class="toast toast-top toast-end" v-if="postId">
+    <div class="alert alert-success">
+      <button @click="postId = null">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </button>
+      <span>Message sent successfully.</span>
+    </div>
+  </div>
 </template>
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { app } from "../firebase";
 import Post from "@/service/firestore/post";
 import { useRouter } from "vue-router";
@@ -78,10 +99,11 @@ const post = new Post(app);
 
 const formData = reactive({
   title: "",
-
   tags: [],
   content: "",
 });
+
+const postId = ref(null);
 
 const handleFileChange = (e) => {
   formData.file = e.target.files[0];
@@ -89,9 +111,8 @@ const handleFileChange = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  console.log(formData);
-  post.create(formData);
-  router.push({ path: "/profile" });
+  postId.value = post.create(formData);
+  //router.push({ path: "/profile" });
 };
 </script>
 <style lang=""></style>
