@@ -5,15 +5,17 @@
       <li>Create Post</li>
     </ul>
   </div>
-  <form>
-    <label class="form-control">
+  <form @submit="handleSubmit">
+    <label class="w-full form-control max-w-xs">
       <div class="label">
-        <span class="label-text">Your bio</span>
+        <span class="label-text">Title</span>
       </div>
       <input
+        required
         type="text"
         placeholder="Type here"
         class="w-full max-w-xs input input-bordered"
+        v-model="formData.title"
       />
     </label>
     <label class="w-full max-w-xs form-control">
@@ -21,16 +23,22 @@
         <span class="label-text">Pick a file</span>
       </div>
       <input
+        required
         type="file"
         accept="image/png, image/jpeg"
         class="w-full max-w-xs file-input file-input-bordered"
+        @change="handleFileChange"
       />
     </label>
     <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick the category</span>
       </div>
-      <select class="select select-bordered">
+      <select
+        class="select select-bordered"
+        v-model="formData.category"
+        required
+      >
         <option disabled selected>Pick one</option>
         <option>Star Wars</option>
         <option>Harry Potter</option>
@@ -42,16 +50,36 @@
 
     <label class="form-control">
       <div class="label">
-        <span class="label-text">Your bio</span>
+        <span class="label-text">Your Content</span>
       </div>
       <textarea
+        required
         class="h-24 textarea textarea-bordered"
-        placeholder="Bio"
+        placeholder="content..."
+        v-model="formData.content"
       ></textarea>
     </label>
 
     <button type="submit" class="mt-3 btn btn-primary">Submit</button>
   </form>
 </template>
-<script setup></script>
+<script setup>
+import { reactive } from "vue";
+
+const formData = reactive({
+  title: "",
+  file: null,
+  category: "",
+  content: "",
+});
+
+const handleFileChange = (e) => {
+  formData.file = e.target.files[0];
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(formData);
+};
+</script>
 <style lang=""></style>
