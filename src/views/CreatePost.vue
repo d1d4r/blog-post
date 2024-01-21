@@ -17,7 +17,9 @@
         class="w-full max-w-xs file-input file-input-bordered"
         @change="handleFileChange"
       />
-      <button class="btn btn-primary">Upload</button>
+      <button class="btn btn-primary" >
+        Upload
+      </button>
     </label>
   </form>
   <form @submit="handleSubmit">
@@ -84,12 +86,14 @@ const uploadPostImage = new UploadPostImage(app);
 
 const formData = reactive({
   title: "",
+  imageUrl: "",
   tags: [],
   content: "",
 });
 
 const fileData = reactive({
   file: null,
+  
 });
 
 const postId = ref(null);
@@ -97,9 +101,11 @@ const postId = ref(null);
 const handleFileSubmit = async (e) => {
   e.preventDefault();
   const { progress, downloadURL } = await uploadPostImage.upload(fileData.file);
-  console.log("🚀 ~ handleFileSubmit ~ downloadURL:", downloadURL);
-  console.log("🚀 ~ handleFileSubmit ~ progress:", progress);
-  console.log("🚀 ~ handleFileSubmit ~ fileData.file:", fileData.file);
+  formData.imageUrl = downloadURL;
+  //fileData.progress = progress;
+  // console.log("🚀 ~ handleFileSubmit ~ downloadURL:", downloadURL);
+  // console.log("🚀 ~ handleFileSubmit ~ progress:", progress);
+  // console.log("🚀 ~ handleFileSubmit ~ fileData.file:", fileData.file);
 };
 
 const handleFileChange = (e) => {
@@ -110,7 +116,7 @@ const handleSubmit = (e) => {
   e.preventDefault();
   console.log("🚀 ~ handleSubmit ~ formData.file:", formData);
   postId.value = post.create(formData);
-  //router.push(`/profile/${postId.value}`);
+  router.push(`/my-feed`);
 };
 </script>
 <style lang=""></style>

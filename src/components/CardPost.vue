@@ -5,8 +5,7 @@
     <div class="card-body">
       <figure>
         <img
-          
-          :src="props.item.image"
+          :src="props.item.imageUrl"
           alt="Shoes"
           class="w-10 h-10 rounded-full border-2 border-white shadow-xl"
         />
@@ -21,8 +20,8 @@
       <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>
       <figure>
         <img
-        loading="lazy"
-          :src="props.item.image"
+          loading="lazy"
+          :src="props.item.imageUrl"
           alt="Shoes"
           class="rounded-xl"
         />
