@@ -18,7 +18,7 @@
         v-model="formData.title"
       />
     </label>
-    <label class="w-full max-w-xs form-control">
+    <!-- <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick a file</span>
       </div>
@@ -29,14 +29,15 @@
         class="w-full max-w-xs file-input file-input-bordered"
         @change="handleFileChange"
       />
-    </label>
+    </label> -->
     <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick the category</span>
       </div>
       <select
         class="select select-bordered"
-        v-model="formData.category"
+        v-model="formData.tags"
+        multiple
         required
       >
         <option disabled selected>Pick one</option>
@@ -60,16 +61,25 @@
       ></textarea>
     </label>
 
-    <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+    <div class="space-x-2">
+      <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+      <button type="reset" class="mt-3 btn btn-secondary">cancel</button>
+    </div>
   </form>
 </template>
 <script setup>
 import { reactive } from "vue";
+import { app } from "../firebase";
+import Post from "@/service/firestore/post";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const post = new Post(app);
 
 const formData = reactive({
   title: "",
-  file: null,
-  category: "",
+
+  tags: [],
   content: "",
 });
 
@@ -80,6 +90,8 @@ const handleFileChange = (e) => {
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log(formData);
+  post.create(formData);
+  router.push({ path: "/profile" });
 };
 </script>
 <style lang=""></style>

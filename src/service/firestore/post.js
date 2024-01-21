@@ -4,6 +4,7 @@ import {
   getDocs,
   getDoc,
   doc,
+  addDoc,
 } from "firebase/firestore";
 
 class Post {
@@ -16,10 +17,8 @@ class Post {
     const querySnapshot = await getDocs(collection(this.db, "Posts"));
     const posts = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-
       ...doc.data(),
     }));
-    //console.log("🚀 ~ Post ~ posts ~ doc.data():", querySnapshot.docs.data);
 
     return posts;
   }
@@ -39,7 +38,7 @@ class Post {
   }
 
   async create(data) {
-    const post = await this.db.collection("Posts").add(data);
+    const post = await addDoc(collection(this.db, "Posts"), data);
     return post.id;
   }
 
