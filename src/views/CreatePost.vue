@@ -6,7 +6,7 @@
     </ul>
   </div>
   <form @submit="handleSubmit">
-    <label class="w-full form-control max-w-xs">
+    <!-- <label class="w-full form-control max-w-xs">
       <div class="label">
         <span class="label-text">Title</span>
       </div>
@@ -17,8 +17,8 @@
         class="w-full max-w-xs input input-bordered"
         v-model="formData.title"
       />
-    </label>
-    <!-- <label class="w-full max-w-xs form-control">
+    </label> -->
+    <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick a file</span>
       </div>
@@ -29,8 +29,8 @@
         class="w-full max-w-xs file-input file-input-bordered"
         @change="handleFileChange"
       />
-    </label> -->
-    <label class="w-full max-w-xs form-control">
+    </label>
+    <!-- <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Pick the category</span>
       </div>
@@ -59,24 +59,24 @@
         placeholder="content..."
         v-model="formData.content"
       ></textarea>
-    </label>
+    </label> -->
 
     <div class="space-x-2">
       <button type="submit" class="mt-3 btn btn-primary">Submit</button>
       <button type="reset" class="mt-3 btn btn-secondary">cancel</button>
     </div>
   </form>
-
-  
 </template>
 <script setup>
 import { reactive, ref } from "vue";
 import { app } from "../firebase";
 import Post from "@/service/firestore/post";
+import UploadPostImage from "@/service/storage/uploadPostImage";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
 const post = new Post(app);
+const uploadPostImage = new UploadPostImage(app);
 
 const formData = reactive({
   title: "",
@@ -92,8 +92,9 @@ const handleFileChange = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  postId.value = post.create(formData);
-  router.push({ path: "/profile" });
+  uploadPostImage.upload(formData.file);
+  // postId.value = post.create(formData);
+  // router.push({ path: "/profile" });
 };
 </script>
 <style lang=""></style>
