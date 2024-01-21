@@ -1,10 +1,8 @@
 <template lang="">
-  <!-- <div>{{$route.params.id}}</div> -->
-
   <div class="prose">
     <h1>{{ state.postItem.title }}</h1>
     <figure>
-      <img :src="state.postItem.image" alt="" />
+      <img :src="state.postItem.imageUrl" alt="" />
       <figcaption>Photo by John Doe</figcaption>
     </figure>
     <p>
@@ -26,14 +24,10 @@ const state = reactive({
   loading: false,
   error: null,
 });
-post.get(route.params.id).then((res) => {
-  console.log("🚀 ~ res:", res);
-});
 
 onMounted(async () => {
   const postItem = await post.get(route.params.id);
   state.postItem = postItem;
-}),
-  console.log("🚀 ~ route:", route.params.id);
+});
 </script>
 <style lang=""></style>

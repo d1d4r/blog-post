@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { app } from "../firebase";
 import Post from "@/service/firestore/post";
 import UploadPostImage from "@/service/storage/uploadPostImage";
@@ -102,7 +102,7 @@ const fileData = reactive({
 
 const handleFileSubmit = async (e) => {
   e.preventDefault();
-  const { progress, downloadURL } = await uploadPostImage.upload(fileData.file);
+  const { downloadURL } = await uploadPostImage.upload(fileData.file);
   formData.imageUrl = downloadURL;
 };
 
@@ -112,9 +112,8 @@ const handleFileChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log("🚀 ~ handleSubmit ~ formData.file:", formData);
   const postId = await post.create(formData);
-  router.push(`/my-feed/${postId}`);
+  router.push(`/my-feed/blogpost/${postId}`);
 };
 </script>
 
