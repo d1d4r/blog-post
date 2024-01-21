@@ -1,8 +1,8 @@
 <template lang="">
-<!--   
+  <Teleport to="#tost" >
     <div class="toast toast-top toast-end">
       <div class="alert alert-success">
-        <button @click="postId = false">
+        <button >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="stroke-current shrink-0 h-6 w-6"
@@ -19,10 +19,10 @@
         </button>
         <span>Message sent successfully.</span>
       </div>
-    </div> -->
-
-
-  <router-link class="btn" to="/profile/create">create post</router-link>
+    </div>
+  </Teleport>
 </template>
-<script setup></script>
+<script setup>
+
+</script>
 <style lang=""></style>

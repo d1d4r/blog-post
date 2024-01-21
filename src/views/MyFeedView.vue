@@ -5,11 +5,19 @@
   <div class="flex flex-wrap justify-evenly gap-7" v-if="state.loading">
     <SkeletonCardPost v-for="item in 200" :key="item.id" />
   </div>
+
+ 
   <!-- <div class="toast toast-top toast-end">
     <div class="alert alert-success">
       <span>Message sent successfully.</span>
     </div>
   </div> -->
+  <!-- <div class="toast toast-top toast-end" v-if="state.error">
+    <div class="alert alert-error">
+      <span>{{ state.error }}</span>
+    </div>
+  </div> -->
+ 
 </template>
 <script setup>
 import CardPost from "@/components/CardPost.vue";
@@ -31,7 +39,7 @@ onMounted(async () => {
   try {
     state.loading = true;
     state.posts = await post.getAll();
-    console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
+    //console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
     state.loading = false;
   } catch (error) {
     console.log("🚀 ~ onMounted ~ error:", error);

@@ -14,13 +14,18 @@ class Post {
   }
 
   async getAll() {
-    const querySnapshot = await getDocs(collection(this.db, "Posts"));
-    const posts = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    try {
+      const querySnapshot = await getDocs(collection(this.db, "Posts"));
+      const posts = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-    return posts;
+      return posts;
+    } catch (error) {
+      console.log("🚀 ~ Post ~ getAll ~ error", error);
+      return error
+    }
   }
 
   async get(id) {
