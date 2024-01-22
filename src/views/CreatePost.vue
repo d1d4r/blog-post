@@ -120,11 +120,6 @@ const fileData = reactive({
   progress: 0,
 });
 
-const handleFileSubmit = async (e) => {
-  e.preventDefault();
-  const { downloadURL } = await uploadPostImage.upload(fileData.file);
-  formData.imageUrl = downloadURL;
-};
 
 const handleFileChange = async (e) => {
   fileData.file = e.target.files[0];
@@ -135,9 +130,8 @@ const handleFileChange = async (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  console.log(formData);
-  //const postId = await post.create(formData);
-  //router.push(`/my-feed/blogpost/${postId}`);
+  const postId = await post.create(formData);
+  router.push(`/my-feed/blogpost/${postId}`);
 };
 </script>
 
