@@ -5,21 +5,7 @@
       <li>Create Post</li>
     </ul>
   </div>
-  <!-- <form @submit="handleFileSubmit">
-    <label class="w-full max-w-xs space-x-1">
-      <div class="label">
-        <span class="label-text">Pick a file</span>
-      </div>
-      <input
-        required
-        type="file"
-        accept="image/png, image/jpeg"
-        class="w-full max-w-xs file-input file-input-bordered"
-        @change="handleFileChange"
-      />
-      <button class="btn btn-primary">Upload</button>
-    </label>
-  </form> -->
+  <h1 class="text-2xl font-bold">Create Post</h1>
   <form @submit="handleSubmit">
     <label class="w-full form-control max-w-xs">
       <div class="label">
@@ -36,7 +22,7 @@
 
     <label class="w-full max-w-xs form-control">
       <div class="label">
-        <span class="label-text">Pick the category</span>
+        <span class="label-text">Pick the tags</span>
       </div>
       <select
         class="select select-bordered"
@@ -44,7 +30,6 @@
         multiple
         required
       >
-        <option disabled selected>Pick one</option>
         <option v-for="category in categories" :key="category">
           {{ category }}
         </option>
@@ -119,7 +104,6 @@ const fileData = reactive({
   file: null,
   progress: 0,
 });
-
 
 const handleFileChange = async (e) => {
   fileData.file = e.target.files[0];
