@@ -57,5 +57,15 @@ import { useAuthentication } from "@/stores/authenticationStore.js";
 
 const { isAuth } = useAuthentication();
 console.log("🚀 ~ isAuth:", isAuth);
+
+import { onMounted, onActivated } from "vue";
+
+onActivated(() => {
+  console.log("🚀 ~ onCreated ~ onCreated");
+});
+
+onMounted(() => {
+  console.log("🚀 ~ onMounted ~ onMounted");
+});
 </script>
 <style lang=""></style>
