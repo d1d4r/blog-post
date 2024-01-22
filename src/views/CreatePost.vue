@@ -5,7 +5,7 @@
       <li>Create Post</li>
     </ul>
   </div>
-  <form @submit="handleFileSubmit">
+  <!-- <form @submit="handleFileSubmit">
     <label class="w-full max-w-xs space-x-1">
       <div class="label">
         <span class="label-text">Pick a file</span>
@@ -19,7 +19,7 @@
       />
       <button class="btn btn-primary">Upload</button>
     </label>
-  </form>
+  </form> -->
   <form @submit="handleSubmit">
     <label class="w-full form-control max-w-xs">
       <div class="label">
@@ -49,6 +49,25 @@
           {{ category }}
         </option>
       </select>
+    </label>
+    <label class="w-full max-w-xs space-x-1">
+      <div class="label">
+        <span class="label-text">Pick a file</span>
+      </div>
+      <input
+        required
+        type="file"
+        accept="image/png, image/jpeg"
+        class="w-full max-w-xs file-input file-input-bordered"
+        @change="handleFileChange"
+      />
+      <div class="label">
+        <span class="label-text"
+          >{{
+            fileData.progress ? `${fileData.progress} % image uploaded` : ""
+          }}
+        </span>
+      </div>
     </label>
 
     <label class="form-control">
@@ -98,6 +117,7 @@ const formData = reactive({
 
 const fileData = reactive({
   file: null,
+  progress: 0,
 });
 
 const handleFileSubmit = async (e) => {
@@ -106,14 +126,18 @@ const handleFileSubmit = async (e) => {
   formData.imageUrl = downloadURL;
 };
 
-const handleFileChange = (e) => {
+const handleFileChange = async (e) => {
   fileData.file = e.target.files[0];
+  const { progress, downloadURL } = await uploadPostImage.upload(fileData.file);
+  fileData.progress = progress;
+  formData.imageUrl = downloadURL;
 };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
-  const postId = await post.create(formData);
-  router.push(`/my-feed/blogpost/${postId}`);
+  console.log(formData);
+  //const postId = await post.create(formData);
+  //router.push(`/my-feed/blogpost/${postId}`);
 };
 </script>
 

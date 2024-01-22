@@ -23,7 +23,7 @@
           loading="lazy"
           :src="props.item.imageUrl"
           alt="Shoes"
-          class="rounded-xl"
+          class="w-64 h-56 rounded-xl object-cover"
         />
       </figure>
       <div class="card-actions justify-end p-3">
