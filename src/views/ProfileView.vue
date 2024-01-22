@@ -1,5 +1,5 @@
 <template lang="">
-<!--   
+  <!--   
     <div class="toast toast-top toast-end">
       <div class="alert alert-success">
         <button @click="postId = false">
@@ -21,8 +21,7 @@
       </div>
     </div> -->
 
-
-  <router-link class="btn" to="/profile/create">create post</router-link>
+  <router-link class="btn" to="/main/profile/create">create post</router-link>
 </template>
 <script setup></script>
 <style lang=""></style>

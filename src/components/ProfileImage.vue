@@ -1,7 +1,5 @@
 <template lang="">
-  <div class="flex-1 hidden md:block">
-    <a class="btn btn-ghost text-xl">K-Blog</a>
-  </div>
+  
   <div class="flex-none gap-2">
     <div class="form-control">
       <input

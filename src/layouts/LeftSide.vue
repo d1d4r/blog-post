@@ -69,11 +69,11 @@ const toggle = () => {
 const routes = ref([
   {
     name: "Profile ",
-    path: "/profile",
+    path: "/main/profile",
   },
   {
     name: "feed",
-    path: "/my-feed",
+    path: "/main/my-feed",
   },
   {
     name: "HOWTO ",

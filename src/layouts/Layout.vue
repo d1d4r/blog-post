@@ -3,13 +3,13 @@
   <TopNavigation />
   <div class="drawer md:drawer-open">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-    <MainConten />
+    <MainContent />
     <LeftSide />
   </div>
 </template>
 <script setup>
 import LeftSide from "./LeftSide.vue";
-import MainConten from "./MainConten.vue";
+import MainContent from "./MainContent.vue";
 import TopNavigation from "./TopNavigation.vue";
 </script>
 <style lang=""></style>
