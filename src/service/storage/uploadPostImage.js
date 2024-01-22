@@ -9,7 +9,6 @@ class UploadPostImage {
   constructor(app) {
     this.storage = getStorage(app);
   }
-
   async upload(file) {
     const storageRef = ref(this.storage, `posts/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
