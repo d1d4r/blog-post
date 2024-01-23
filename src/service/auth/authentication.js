@@ -1,6 +1,10 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
-class AuthenticationService {
+class Authentication {
   constructor(app) {
     this.auth = getAuth(app);
   }
@@ -20,14 +24,15 @@ class AuthenticationService {
   }
   async signup(email, password) {
     try {
-      const userCredential = await this.auth.createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
         email,
         password
       );
       const user = userCredential.user;
       return user;
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ Authentication ~ signup ~ error:", error)
       throw error;
     }
   }
@@ -36,7 +41,7 @@ class AuthenticationService {
       await this.auth.signOut();
     } catch (error) {
       console.log(error);
-      throw error;
+      return error;
     }
   }
 
@@ -54,4 +59,4 @@ class AuthenticationService {
   }
 }
 
-export default AuthenticationService;
+export default Authentication;

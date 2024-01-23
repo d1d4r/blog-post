@@ -31,12 +31,24 @@
         </div>
       </div>
     </div>
-    <router-link class="btn" to="/main/profile/create">create post</router-link>
+    <router-link class="btn" to="/main/profile/create"
+      >create post <span>+</span></router-link
+    >
     <ProfileImage />
   </div>
 </template>
 <script setup>
 import ProfileImage from "@/components/ProfileImage.vue";
+import { app } from "@/firebase/index.js";
+import Authentication from "@/service/auth/authentication";
+import { onMounted } from "vue";
+
+const authentication = new Authentication(app);
+
+onMounted(async () => {
+  const uc = await authentication.getAuth();
+  console.log("🚀 ~ onMounted ~ uc:", uc);
+});
 </script>
 <style>
 .btn {

@@ -6,8 +6,8 @@
         <p>create your account now and start writing your own blog</p>
       </div>
       <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <form class="card-body">
-          <div class="form-control">
+        <form @submit="signup" class="card-body">
+          <!-- <div class="form-control">
             <label class="label">
               <span class="label-text">username</span>
             </label>
@@ -17,12 +17,13 @@
               class="input input-bordered"
               required
             />
-          </div>
+          </div> -->
           <div class="form-control">
             <label class="label">
               <span class="label-text">Email</span>
             </label>
             <input
+              v-model="userData.email"
               type="email"
               placeholder="email"
               class="input input-bordered"
@@ -34,13 +35,18 @@
               <span class="label-text">Password</span>
             </label>
             <input
+              v-model="userData.password"
               type="password"
               placeholder="password"
               class="input input-bordered"
               required
             />
+            <label class="label">
+              <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+            </label>
           </div>
-          <div class="form-control">
+
+          <!-- <div class="form-control">
             <label class="label">
               <span class="label-text">Confirm Password</span>
             </label>
@@ -55,14 +61,39 @@
                 >Forgot password?</a
               >
             </label>
-          </div>
+          </div> -->
           <div class="form-control mt-6">
-            <button class="btn btn-primary">Signup</button>
+            <button type="submit" class="btn btn-primary">Signup</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { app } from "@/firebase/index.js";
+import Authentication from "@/service/auth/authentication.js";
+import { reactive, ref } from "vue";
+
+const errorMessage = ref(null);
+
+const userData = reactive({
+  email: "",
+  password: "",
+});
+
+const authentication = new Authentication(app);
+
+const signup = async (e) => {
+  try {
+    e.preventDefault();
+    const user = await authentication.signup(userData.email, userData.password);
+    console.log("🚀 ~ register ~ user:", user.accessToken);
+  } catch (error) {
+    errorMessage.value = `${error.message}`;
+  }
+
+  userData.password = "";
+};
+</script>
 <style lang=""></style>
