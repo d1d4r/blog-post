@@ -3,9 +3,9 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-
+import { app } from "@/firebase/index.js";
 class Authentication {
-  constructor(app) {
+  constructor() {
     this.auth = getAuth(app);
   }
   async login(email, password) {
@@ -32,7 +32,7 @@ class Authentication {
       const user = userCredential.user;
       return user;
     } catch (error) {
-      console.log("🚀 ~ Authentication ~ signup ~ error:", error)
+      console.log("🚀 ~ Authentication ~ signup ~ error:", error);
       throw error;
     }
   }

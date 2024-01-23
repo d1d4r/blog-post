@@ -4,9 +4,9 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-
+import { app } from "@/firebase/index.js";
 class UploadPostImage {
-  constructor(app) {
+  constructor() {
     this.storage = getStorage(app);
   }
   async upload(file) {

@@ -6,9 +6,9 @@ import {
   doc,
   addDoc,
 } from "firebase/firestore";
-
+import { app } from "@/firebase/index.js";
 class Post {
-  constructor(app) {
+  constructor() {
     this.db = getFirestore(app);
     //console.log("🚀 ~ Post ~ constructor ~ this.db :", this.db);
   }
