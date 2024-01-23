@@ -23,10 +23,10 @@
 import CardPost from "@/components/CardPost.vue";
 import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 import Post from "@/service/firestore/post.js";
-import { app } from "@/firebase/index.js";
+//import { app } from "@/firebase/index.js";
 import { reactive, onMounted } from "vue";
 
-const post = new Post(app);
+const post = new Post();
 
 const state = reactive({
   posts: [],

@@ -11,12 +11,12 @@
   </div>
 </template>
 <script setup>
-import { app } from "@/firebase/index.js";
+//import { app } from "@/firebase/index.js";
 import Post from "@/service/firestore/post.js";
 import { useRoute } from "vue-router";
 import { onMounted, reactive } from "vue";
 const route = useRoute();
-const post = new Post(app);
+const post = new Post();
 
 const state = reactive({
   postItem: [],

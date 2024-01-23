@@ -67,7 +67,7 @@
   </div>
 </template>
 <script setup>
-import { app } from "@/firebase/index.js";
+//import { app } from "@/firebase/index.js";
 import Authentication from "@/service/auth/authentication.js";
 import { reactive } from "vue";
 
@@ -76,7 +76,7 @@ const userData = reactive({
   password: "",
 });
 
-const authentication = new Authentication(app);
+const authentication = new Authentication();
 
 const signup = async (e) => {
   try {

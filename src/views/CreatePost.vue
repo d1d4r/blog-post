@@ -76,14 +76,14 @@
 
 <script setup>
 import { reactive } from "vue";
-import { app } from "../firebase";
+//import { app } from "../firebase";
 import Post from "@/service/firestore/post";
 import UploadPostImage from "@/service/storage/uploadPostImage";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const post = new Post(app);
-const uploadPostImage = new UploadPostImage(app);
+const post = new Post();
+const uploadPostImage = new UploadPostImage();
 
 const categories = [
   "web development",
