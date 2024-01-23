@@ -21,7 +21,7 @@
       </div>
     </div> -->
 
-  <router-link class="btn" to="/main/profile/create">create post</router-link>
+  
   <router-view name="CreatePost"></router-view>
 
 </template>

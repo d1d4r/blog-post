@@ -1,8 +1,9 @@
 <template lang="">
-  <div class="border-b border-b-base-300 navbar  bg-base-100 ">
+  <div class="border-b border-b-base-300 navbar bg-base-100">
     <div class="flex-1 hidden md:block">
       <a class="btn btn-ghost text-xl">K-Blog</a>
     </div>
+
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
@@ -30,10 +31,15 @@
         </div>
       </div>
     </div>
+    <router-link class="btn" to="/main/profile/create">create post</router-link>
     <ProfileImage />
   </div>
 </template>
 <script setup>
 import ProfileImage from "@/components/ProfileImage.vue";
 </script>
-<style lang=""></style>
+<style>
+.btn {
+  @apply mr-2;
+}
+</style>

@@ -1,5 +1,4 @@
 <template lang="">
- 
   <div
     class="hero min-h-screen"
     style="
@@ -15,7 +14,9 @@
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
           id nisi.
         </p>
-        <router-link to="/how-to" class="btn w-2/5">HOWTO</router-link>
+        <router-link to="/main/my-feed" class="btn w-2/5"
+          >strat reading & writing</router-link
+        >
       </div>
     </div>
   </div>
@@ -30,7 +31,6 @@
       </p>
     </div>
   </div>
-  
 </template>
 <script setup></script>
 <style lang=""></style>
