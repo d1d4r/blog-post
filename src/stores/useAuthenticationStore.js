@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-export const useAuthentication = defineStore("authentication", () => {
+export const useAuthenticationStore = defineStore("authentication", () => {
   const isAuth = ref(false);
   const toggleAuth = () => {
     isAuth.value = !isAuth.value;
