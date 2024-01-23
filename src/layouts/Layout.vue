@@ -1,7 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template lang="">
   <TopNavigation />
-  <div class="drawer md:drawer-open">
+ 
+  <div class="drawer md:drawer-open ">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <MainContent />
     <LeftSide />

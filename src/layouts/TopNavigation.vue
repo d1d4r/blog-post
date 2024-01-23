@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="border-b border-b-base-300 navbar bg-base-100">
+  <div class="border-b border-b-base-300 navbar  bg-base-100 ">
     <div class="flex-1 hidden md:block">
       <a class="btn btn-ghost text-xl">K-Blog</a>
     </div>
