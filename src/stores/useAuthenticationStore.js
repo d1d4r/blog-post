@@ -2,9 +2,27 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 export const useAuthenticationStore = defineStore("authentication", () => {
   const isAuth = ref(false);
-  const toggleAuth = () => {
-    isAuth.value = !isAuth.value;
-    console.log("🚀 ~ toggleAuth ~ isAuth:", isAuth.value);
+  const token = ref(null);
+  const user = ref(null);
+
+  const setAuth = (auth) => {
+    isAuth.value = auth;
   };
-  return { isAuth, toggleAuth };
+
+  const setToken = (token) => {
+    token.value = token;
+  };
+
+  const setUser = (user) => {
+    user.value = user;
+  };
+
+  return {
+    isAuth,
+    token,
+    user,
+    setAuth,
+    setToken,
+    setUser,
+  };
 });

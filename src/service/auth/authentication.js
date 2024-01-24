@@ -3,10 +3,12 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { app } from "@/firebase/index.js";
+import { auth } from "@/firebase/index.js";
+
 class Authentication {
   constructor() {
-    this.auth = getAuth(app);
+    this.auth = auth;
+    //console.log("🚀 ~ Authentication ~ constructor ~ this.auth:", this.auth._errorFactory);
   }
   async login(email, password) {
     try {
@@ -48,7 +50,20 @@ class Authentication {
   async getCurrentUser() {
     try {
       const user = this.auth.currentUser;
-      return user;
+      if (user !== null) {
+        
+        const email = user.email;
+        const photoURL = user.photoURL;
+        const emailVerified = user.emailVerified;
+        const uid = user.uid;
+
+        return {
+          email,
+          photoURL,
+          emailVerified,
+          uid,
+        };
+      }
     } catch (error) {
       console.log(error);
       throw error;

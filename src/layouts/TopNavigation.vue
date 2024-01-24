@@ -39,16 +39,16 @@
 </template>
 <script setup>
 import ProfileImage from "@/components/ProfileImage.vue";
-import { app } from "@/firebase/index.js";
+//import { app } from "@/firebase/index.js";
 import Authentication from "@/service/auth/authentication";
 import { onMounted } from "vue";
 
-const authentication = new Authentication(app);
+// const authentication = new Authentication();
 
-onMounted(async () => {
-  const uc = await authentication.getAuth();
-  console.log("🚀 ~ onMounted ~ uc:", uc);
-});
+// onMounted(async () => {
+//   const uc = await authentication.getAuth();
+//   console.log("🚀 ~ onMounted ~ uc:", uc);
+// });
 </script>
 <style>
 .btn {
