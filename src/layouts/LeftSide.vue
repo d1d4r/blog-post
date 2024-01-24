@@ -60,7 +60,13 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import router from "../router";
 const isExpanded = ref(false);
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== "register" ) next({ name: "register" });
+//   else next();
+// });
 
 const toggle = () => {
   isExpanded.value = !isExpanded.value;

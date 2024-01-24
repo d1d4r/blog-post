@@ -72,6 +72,7 @@ import Authentication from "@/service/auth/authentication.js";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+import { auth } from "@/firebase";
 
 const { isAuth, setAuth } = useAuthenticationStore();
 const router = useRouter();
@@ -88,6 +89,7 @@ const signup = async (e) => {
     e.preventDefault();
     const user = await authentication.login(userData.email, userData.password);
     router.push("/main/my-feed");
+    authentication.monitorSateChange();
     setAuth(true);
     console.log("🚀 ~ register ~ user:", user.accessToken);
   } catch (error) {

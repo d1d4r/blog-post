@@ -47,11 +47,22 @@ class Authentication {
     }
   }
 
+  monitorSateChange = () => {
+    this.auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("🚀 ~ Authentication ~ user", user);
+        return user;
+      } else {
+        console.log("🚀 ~ Authentication ~ user", user);
+        return user;
+      }
+    });
+  };
+
   async getCurrentUser() {
     try {
       const user = this.auth.currentUser;
       if (user !== null) {
-        
         const email = user.email;
         const photoURL = user.photoURL;
         const emailVerified = user.emailVerified;
