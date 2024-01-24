@@ -77,11 +77,11 @@ const routes = ref([
   },
   {
     name: "HOWTO ",
-    path: "/how-to",
+    path: "/main/how-to",
   },
   {
     name: "bookmarks ",
-    path: "/bookmarks",
+    path: "/main/bookmarks",
   },
 ]);
 </script>

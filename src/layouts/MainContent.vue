@@ -4,6 +4,8 @@
       <router-view></router-view>
       <router-view name="MainContent"></router-view>
       <router-view name="ProfileView"></router-view>
+      <router-view name="HowTo"></router-view>
+      <router-view name="BookMarks"></router-view>
     </main>
   </div>
 </template>

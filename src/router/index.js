@@ -34,6 +34,18 @@ const router = createRouter({
           },
         },
         {
+          path: "how-to",
+          components: {
+            MainContent: () => import("@/views/HowTo.vue"),
+          },
+        },
+        {
+          path: "bookmarks",
+          components: {
+            BookMarks: () => import("@/views/BookMarks.vue"),
+          },
+        },
+        {
           path: "profile",
           components: {
             ProfileView: () => import("@/views/ProfileView.vue"),
