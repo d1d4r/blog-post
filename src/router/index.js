@@ -17,6 +17,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: () => import("@/views/NotFound.vue"),
+    },
+    {
       path: "/",
       name: "root",
       component: () => import("@/views/RootView.vue"),
