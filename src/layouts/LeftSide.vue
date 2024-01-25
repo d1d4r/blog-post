@@ -6,15 +6,14 @@
       class="drawer-overlay"
     ></label>
     <ul
-      :class="
-        'min-h-full  menu bg-base-200 text-base-content p-4 ' +
+      :class="'min-h-full  menu bg-base-200 text-base-content p-4 ' +
         (isExpanded ? 'w-20' : 'w-80')
       "
     >
       <label for="my-drawer-4" class="drawer-button sm:hidden">
         <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
           <svg
-            class="swap-on fill-current w-6 h-6"
+            class="w-6 h-6 fill-current swap-on"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
@@ -91,4 +90,8 @@ const routes = ref([
   },
 ]);
 </script>
-<style lang=""></style>
+<style>
+.active {
+  @apply bg-base-100;
+}
+</style>
