@@ -1,7 +1,7 @@
 <template lang="">
   <div class="border-b border-b-base-300 navbar bg-base-100">
     <div class="flex-1 hidden md:block">
-      <a class="btn btn-ghost text-xl">K-Blog</a>
+      <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>
 
     <div class="navbar-start">
