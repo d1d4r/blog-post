@@ -15,6 +15,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  linkActiveClass: "active",
   routes: [
     {
       path: "/:pathMatch(.*)*",
@@ -75,6 +76,11 @@ const router = createRouter({
       path: "/loging",
       name: "loging",
       component: () => import("@/views/LogingUser.vue"),
+    },
+    {
+      path: "/modal",
+      name: "modal",
+      component: () => import("@/components/ModalPopup.vue"),
     },
   ],
 });
