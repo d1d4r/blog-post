@@ -20,18 +20,24 @@
       </div>
     </div>
   </div>
-
-  <SwiperCard>
-    <swiper-slide :key="item.id" v-for="item in state.posts">
-      <CardPost :item="item" />
-    </swiper-slide>
-  </SwiperCard>
-
-  <SwiperCard>
-    <swiper-slide :key="item.id" v-for="item in state.posts">
-      <CardPost :item="item" />
-    </swiper-slide>
-  </SwiperCard>
+  
+  <div v-if="!state.loading">
+    <SwiperCard>
+      <swiper-slide :key="item.id" v-for="item in state.posts" >
+        <CardPost :item="item" />
+      </swiper-slide>
+    </SwiperCard>
+    <SwiperCard>
+      <swiper-slide :key="item.id" v-for="item in state.posts">
+        <CardPost :item="item" />
+      </swiper-slide>
+    </SwiperCard>
+  </div>
+  <div v-else>
+    <div class="flex items-center justify-center">
+      <div class="w-64 h-64 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
+    </div>
+  </div>
 </template>
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
@@ -66,7 +72,9 @@ onMounted(async () => {
   }
 });
 </script>
-<style lang=""></style>
+<style >
+
+</style>
 <!-- <div class="flex flex-col items-center justify-center py-20">
     <div class="prose text-center">
       <h1>Hello there</h1>
