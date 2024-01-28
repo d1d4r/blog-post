@@ -34,6 +34,7 @@ const router = createRouter({
       children: [
         {
           path: "my-feed",
+          alias: "/main",
           components: {
             default: () => import("@/views/MyFeedView.vue"),
             MainContent: () => import("@/layouts/MainContent.vue"),
@@ -50,6 +51,11 @@ const router = createRouter({
           components: {
             BookMarks: () => import("@/views/BookMarks.vue"),
           },
+          beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("token")) next();
+            else next({ name: "loging" });
+            next();
+          },
         },
         {
           path: "profile",
@@ -61,6 +67,11 @@ const router = createRouter({
               path: "create",
               components: {
                 CreatePost: () => import("@/views/CreatePost.vue"),
+              },
+              beforeEnter: (to, from, next) => {
+                if (localStorage.getItem("token")) next();
+                else next({ name: "loging" });
+                next();
               },
             },
           ],
