@@ -20,13 +20,21 @@
       </div>
     </div>
   </div>
-  
   <div v-if="!state.loading">
-    <SwiperCard>
-      <swiper-slide :key="item.id" v-for="item in state.posts" >
-        <CardPost :item="item" />
-      </swiper-slide>
-    </SwiperCard>
+    <div class="">
+      <div class="flex justify-between p-5">
+        <h1 class="text-3xl font-bold text-center">My Feed</h1>
+        <router-link to="/main/my-feed" class="text-xl underline"
+          >see more</router-link
+        >
+      </div>
+      <SwiperCard>
+        <swiper-slide :key="item.id" v-for="item in state.posts">
+          <CardPost :item="item" />
+        </swiper-slide>
+      </SwiperCard>
+    </div>
+
     <SwiperCard>
       <swiper-slide :key="item.id" v-for="item in state.posts">
         <CardPost :item="item" />
@@ -34,15 +42,14 @@
     </SwiperCard>
   </div>
   <div v-else>
-    <div class="flex items-center justify-center">
-      <div class="w-64 h-64 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
-    </div>
+    <LoadingOverlay />
   </div>
 </template>
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
 import CardPost from "@/components/CardPost.vue";
 import { SwiperSlide } from "swiper/vue";
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
 
 import Post from "@/service/firestore/post.js";
 import { reactive, onMounted } from "vue";
@@ -72,9 +79,7 @@ onMounted(async () => {
   }
 });
 </script>
-<style >
-
-</style>
+<style></style>
 <!-- <div class="flex flex-col items-center justify-center py-20">
     <div class="prose text-center">
       <h1>Hello there</h1>
