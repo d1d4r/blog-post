@@ -1,19 +1,15 @@
 <template lang="">
-  
-    <Swiper
-      :slides-per-view="5"
-      :space-between="spaceBetween"
-      :centered-slides="true"
-      class="border-white border-[0.01px] w-[90%] m-10"
-      :navigation="true"
-      @swiperprogress="onProgress"
-      @swiperslidechange="onSlideChange"
-    >
-       <router-link to="/main/my-feed" >see more</router-link>
-      <slot></slot>
-     
-    </Swiper>
-  
+  <Swiper
+    :loop="true"
+    :slides-per-view="4"
+    :space-between="spaceBetween"
+    :centered-slides="true"
+    :navigation="true"
+    @swiperprogress="onProgress"
+    @swiperslidechange="onSlideChange"
+  >
+    <slot></slot>
+  </Swiper>
 </template>
 <script setup>
 import "swiper/css";
@@ -34,4 +30,12 @@ const onSlideChange = (e) => {
   console.log("slide changed");
 };
 </script>
-<style></style>
+<style>
+.swiper {
+  @apply w-[90%]  mb-5 mt-5;
+}
+
+.swiper-slide {
+  @apply w-1/5;
+}
+</style>
