@@ -6,7 +6,8 @@
       class="drawer-overlay"
     ></label>
     <ul
-      :class="'min-h-full  menu bg-base-200 text-base-content p-4 ' +
+      :class="
+        'min-h-full  menu bg-base-200 text-base-content p-4 ' +
         (isExpanded ? 'w-20' : 'w-80')
       "
     >
@@ -36,23 +37,42 @@
       </router-link>
 
       <div>
-        <label for="expand" class="btn">
+        <label class="btn btn-circle swap swap-rotate">
+          <!-- this hidden checkbox controls the state -->
+          <input type="checkbox" @click="toggle" />
+
+          <!-- hamburger icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            class="w-6 h-6 swap-off"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+
+          <!-- close icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 swap-on"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
             />
           </svg>
         </label>
-        <input id="expand" type="checkbox" @click="toggle" class="hidden" />
       </div>
     </ul>
   </div>
@@ -93,5 +113,8 @@ const routes = ref([
 <style>
 .active {
   @apply bg-base-100;
+}
+.menu {
+  @apply flex-col-reverse justify-end;
 }
 </style>
