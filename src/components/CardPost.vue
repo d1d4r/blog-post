@@ -3,7 +3,7 @@
     class="card w-72 bg-base-100 border-solid m-auto lg:m-0 border-[1px] border-sky-500 shadow-xl"
   >
     <div class="card-body">
-      <figure >
+      <figure>
         <img
           :src="props.item.imageUrl"
           alt="Shoes"
@@ -12,18 +12,18 @@
       </figure>
 
       <router-link
-        :to="`/my-feed/blogpost/${props.item.id}`"
+        :to="`/main/blogpost/${props.item.id}`"
         class="hover:underline"
       >
         <h2 class="p-2 card-title">{{ props.item.title }}</h2>
       </router-link>
       <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>
-      <figure >
+      <figure>
         <img
           loading="lazy"
           :src="props.item.imageUrl"
           alt="Shoes"
-          class="object-cover m-auto select-none h-44 w-44 rounded-xl"
+          class="object-cover m-auto select-none h-44 w-full rounded-xl"
         />
       </figure>
       <div class="justify-end p-3 card-actions">
