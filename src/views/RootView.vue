@@ -8,42 +8,44 @@
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="text-center hero-content text-neutral-content">
       <div class="max-w-md">
-        <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-        <p class="mb-5">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
-        </p>
-        <router-link to="/main/my-feed" class="w-2/5 btn"
-          >strat reading & writing</router-link
-        >
+        <div class="prose">
+          <h1 class="font-sixtyfour">Hello there</h1>
+          <p class="font-oswald">
+            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
+            a id nisi.
+          </p>
+          <router-link to="/main/my-feed" class="w-2/5 btn"
+            >strat reading & writing</router-link
+          >
+        </div>
       </div>
     </div>
   </div>
-  <div v-if="!state.loading">
-    <div class="">
-      <div class="flex justify-between p-5">
-        <h1 class="text-3xl font-bold text-center">My Feed</h1>
-        <router-link to="/main/my-feed" class="text-xl underline"
-          >see more</router-link
-        >
-      </div>
-      <SwiperCard>
-        <swiper-slide :key="item.id" v-for="item in state.posts">
-          <CardPost :item="item" />
-        </swiper-slide>
-      </SwiperCard>
-    </div>
 
+  <div class="">
+    <div class="flex justify-between p-5">
+      <h1 class="text-3xl font-bold text-center">My Feed</h1>
+      <router-link to="/main/my-feed" class="text-xl underline"
+        >see more</router-link
+      >
+    </div>
     <SwiperCard>
       <swiper-slide :key="item.id" v-for="item in state.posts">
         <CardPost :item="item" />
       </swiper-slide>
     </SwiperCard>
   </div>
-  <div v-else>
+
+  <SwiperCard>
+    <swiper-slide :key="item.id" v-for="item in state.posts">
+      <CardPost :item="item" />
+    </swiper-slide>
+  </SwiperCard>
+
+  <!-- <div v-else>
     <LoadingOverlay />
-  </div>
+  </div> -->
 </template>
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
