@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+@font-face {
+    font-family: "Sixtyfour";
+    src: url("./font/Sixtyfour-Regular.ttf");
+}
+
 #app {
     height: 100vh;
 }
