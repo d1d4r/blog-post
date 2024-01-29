@@ -1,10 +1,10 @@
 <template lang="">
-  <div class="flex flex-wrap justify-evenly gap-7" v-if="!state.loading">
+  <div class="grid gap-2 grid-cols-res" v-if="!state.loading">
     <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
   </div>
-  <div class="flex flex-wrap justify-evenly gap-7" v-if="state.loading">
+  <!-- <div class="flex flex-wrap justify-evenly gap-7" v-if="state.loading">
     <SkeletonCardPost v-for="item in 200" :key="item.id" />
-  </div>
+  </div> -->
 
  
   <!-- <div class="toast toast-top toast-end">
