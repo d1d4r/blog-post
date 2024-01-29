@@ -1,12 +1,12 @@
 <template lang="">
-  <div class="grid gap-2 grid-cols-res" v-if="!state.loading">
+  <div v-if="!state.loading" class="grid gap-2 grid-cols-res">
     <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
   </div>
-  <!-- <div class="flex flex-wrap justify-evenly gap-7" v-if="state.loading">
-    <SkeletonCardPost v-for="item in 200" :key="item.id" />
-  </div> -->
 
- 
+  <div v-else class="grid gap-2 grid-cols-res">
+    <SkeletonCardPost v-for="item in 200" :key="item.id" />
+  </div>
+
   <!-- <div class="toast toast-top toast-end">
     <div class="alert alert-success">
       <span>Message sent successfully.</span>
@@ -17,7 +17,6 @@
       <span>{{ state.error }}</span>
     </div>
   </div> -->
- 
 </template>
 <script setup>
 import CardPost from "@/components/CardPost.vue";
