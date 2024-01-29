@@ -38,8 +38,7 @@ class Post {
     } else {
       return [];
     }
-    // const post = await this.db.collection("Posts").doc(id).get();
-    // return post.data();
+
   }
 
   async create(data) {

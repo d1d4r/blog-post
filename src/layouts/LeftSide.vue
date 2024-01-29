@@ -115,6 +115,6 @@ const routes = ref([
   @apply bg-base-100;
 }
 .menu {
-  @apply flex-col-reverse justify-end;
+  @apply flex-col-reverse justify-end hover:w-20;
 }
 </style>
