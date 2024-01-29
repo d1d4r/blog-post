@@ -6,6 +6,7 @@
       <router-view name="ProfileView"></router-view>
       <router-view name="HowTo"></router-view>
       <router-view name="BookMarks"></router-view>
+      <router-view name="BlogPost"></router-view>
     </main>
   </div>
 </template>
