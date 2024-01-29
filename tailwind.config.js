@@ -3,6 +3,10 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      sixtyfour: ["Sixtyfour", "sans-serif"],
+    },
     extend: {
       gridTemplateColumns: {
         res: "repeat(auto-fit, minmax(18rem, 1fr))",
