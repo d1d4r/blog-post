@@ -2,11 +2,11 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useDrawer = defineStore("drawer", () => {
-  const drawer = ref(false);
+  const isOpen = ref(false);
   const toggleDrawer = () => {
-    drawer.value = !drawer.value;
-    console.log("🚀 ~ toggleDrawer ~ toggleDrawer:", drawer.value);
+    isOpen.value = !isOpen.value;
+    console.log("🚀 ~ toggleDrawer ~ toggleDrawer:", isOpen.value);
   };
 
-  return { drawer, toggleDrawer };
+  return { isOpen, toggleDrawer };
 });
