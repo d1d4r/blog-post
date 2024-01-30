@@ -1,6 +1,6 @@
 <template lang="">
   <div class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="hero-content flex-col lg:flex-row-reverse items-stretch">
       <div class="text-center lg:text-left prose">
         <h1>regesiter now!</h1>
         <p>create your account now and start writing your own blog</p>
@@ -85,15 +85,33 @@ const userData = reactive({
 const authentication = new Authentication();
 
 const signup = async (e) => {
+  errorMessage.value = null;
   try {
     e.preventDefault();
     const user = await authentication.signup(userData.email, userData.password);
     console.log("🚀 ~ register ~ user:", user.accessToken);
   } catch (error) {
-    errorMessage.value = `${error.message}`;
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        errorMessage.value = "Email already in use";
+        break;
+      case "auth/invalid-email":
+        errorMessage.value = "Invalid email";
+        break;
+      case "auth/weak-password":
+        errorMessage.value = "Weak password";
+        break;
+      default:
+        errorMessage.value = `${error.message}`;
+        break;
+      case "auth/too-many-requests":
+        errorMessage.value = "Too many requests";
+        break;
+    }
+    //errorMessage.value = `${error.message}`;
   }
 
   userData.password = "";
 };
 </script>
-<style lang=""></style>
+<style scoped></style>

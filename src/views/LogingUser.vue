@@ -1,29 +1,21 @@
 <template lang="">
-  <div class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-      <div class="text-center lg:text-left prose">
+  <div class="hero min-h-screen bg-base-200 ">
+    <div class="hero-content flex-col lg:flex-row-reverse  items-stretch">
+      <div class="text-center w-full lg:text-left prose ">
         <h1>Loging</h1>
-        <p>loag account be aware all new</p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum
+          totam quidem minus enim nam? Omnis provident animi atque dolor.
+        </p>
       </div>
-      <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ">
         <form @submit="signup" class="card-body">
-          <!-- <div class="form-control">
-            <label class="label">
-              <span class="label-text">username</span>
-            </label>
-            <input
-              type="text"
-              placeholder="your name"
-              class="input input-bordered"
-              required
-            />
-          </div> -->
           <div class="form-control">
             <label class="label">
               <span class="label-text">Email</span>
             </label>
             <input
-              v-model="userData.email"
+              v-model.trim="userData.email"
               type="email"
               placeholder="email"
               class="input input-bordered"
@@ -35,34 +27,30 @@
               <span class="label-text">Password</span>
             </label>
             <input
-              v-model="userData.password"
+              v-model.trim="userData.password"
               type="password"
               placeholder="password"
               class="input input-bordered"
               required
             />
           </div>
-          <!-- <div class="form-control">
-            <label class="label">
-              <span class="label-text">Confirm Password</span>
-            </label>
-            <input
-              type="password"
-              placeholder="password"
-              class="input input-bordered"
-              required
-            />
-            <label class="label">
-              <a href="#" class="label-text-alt link link-hover"
-                >Forgot password?</a
-              >
-            </label>
-          </div> -->
+
           <div class="form-control mt-6">
-            <button type="submit" class="btn btn-primary">Signup</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              :disabled="userData.loading"
+            >
+              Signup
+            </button>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+  <div class="toast toast-start" v-if="userData.error">
+    <div class="alert alert-warning">
+      <span>{{ userData.error }}</span>
     </div>
   </div>
 </template>
@@ -80,12 +68,16 @@ const router = useRouter();
 const userData = reactive({
   email: "",
   password: "",
+  loading: false,
+  error: null,
 });
 
 const authentication = new Authentication();
 
 const signup = async (e) => {
+  userData.error = null;
   try {
+    userData.loading = true;
     e.preventDefault();
     const user = await authentication.login(userData.email, userData.password);
     router.push("/main/my-feed");
@@ -93,7 +85,9 @@ const signup = async (e) => {
     setAuth(true);
     console.log("🚀 ~ register ~ user:", user.accessToken);
   } catch (error) {
-    console.log(error);
+    userData.error = error.message;
+  } finally {
+    userData.loading = false;
   }
 };
 </script>
