@@ -1,14 +1,16 @@
 <template lang="">
-  <div class=" navbar bg-base-100  sticky top-0 z-10">
+  <div class="navbar bg-base-100 sticky top-0 z-10">
     <div class="flex-1 hidden md:block">
       <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
-          
-          
-          <label for="my-drawer-4" class="drawer-button sm:hidden">
+          <label
+            for="my-drawer-4"
+            class="drawer-button sm:hidden"
+            @click="toggleDrawer"
+          >
             <div
               tabindex="0"
               class="btn btn-ghost btn-circle hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
@@ -35,14 +37,20 @@
     <router-link class="btn" to="/main/profile/create"
       >create post <span>+</span></router-link
     >
+
     <ProfileImage />
+    <ThemeDropdwon />
   </div>
 </template>
 <script setup>
 import ProfileImage from "@/components/ProfileImage.vue";
+import ThemeDropdwon from "@/components/ThemeDropdwon.vue";
 //import { app } from "@/firebase/index.js";
 import Authentication from "@/service/auth/authentication";
 import { onMounted } from "vue";
+import { useDrawer } from "@/stores/openDrawer";
+
+const { toggleDrawer } = useDrawer();
 
 // const authentication = new Authentication();
 
