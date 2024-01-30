@@ -1,12 +1,11 @@
 <template lang="">
   <Swiper
     :loop="true"
-    :slides-per-view="4"
-    :space-between="spaceBetween"
+    :slides-per-view="isLargeScreen ? 4 : 1"
+    :slides-per-group="2"
+    :space-between="50"
     :centered-slides="true"
     :navigation="true"
-    @swiperprogress="onProgress"
-    @swiperslidechange="onSlideChange"
   >
     <slot></slot>
   </Swiper>
@@ -17,18 +16,21 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/virtual";
 import { register } from "swiper/element/bundle";
-import { Swiper, SwiperSlide } from "swiper/vue";
+import { Swiper } from "swiper/vue";
+import { useMediaQuery } from "@vueuse/core";
 
 register();
-const spaceBetween = 50;
-const onProgress = (e) => {
-  const [swiper, progress] = e.detail;
-  console.log(progress);
-};
 
-const onSlideChange = (e) => {
-  console.log("slide changed");
-};
+const isLargeScreen = useMediaQuery("(min-width: 1024px)");
+
+// const onProgress = (e) => {
+//   const [swiper, progress] = e.detail;
+//   console.log(progress);
+// };
+
+// const onSlideChange = (e) => {
+//   console.log("slide changed");
+// };
 </script>
 <style>
 .swiper {
