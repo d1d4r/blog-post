@@ -15,6 +15,20 @@ export default {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: [
+      "light",
+      "dark",
+      "cyberpunk",
+      "default",
+      "forest",
+      "halloween",
+      "synthwave",
+      "retro",
+      "valentine",
+      "bumblebee",
+      "luxury",
+      "dracula",
+      "aqua"
+    ],
   },
 };
