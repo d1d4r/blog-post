@@ -51,7 +51,6 @@
 import SwiperCard from "@/components/SwiperCard.vue";
 import CardPost from "@/components/CardPost.vue";
 import { SwiperSlide } from "swiper/vue";
-import LoadingOverlay from "@/components/LoadingOverlay.vue";
 
 import Post from "@/service/firestore/post.js";
 import { reactive, onMounted } from "vue";
