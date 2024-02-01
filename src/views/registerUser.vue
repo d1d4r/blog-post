@@ -71,7 +71,7 @@
   </div>
 </template>
 <script setup>
-//import { app } from "@/firebase/index.js";
+//TODO: add fix signup
 import Authentication from "@/service/auth/authentication.js";
 import { reactive, ref } from "vue";
 
@@ -88,8 +88,8 @@ const signup = async (e) => {
   errorMessage.value = null;
   try {
     e.preventDefault();
+    
     const user = await authentication.signup(userData.email, userData.password);
-    console.log("🚀 ~ register ~ user:", user.accessToken);
   } catch (error) {
     switch (error.code) {
       case "auth/email-already-in-use":
