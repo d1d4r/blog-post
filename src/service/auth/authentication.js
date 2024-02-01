@@ -51,10 +51,10 @@ class Authentication {
     this.auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("🚀 ~ Authentication ~ user", user);
-        return user;
+        return true;
       } else {
         console.log("🚀 ~ Authentication ~ user", user);
-        return user;
+        return false;
       }
     });
   };
@@ -82,6 +82,10 @@ class Authentication {
   }
   async getAuth() {
     return this.auth;
+  }
+
+  signOut() {
+    this.auth.signOut();
   }
 }
 
