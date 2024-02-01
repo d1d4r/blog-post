@@ -7,7 +7,7 @@
         class="input input-bordered w-24 md:w-auto"
       />
     </div>
-    <div class="dropdown dropdown-end" v-if="isAuth">
+    <div class="dropdown dropdown-end" v-if="user">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img
@@ -52,12 +52,10 @@
 </template>
 <script setup>
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
-const { isAuth } = useAuthenticationStore();
-//import Authentication from "@/service/auth/authentication";
-//import { app } from "@/firebase/index.js";
-//const authentication = new Authentication();
 
-console.log("🚀 ~ isAuth:", isAuth);
+const { user } = useAuthenticationStore();
+console.log("🚀 ~ user:", user)
+
 </script>
 <style lang=""></style>
 @/stores/useAuthenticationStore.js
