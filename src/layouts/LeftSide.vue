@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="p-0 border-r border-r-base-300 drawer-side">
+  <div class="p-0 border-r border-r-base-300 drawer-side ">
     <label
       for="my-drawer-4"
       aria-label="close sidebar"
@@ -115,6 +115,6 @@ const routes = ref([
   @apply bg-base-100;
 }
 .menu {
-  @apply flex-col-reverse justify-end hover:w-20;
+  @apply flex-col-reverse justify-end;
 }
 </style>
