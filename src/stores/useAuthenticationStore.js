@@ -1,28 +1,46 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import Authentication from "@/service/auth/authentication";
+
+const authentication = new Authentication();
 export const useAuthenticationStore = defineStore("authentication", () => {
-  const isAuth = ref(false);
-  const token = ref(null);
   const user = ref(null);
 
-  const setAuth = (auth) => {
-    isAuth.value = auth;
+  const setUser = (newUser) => {
+    user.value = newUser;
   };
 
-  const setToken = (token) => {
-    token.value = token;
+  const loagin = async (email, password) => {
+    const newUser = await authentication.login(email, password);
+    console.log("🚀 ~ loagin ~ newUser:", newUser)
+    setUser(true);
   };
 
-  const setUser = (user) => {
-    user.value = user;
+  const logout = () => {
+    setUser(null);
+  };
+
+  const signup = (email, password) => {
+    const newUser = authentication.signup(email, password);
+    setUser(newUser);
+  };
+
+  const getCurrentUser = () => {
+    const newUser = authentication.getCurrentUser();
+    setUser(newUser);
+  };
+
+  const monitorSateChange = () => {
+    authentication.monitorSateChange();
   };
 
   return {
-    isAuth,
-    token,
     user,
-    setAuth,
-    setToken,
     setUser,
+    loagin,
+    logout,
+    signup,
+    getCurrentUser,
+    monitorSateChange,
   };
 });
