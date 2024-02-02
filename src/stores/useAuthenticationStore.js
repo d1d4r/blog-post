@@ -1,45 +1,111 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, reactive, computed } from "vue";
 import Authentication from "@/service/auth/authentication";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "@/firebase/index.js";
 
-const authentication = new Authentication();
 export const useAuthenticationStore = defineStore("authentication", () => {
-  const user = ref(null);
+  const user = reactive({
+    uid: null,
+    accessToken: null,
+  });
+
+  const isLogged = computed(() => {
+    if (user.uid !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   const setUser = (newUser) => {
-    user.value = newUser;
+    user.uid = newUser.uid;
+    user.accessToken = newUser.accessToken;
   };
 
-  const loagin = async (email, password) => {
-    const newUser = await authentication.login(email, password);
-    console.log("🚀 ~ loagin ~ newUser:", newUser)
-    setUser(true);
+  const signIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      return userCredential;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+    //setUser(newUser);
   };
 
-  const logout = () => {
-    setUser(null);
+  const signup = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      return userCredential;
+    } catch (error) {
+      console.log("🚀 ~ Authentication ~ signup ~ error:", error);
+      throw error;
+    }
+    //setUser(newUser);
   };
 
-  const signup = (email, password) => {
-    const newUser = authentication.signup(email, password);
-    setUser(newUser);
+  const signOut = () => {
+    auth.signOut();
+    //setUser({ uid: null, accessToken: null });
   };
 
-  const getCurrentUser = () => {
-    const newUser = authentication.getCurrentUser();
-    setUser(newUser);
+  const getCurrentUser = async () => {
+    try {
+      const user = auth.currentUser;
+      if (user !== null) {
+        const email = user.email;
+        const photoURL = user.photoURL;
+        const emailVerified = user.emailVerified;
+        const uid = user.uid;
+        const accessToken = user.accessToken;
+
+        //console.log("🚀 ~ Authentication ~ getCurrentUser ~ user", user);
+        return {
+          email,
+          photoURL,
+          emailVerified,
+          accessToken,
+          uid,
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 
   const monitorSateChange = () => {
-    authentication.monitorSateChange();
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("🚀 ~ Authentication ~ user", user);
+        return true;
+      } else {
+        console.log("🚀 ~ Authentication ~ user", user);
+        return false;
+      }
+    });
   };
 
   return {
     user,
+    isLogged,
     setUser,
-    loagin,
-    logout,
+    signIn,
     signup,
+    signOut,
     getCurrentUser,
     monitorSateChange,
   };
