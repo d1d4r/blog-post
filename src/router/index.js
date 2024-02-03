@@ -12,6 +12,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import RootView from "@/views/RootView.vue";
 // import Layout from "@/layouts/Layout.vue";
 // import MainContent from "@/layouts/MainContent.vue";
+import { useModalStore } from "@/stores/useModalStore.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,7 +59,7 @@ const router = createRouter({
             BookMarks: () => import("@/views/BookMarks.vue"),
           },
           beforeEnter: (to, from, next) => {
-            if (localStorage.getItem("token")) next();
+            if (localStorage.getItem("accessToken")) next();
             else next({ name: "loging" });
           },
         },
@@ -74,7 +75,9 @@ const router = createRouter({
                 CreatePost: () => import("@/views/CreatePost.vue"),
               },
               beforeEnter: (to, from, next) => {
-                if (localStorage.getItem("token")) next();
+                const { openModal } = useModalStore();
+                openModal();
+                if (localStorage.getItem("accessToken")) next();
                 else next({ name: "loging" });
               },
             },
@@ -102,7 +105,7 @@ const router = createRouter({
 
 router.beforeEach(() => {
   window.scrollTo(0, 0);
-})
+});
 
 // const isAuthenticated = false;
 
