@@ -15,13 +15,20 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   const isAuthenticated = computed(() => {
     return !!user.accessToken;
   });
-    
-
 
   const setUser = (newUser) => {
-    console.log("🚀 ~ setUser ~ newUser:", newUser)
     user.uid = newUser.uid;
     user.accessToken = newUser.accessToken;
+    localStorage.setItem("accessToken", newUser.accessToken);
+    localStorage.setItem("uid", newUser.uid);
+  };
+
+  const tryLoadingUser = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const uid = localStorage.getItem("uid");
+    if (accessToken && uid) {
+      setUser({ accessToken, uid });
+    }
   };
 
   const signIn = async (email, password) => {
@@ -32,8 +39,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         password
       );
 
-      console.log("🚀 ~ signIn ~ userCredential:", userCredential);
-      console.log("🚀 ~ signIn ~ user:", userCredential.user);
       setUser(userCredential.user);
 
       //return userCredential.user;
@@ -60,11 +65,16 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     //setUser(newUser);
   };
 
-  const signOut = () => {
-    auth.signOut();
+  const signOut = async () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("uid");
+    setUser({ uid: null, accessToken: null });
+    await auth.signOut();
+     console.log("🚀 ~ signOut ~ auth.signOut():", await auth.signOut())
+
     //setUser({ uid: null, accessToken: null });
   };
-
+   
   const getCurrentUser = async () => {
     try {
       const user = auth.currentUser;
@@ -107,6 +117,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   return {
     user,
     isAuthenticated,
+    tryLoadingUser,
     setUser,
     signIn,
     signup,
