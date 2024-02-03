@@ -27,7 +27,7 @@
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li @click="handleSignOut" class="btn btn-ghost">sign out</li>
       </ul>
     </div>
     <div class="dropdown dropdown-end" v-else>
@@ -47,7 +47,6 @@
         <li><router-link to="/signIn">signIn</router-link></li>
         <li><router-link to="/signup">Register</router-link></li>
         <li @click="getCurrentUser()" class="btn">current user</li>
-        <li @click="signOut()" class="btn">sign out</li>
       </ul>
     </div>
   </div>
@@ -55,12 +54,18 @@
 <script setup>
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 const { getCurrentUser, signOut, isAuthenticated } = useAuthenticationStore();
 
+const router = useRouter();
+
 const isLogged = computed(() => {
-  console.log("🚀 ~ isLogged ~ profileImage:", isAuthenticated);
   return isAuthenticated;
 });
 
+const handleSignOut = () => {
+  signOut();
+  router.push("/");
+};
 </script>
 <style lang=""></style>
