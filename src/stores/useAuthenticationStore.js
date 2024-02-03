@@ -20,11 +20,12 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     user.uid = newUser.uid;
     user.accessToken = newUser.accessToken;
     localStorage.setItem("accessToken", newUser.accessToken);
-    localStorage.setItem("uid", newUser.uid);
+    localStorage.setItem("uid",newUser.uid);
   };
 
   const tryLoadingUser = () => {
     const accessToken = localStorage.getItem("accessToken");
+    console.log("🚀 ~ tryLoadingUser ~ accessToken:", accessToken)
     const uid = localStorage.getItem("uid");
     if (accessToken && uid) {
       setUser({ accessToken, uid });
@@ -66,15 +67,16 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   };
 
   const signOut = async () => {
+    await auth.signOut();
     localStorage.removeItem("accessToken");
     localStorage.removeItem("uid");
-    setUser({ uid: null, accessToken: null });
-    await auth.signOut();
-     console.log("🚀 ~ signOut ~ auth.signOut():", await auth.signOut())
+    user.uid = null;
+    user.accessToken = null;
+    
 
     //setUser({ uid: null, accessToken: null });
   };
-   
+
   const getCurrentUser = async () => {
     try {
       const user = auth.currentUser;
