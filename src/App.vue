@@ -13,6 +13,16 @@
 <script setup>
 import TopNavigation from "./layouts/TopNavigation.vue";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+import { onBeforeMount } from "vue";
+
+
+const { tryLoadingUser } = useAuthenticationStore();
+
+
+
+onBeforeMount(() => {
+  tryLoadingUser();
+});
 
 
 // import { onMounted, ref } from "vue";
