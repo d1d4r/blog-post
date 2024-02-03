@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="p-0 border-r border-r-base-300 drawer-side ">
+  <div class="p-0 border-r border-r-base-300 drawer-side" >
     <label
       for="my-drawer-4"
       aria-label="close sidebar"
@@ -31,7 +31,8 @@
         v-for="route in routes"
         :key="route.name"
         :to="`${route.path}`"
-        class="p-3 hover:bg-base-300 rounded-md text-[15px]"
+        class="p-3 hover:bg-base-300 rounded-md text-[15px] "
+       
       >
         <li>{{ route.name }}</li>
       </router-link>
@@ -81,7 +82,10 @@
 import { ref } from "vue";
 import router from "../router";
 const isExpanded = ref(false);
+import { useDrawer } from "@/stores/openDrawer.js";
+import { onMounted } from "vue";
 
+const { toggleDrawer } = useDrawer();
 // router.beforeEach((to, from, next) => {
 //   if (to.name !== "register" ) next({ name: "register" });
 //   else next();
@@ -90,6 +94,8 @@ const isExpanded = ref(false);
 const toggle = () => {
   isExpanded.value = !isExpanded.value;
 };
+
+
 
 const routes = ref([
   {
@@ -110,7 +116,7 @@ const routes = ref([
   },
 ]);
 </script>
-<style>
+<style scoped>
 .active {
   @apply bg-base-100;
 }
