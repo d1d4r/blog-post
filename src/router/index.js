@@ -83,14 +83,14 @@ const router = createRouter({
       ],
     },
     {
-      path: "/register",
-      name: "register",
-      component: () => import("@/views/registerUser.vue"),
+      path: "/signup",
+      name: "signup",
+      component: () => import("@/views/SignUp.vue"),
     },
     {
-      path: "/loging",
-      name: "loging",
-      component: () => import("@/views/LogingUser.vue"),
+      path: "/signIn",
+      name: "signIn",
+      component: () => import("@/views/SignIn.vue"),
     },
     {
       path: "/modal",
@@ -99,6 +99,10 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach(() => {
+  window.scrollTo(0, 0);
+})
 
 // const isAuthenticated = false;
 
