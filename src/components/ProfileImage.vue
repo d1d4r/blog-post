@@ -7,7 +7,7 @@
         class="input input-bordered w-24 md:w-auto"
       />
     </div>
-    <div class="dropdown dropdown-end" v-if="user">
+    <div class="dropdown dropdown-end" v-if="isLogged">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img
@@ -34,7 +34,7 @@
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img
-            alt="Tailwind CSS Navbar component"
+            alt=" "
             src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
           />
         </div>
@@ -44,18 +44,23 @@
         class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
       >
         <li>hi didar nawzad</li>
-        <li><router-link to="/loging">Loging</router-link></li>
-        <li><router-link to="/register">Register</router-link></li>
+        <li><router-link to="/signIn">signIn</router-link></li>
+        <li><router-link to="/signup">Register</router-link></li>
+        <li @click="getCurrentUser()" class="btn">current user</li>
+        <li @click="signOut()" class="btn">sign out</li>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+import { computed } from "vue";
+const { getCurrentUser, signOut, isAuthenticated } = useAuthenticationStore();
 
-const { user } = useAuthenticationStore();
-console.log("🚀 ~ user:", user)
+const isLogged = computed(() => {
+  console.log("🚀 ~ isLogged ~ profileImage:", isAuthenticated);
+  return isAuthenticated;
+});
 
 </script>
 <style lang=""></style>
-@/stores/useAuthenticationStore.js
