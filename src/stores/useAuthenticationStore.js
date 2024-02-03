@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, reactive, computed } from "vue";
-import Authentication from "@/service/auth/authentication";
+import { reactive, computed } from "vue";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -13,15 +12,14 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     accessToken: null,
   });
 
-  const isLogged = computed(() => {
-    if (user.uid !== null) {
-      return true;
-    } else {
-      return false;
-    }
+  const isAuthenticated = computed(() => {
+    return !!user.accessToken;
   });
+    
+
 
   const setUser = (newUser) => {
+    console.log("🚀 ~ setUser ~ newUser:", newUser)
     user.uid = newUser.uid;
     user.accessToken = newUser.accessToken;
   };
@@ -33,7 +31,12 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         email,
         password
       );
-      return userCredential;
+
+      console.log("🚀 ~ signIn ~ userCredential:", userCredential);
+      console.log("🚀 ~ signIn ~ user:", userCredential.user);
+      setUser(userCredential.user);
+
+      //return userCredential.user;
     } catch (error) {
       console.log(error);
       throw error;
@@ -65,7 +68,9 @@ export const useAuthenticationStore = defineStore("authentication", () => {
   const getCurrentUser = async () => {
     try {
       const user = auth.currentUser;
+      console.log("🚀 ~ getCurrentUser ~ user:", user);
       if (user !== null) {
+        //isLogged.value = true;
         const email = user.email;
         const photoURL = user.photoURL;
         const emailVerified = user.emailVerified;
@@ -101,7 +106,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
 
   return {
     user,
-    isLogged,
+    isAuthenticated,
     setUser,
     signIn,
     signup,
