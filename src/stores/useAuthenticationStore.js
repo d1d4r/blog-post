@@ -3,6 +3,7 @@ import { reactive, computed } from "vue";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "@/firebase/index.js";
 
@@ -20,12 +21,11 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     user.uid = newUser.uid;
     user.accessToken = newUser.accessToken;
     localStorage.setItem("accessToken", newUser.accessToken);
-    localStorage.setItem("uid",newUser.uid);
+    localStorage.setItem("uid", newUser.uid);
   };
 
   const tryLoadingUser = () => {
     const accessToken = localStorage.getItem("accessToken");
-    console.log("🚀 ~ tryLoadingUser ~ accessToken:", accessToken)
     const uid = localStorage.getItem("uid");
     if (accessToken && uid) {
       setUser({ accessToken, uid });
@@ -40,6 +40,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         password
       );
 
+      console.log("🚀 ~ signIn ~ userCredential.user:", userCredential.user);
       setUser(userCredential.user);
 
       //return userCredential.user;
@@ -50,7 +51,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     //setUser(newUser);
   };
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -58,11 +59,18 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         password
       );
 
-      return userCredential;
+      updateProfile(auth.currentUser, { displayName: displayName }).catch(
+        (err) => console.log(err)
+      );
+      console.log("🚀 ~ signup ~ userCredential.user:", userCredential.user);
+      setUser(userCredential.user);
+
+      //return userCredential;
     } catch (error) {
       console.log("🚀 ~ Authentication ~ signup ~ error:", error);
       throw error;
     }
+
     //setUser(newUser);
   };
 
@@ -72,7 +80,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     localStorage.removeItem("uid");
     user.uid = null;
     user.accessToken = null;
-    
 
     //setUser({ uid: null, accessToken: null });
   };
@@ -84,6 +91,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
       if (user !== null) {
         //isLogged.value = true;
         const email = user.email;
+        const displayName = user.displayName;
         const photoURL = user.photoURL;
         const emailVerified = user.emailVerified;
         const uid = user.uid;
@@ -96,6 +104,7 @@ export const useAuthenticationStore = defineStore("authentication", () => {
           emailVerified,
           accessToken,
           uid,
+          displayName,
         };
       }
     } catch (error) {
