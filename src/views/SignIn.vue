@@ -82,8 +82,8 @@ const submit = async () => {
   try {
     userData.error = null;
     userData.loading = true;
-    const user = await signIn(userData.email, userData.password);
-    console.log("🚀 ~ submit ~ user:", user);
+    await signIn(userData.email, userData.password);
+    //console.log("🚀 ~ submit ~ user:", user);
     router.push("/main/my-feed");
   } catch (error) {
     userData.error = error.message;
