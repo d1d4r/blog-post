@@ -1,16 +1,12 @@
 <template lang="">
-  <div class="navbar bg-base-100 sticky top-0 z-10">
+  <div class="sticky top-0 z-10 navbar bg-base-100">
     <div class="flex-1 hidden md:block">
       <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
-          <label
-            for="my-drawer-4"
-            class="drawer-button sm:hidden"
-            @click="toggleDrawer"
-          >
+          <label for="my-drawer-4" class="drawer-button sm:hidden">
             <div
               tabindex="0"
               class="btn btn-ghost btn-circle hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
