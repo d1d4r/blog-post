@@ -1,4 +1,4 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import {  doc, getFirestore, setDoc } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 export default class User {
   constructor() {
@@ -7,10 +7,7 @@ export default class User {
 
   createUser = async (data) => {
     try {
-      const user = await addDoc(collection(this.db, "Users"), {
-        data
-      });
-      return user.id;
+      await setDoc(doc(this.db, "Users", data.uid), data);
     } catch (error) {
       console.log("🚀 ~ User ~ createUser ~ error", error);
       return error;
