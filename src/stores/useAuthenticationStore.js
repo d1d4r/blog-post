@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import User from "@/service/firestore/User.js";
 import { auth } from "@/firebase/index.js";
 
 export const useAuthenticationStore = defineStore("authentication", () => {
@@ -62,6 +63,10 @@ export const useAuthenticationStore = defineStore("authentication", () => {
       updateProfile(auth.currentUser, { displayName: displayName }).catch(
         (err) => console.log(err)
       );
+
+      const newUser = new User();
+
+      await newUser.createUser({ displayName, uid: userCredential.user.uid });
       console.log("🚀 ~ signup ~ userCredential.user:", userCredential.user);
       setUser(userCredential.user);
 
