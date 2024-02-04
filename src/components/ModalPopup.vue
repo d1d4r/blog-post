@@ -13,10 +13,10 @@
           </button>
         </form>
         <div class="prose">
-          <h3 class="text-lg font-bold">log account to show bookmarks</h3>
-          <router-link to="/register" class="btn"
-            ><span>log account</span></router-link
-          >
+          <h3 class="text-lg font-bold">log account</h3>
+          <router-link to="/signIn" class="btn">
+            <span>log account</span>
+          </router-link>
         </div>
       </div>
       <form method="dialog" class="modal-backdrop">
@@ -25,14 +25,5 @@
     </dialog>
   </Teleport>
 </template>
-<script setup>
-import { onMounted } from "vue";
-const showModal = () => {
-  const modal = document.getElementById("my_modal_3");
-  modal.setAttribute("open", true);
-};
-onMounted(() => {
-  showModal();
-});
-</script>
+<script setup></script>
 <style lang=""></style>
