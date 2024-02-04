@@ -7,7 +7,7 @@
   </div>
   <h1 class="text-2xl font-bold">Create Post</h1>
   <form @submit="handleSubmit">
-    <label class="w-full form-control max-w-xs">
+    <label class="w-full max-w-xs form-control">
       <div class="label">
         <span class="label-text">Title</span>
       </div>
@@ -80,6 +80,9 @@ import { reactive } from "vue";
 import Post from "@/service/firestore/post";
 import UploadPostImage from "@/service/storage/uploadPostImage";
 import { useRouter } from "vue-router";
+import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+
+const { user } = useAuthenticationStore();
 
 const router = useRouter();
 const post = new Post();
@@ -98,6 +101,7 @@ const formData = reactive({
   imageUrl: "",
   tags: [],
   content: "",
+  userId: user.uid,
 });
 
 const fileData = reactive({
