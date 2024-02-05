@@ -10,6 +10,7 @@ export default {
     extend: {
       gridTemplateColumns: {
         res: "repeat(auto-fit, minmax(18rem, 1fr))",
+        res2: "repeat(auto-fit, minmax(24rem, 1fr))",
       },
     },
   },
