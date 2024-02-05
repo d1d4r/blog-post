@@ -35,7 +35,7 @@
     >
 
     <ProfileImage />
-    <ThemeDropdwon />
+    <!-- <ThemeDropdwon /> -->
   </div>
 </template>
 <script setup>
