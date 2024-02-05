@@ -11,7 +11,11 @@
         <p class="text-sm text-gray-600">
           {{ item.bio }}
         </p>
-        <button class="btn btn-outline rounded-none">view profile</button>
+        <router-link
+          :to="`users/${item.uid}`"
+          class="btn btn-outline rounded-none"
+          >view profile</router-link
+        >
       </div>
     </div>
   </div>
