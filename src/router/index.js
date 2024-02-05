@@ -54,6 +54,12 @@ const router = createRouter({
           },
         },
         {
+          path: "users",
+          components: {
+            Users: () => import("@/views/UsersView.vue"),
+          },
+        },
+        {
           path: "bookmarks",
           components: {
             BookMarks: () => import("@/views/BookMarks.vue"),
@@ -76,9 +82,13 @@ const router = createRouter({
               },
               beforeEnter: (to, from, next) => {
                 const { openModal } = useModalStore();
-                openModal();
-                if (localStorage.getItem("accessToken")) next();
-                else next({ name: "loging" });
+
+                if (localStorage.getItem("accessToken")) {
+                  next();
+                } else {
+                  openModal();
+                  //next({ name: "loging" });
+                }
               },
             },
           ],
