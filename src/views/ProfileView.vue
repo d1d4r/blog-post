@@ -21,9 +21,7 @@
       </div>
     </div> -->
 
-  
   <router-view name="CreatePost"></router-view>
-
 </template>
 <script setup></script>
 <style lang=""></style>
