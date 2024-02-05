@@ -54,9 +54,15 @@ const router = createRouter({
           },
         },
         {
-          path: "users",
+          path: "auhters",
           components: {
-            Users: () => import("@/views/UsersView.vue"),
+            Users: () => import("@/views/AuthersView.vue"),
+          },
+        },
+        {
+          path: "auhter/:id",
+          components: {
+            UserProfile: () => import("@/views/AutherProfileView.vue"),
           },
         },
         {
