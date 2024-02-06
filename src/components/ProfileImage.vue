@@ -8,7 +8,7 @@
       />
     </div>
     <div class="dropdown dropdown-end" v-if="isLogged">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+      <div tabindex="0" role="button" class="ring btn btn-ghost btn-circle">
         <div class="rounded-full">
           <!-- {{ currentUser }} -->
         </div>
@@ -17,10 +17,10 @@
         tabindex="0"
         class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
       >
-        <li>
+        <!-- <li>
           <span class="btn" @click="getCurrentUser">show user</span>
-        </li>
-        <li><a>Settings</a></li>
+        </li> -->
+        <li><router-link to="/main/profile">profile</router-link></li>
         <li @click="handleSignOut" class="btn btn-ghost">sign out</li>
       </ul>
     </div>
@@ -50,7 +50,6 @@ import { useRouter } from "vue-router";
 const { getCurrentUser, signOut, isAuthenticated } = useAuthenticationStore();
 
 const router = useRouter();
-
 
 const isLogged = computed(() => {
   return isAuthenticated;
