@@ -75,29 +75,28 @@ const router = createRouter({
             else next({ name: "loging" });
           },
         },
+
+        {
+          path: "create",
+          components: {
+            CreatePost: () => import("@/views/CreatePost.vue"),
+          },
+          beforeEnter: (to, from, next) => {
+            const { openModal } = useModalStore();
+
+            if (localStorage.getItem("accessToken")) {
+              next();
+            } else {
+              openModal();
+              //next({ name: "loging" });
+            }
+          },
+        },
         {
           path: "profile",
           components: {
             ProfileView: () => import("@/views/ProfileView.vue"),
           },
-          children: [
-            {
-              path: "create",
-              components: {
-                CreatePost: () => import("@/views/CreatePost.vue"),
-              },
-              beforeEnter: (to, from, next) => {
-                const { openModal } = useModalStore();
-
-                if (localStorage.getItem("accessToken")) {
-                  next();
-                } else {
-                  openModal();
-                  //next({ name: "loging" });
-                }
-              },
-            },
-          ],
         },
       ],
     },
