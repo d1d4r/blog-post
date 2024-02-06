@@ -1,34 +1,44 @@
 <template lang="">
-  <!--   
-    <div class="toast toast-top toast-end">
-      <div class="alert alert-success">
-        <button @click="postId = false">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="stroke-current shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </button>
-        <span>Message sent successfully.</span>
-      </div>
-    </div> -->
-
-  <router-view name="CreatePost"></router-view>
+  <div>
+    <form>
+      <label class="w-full max-w-xs form-control">
+        <div class="label">
+          <span class="label-text">Name</span>
+        </div>
+        <input
+          type="text"
+          placeholder="Type here"
+          class="w-full max-w-xs input input-bordered"
+        />
+      </label>
+      <label class="max-w-xs form-control">
+        <div class="label">
+          <span class="label-text">Email</span>
+        </div>
+        <input
+          type="email"
+          placeholder="you@example.com"
+          class="w-full input input-bordered"
+        />
+      </label>
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Your bio</span>
+        </div>
+        <textarea
+          class="h-24 textarea textarea-bordered"
+          placeholder="Bio"
+        ></textarea>
+      </label>
+    </form>
+  </div>
 </template>
 <script setup></script>
 <style lang=""></style>
 
 <!-- 
-<div  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <div class="card shadow-lg" v-for="item in 20" :key="item">
+<div  class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+  <div class="shadow-lg card" v-for="item in 20" :key="item">
     <div class="card-body">
       <div class="flex items-center space-x-4">
         <div class="flex-shrink-0">
@@ -39,7 +49,7 @@
           </div>
         </div>
         <div class="flex-1">
-          <div class="text-gray-700 font-bold">John Doe</div>
+          <div class="font-bold text-gray-700">John Doe</div>
           <div class="text-sm text-gray-600">
             5 minutes ago
           </div>
@@ -49,7 +59,7 @@
           <button class="btn btn-square btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="stroke-current h-6 w-6"
+              class="w-6 h-6 stroke-current"
               fill="none"
               viewBox="0 0 24 24"
             >
