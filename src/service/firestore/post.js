@@ -5,12 +5,13 @@ import {
   getDoc,
   doc,
   addDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 class Post {
   constructor() {
     this.db = getFirestore(app);
-    //console.log("🚀 ~ Post ~ constructor ~ this.db :", this.db);
   }
 
   async getAll() {
@@ -24,7 +25,7 @@ class Post {
       return posts;
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);
-      return error
+      return error;
     }
   }
 
@@ -38,7 +39,20 @@ class Post {
     } else {
       return [];
     }
+  }
 
+  async getByUser(userId) {
+    const posts = [];
+    const postsref = collection(this.db, "Posts");
+    const q = where("userId", "==", userId);
+    const querySnapshot = query(postsref, q);
+
+    const filteredData = await getDocs(querySnapshot);
+    filteredData.forEach((doc) => {
+      posts.push({ ...doc.data(), id: doc.id });
+
+    });
+    return posts;
   }
 
   async create(data) {
