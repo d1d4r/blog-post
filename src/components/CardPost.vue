@@ -1,6 +1,6 @@
 <template lang="">
   <div
-    class="card w-72 bg-base-100 border-solid m-auto lg:m-0 border-[1px] border-sky-500 shadow-xl"
+    class="card w-full bg-base-100 border-solid m-auto lg:m-0 border-[1px] border-sky-500 shadow-xl"
   >
     <div class="card-body">
       <figure>
@@ -23,7 +23,7 @@
           loading="lazy"
           :src="props.item.imageUrl"
           alt="Shoes"
-          class="object-cover m-auto select-none h-44 w-full rounded-xl"
+          class="object-cover w-full m-auto select-none h-44 rounded-xl"
         />
       </figure>
       <div class="justify-end p-3 card-actions">
