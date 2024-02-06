@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="sticky top-0 z-10 navbar bg-base-100">
+  <div class=" navbar bg-base-100">
     <div class="flex-1 hidden md:block">
       <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>

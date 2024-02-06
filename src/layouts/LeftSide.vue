@@ -1,18 +1,19 @@
 <template lang="">
-  <div class="p-0 border-r border-r-base-300 drawer-side" >
+  <div class="p-0 border-r border-r-base-300 drawer-side">
     <label
       for="my-drawer-4"
       aria-label="close sidebar"
       class="drawer-overlay"
     ></label>
     <ul
-      :class="
-        'min-h-full  menu bg-base-200 text-base-content p-4 ' +
+      :class="'min-h-full  menu bg-base-200 text-base-content p-4 ' +
         (isExpanded ? 'w-20' : 'w-80')
       "
     >
-      <label for="my-drawer-4" class="drawer-button sm:hidden">
-        <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
+      <label for="my-drawer-4" class="flex flex-row justify-between drawer-button sm:hidden">
+         <div class="w-1/2"></div>
+        <div tabindex="0" class=" btn active:bg-black btn-ghost btn-circle">
+         
           <svg
             class="w-6 h-6 fill-current swap-on"
             xmlns="http://www.w3.org/2000/svg"
@@ -26,23 +27,22 @@
           </svg>
         </div>
       </label>
-
       <router-link
         v-for="route in routes"
         :key="route.name"
         :to="`${route.path}`"
-        class="p-3 hover:bg-base-300 rounded-md text-[15px] "
-       
+        class="p-3 hover:bg-base-300 rounded-md text-[15px]"
       >
         <li>{{ route.name }}</li>
       </router-link>
-
-      <div>
+    </ul>
+  </div>
+  <!-- <div>
         <label class="btn btn-circle swap swap-rotate">
-          <!-- this hidden checkbox controls the state -->
+          
           <input type="checkbox" @click="toggle" />
 
-          <!-- hamburger icon -->
+         
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -58,7 +58,7 @@
             />
           </svg>
 
-          <!-- close icon -->
+          
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -74,9 +74,7 @@
             />
           </svg>
         </label>
-      </div>
-    </ul>
-  </div>
+      </div> -->
 </template>
 <script setup>
 import { ref } from "vue";
@@ -95,12 +93,10 @@ const toggle = () => {
   isExpanded.value = !isExpanded.value;
 };
 
-
-
 const routes = ref([
   {
-    name: "Profile ",
-    path: "/main/profile",
+    name: "auhters",
+    path: "/main/auhters",
   },
   {
     name: "feed",
@@ -120,7 +116,5 @@ const routes = ref([
 .active {
   @apply bg-base-100;
 }
-.menu {
-  @apply flex-col-reverse justify-end;
-}
+
 </style>
