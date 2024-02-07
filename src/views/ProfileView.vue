@@ -1,36 +1,64 @@
 <template lang="">
-  <div>
-    <form>
-      <label class="w-full max-w-xs form-control">
-        <div class="label">
-          <span class="label-text">Name</span>
-        </div>
-        <input
-          type="text"
-          placeholder="Type here"
-          class="w-full max-w-xs input input-bordered"
+  <div class="grid grid-cols-1 grid-rows-1 sm:grid-cols-3">
+    <div class="h-full">
+      <div class="text-center">
+        <img
+          src="../assets//img/no-profile-picture-icon.webp"
+          alt=""
+          class="w-32 h-32 m-auto rounded-full"
         />
-      </label>
-      <label class="max-w-xs form-control">
-        <div class="label">
-          <span class="label-text">Email</span>
+        <div class="prose">
+          <h3>John Doe</h3>
+          <h4>you@example.com</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
-        <input
-          type="email"
-          placeholder="you@example.com"
-          class="w-full input input-bordered"
-        />
-      </label>
-      <label class="form-control">
-        <div class="label">
-          <span class="label-text">Your bio</span>
+      </div>
+    </div>
+    <div class="col-span-2">
+      <form>
+        <label class="w-full max-w-xs form-control">
+          <div class="label">
+            <span class="label-text">Change Profile Photo</span>
+          </div>
+          <input
+            type="file"
+            class="w-full max-w-xs file-input file-input-bordered"
+          />
+        </label>
+        <label class="w-full max-w-xs form-control">
+          <div class="label">
+            <span class="label-text">Name</span>
+          </div>
+          <input
+            type="text"
+            placeholder="Type here"
+            class="w-full max-w-xs input input-bordered"
+          />
+        </label>
+        <label class="max-w-xs form-control">
+          <div class="label">
+            <span class="label-text">Email</span>
+          </div>
+          <input
+            type="email"
+            placeholder="you@example.com"
+            class="w-full input input-bordered"
+          />
+        </label>
+        <label class="form-control">
+          <div class="label">
+            <span class="label-text">Your bio</span>
+          </div>
+          <textarea
+            class="h-24 textarea textarea-bordered"
+            placeholder="Bio"
+          ></textarea>
+        </label>
+        <div class="">
+          <button class="mt-2 btn btn-primary">Save</button>
         </div>
-        <textarea
-          class="h-24 textarea textarea-bordered"
-          placeholder="Bio"
-        ></textarea>
-      </label>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
 <script setup></script>
