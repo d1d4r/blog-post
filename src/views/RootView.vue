@@ -1,8 +1,8 @@
 <template lang="">
   <div
-    class="min-h-screen hero"
+    class="min-h-screen  hero"
     style="
-      background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);
+      background-image: url(https://miro.medium.com/v2/resize:fit:2000/0*dgJcrlUAb1F2_-jJ);
     "
   >
     <div class="hero-overlay bg-opacity-60"></div>
@@ -91,3 +91,4 @@ onMounted(async () => {
       </p>
     </div>
   </div> -->
+@/service/firestore/Post.js
