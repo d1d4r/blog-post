@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="flex-none gap-2">
+  <div class="gap-2 ">
     <div class="form-control">
       <input
         type="text"
@@ -9,8 +9,12 @@
     </div>
     <div class="dropdown dropdown-end" v-if="isLogged">
       <div tabindex="0" role="button" class="ring btn btn-ghost btn-circle">
-        <div class="rounded-full">
-          <!-- {{ currentUser }} -->
+        <div class="avatar">
+          <div class="rounded-full" >
+            <img
+              src="../assets/img/no-profile-picture-icon.webp"
+            />
+          </div>
         </div>
       </div>
       <ul
