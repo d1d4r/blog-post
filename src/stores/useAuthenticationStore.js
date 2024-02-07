@@ -118,6 +118,53 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     }
   };
 
+  const currentUser = () => {
+    const user = auth.currentUser;
+
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
+  };
+
+  const getUserInfo = async (uid) => {
+    try {
+      if (!uid) {
+        throw new Error("User ID is required to get user info");
+      }
+      const user = new User();
+      const userInfo = await user.getUser(uid);
+      const currentUser = auth.currentUser;
+      return {
+        email: currentUser.email,
+        photoURL: currentUser.photoURL,
+        emailVerified: currentUser.emailVerified,
+        uid: currentUser.uid,
+        displayName: currentUser.displayName,
+        ...userInfo,
+      };
+    } catch (error) {
+      console.log("🚀 ~ Authentication ~ getUserInfo ~ error", error);
+      throw error;
+    }
+  };
+
+  const updateProfileInfo = async (displayName, photoURL, email, bio) => {
+    try {
+      const user = new User();
+      await updateProfile(auth.currentUser, {
+        displayName,
+        photoURL,
+        email,
+      });
+      await user.updateUser(user.uid, { displayName, photoURL, bio });
+    } catch (error) {
+      console.log("🚀 ~ Authentication ~ updatePprofile ~ error", error);
+      throw error;
+    }
+  };
+
   const monitorSateChange = () => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -134,10 +181,12 @@ export const useAuthenticationStore = defineStore("authentication", () => {
     user,
     isAuthenticated,
     tryLoadingUser,
+    getUserInfo,
     setUser,
     signIn,
     signup,
     signOut,
+    currentUser,
     getCurrentUser,
     monitorSateChange,
   };
