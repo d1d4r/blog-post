@@ -8,6 +8,44 @@
     src: url("./font/Sixtyfour-Regular.ttf");
 }
 
-#app {
-    height: 100vh;
+*,
+*::after,
+*::before {
+    /* border: solid 0.01rem darkblue; */
 }
+
+#app {
+    /* height: 100vh; */
+    /* background-color: aqua; */
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3E3E3E #FFFFFF;
+  }
+  
+  /* Chrome, Edge and Safari */
+  *::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: #FFFFFF;
+  }
+  
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #3E3E3E;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #3E3E3E;
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #3E3E3E;
+  }
+  
