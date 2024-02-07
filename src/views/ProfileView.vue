@@ -3,14 +3,14 @@
     <div class="h-full">
       <div class="text-center">
         <img
-          src="../assets//img/no-profile-picture-icon.webp"
+          :src="userInfoSatate.userInfo?.photoURL"
           alt=""
-          class="w-32 h-32 m-auto rounded-full"
+          class="object-cover w-32 h-32 m-auto rounded-full"
         />
         <div class="prose">
-          <h3>John Doe</h3>
-          <h4>you@example.com</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <h3>{{ userInfoSatate.userInfo?.displayName }}</h3>
+          <h4>{{ userInfoSatate.userInfo?.email }}</h4>
+          <p>{{ userInfoSatate.userInfo?.bio }}</p>
         </div>
       </div>
     </div>
@@ -30,6 +30,7 @@
             <span class="label-text">Name</span>
           </div>
           <input
+            :defaultValue="userInfoSatate.userInfo?.displayName"
             type="text"
             placeholder="Type here"
             class="w-full max-w-xs input input-bordered"
@@ -40,6 +41,7 @@
             <span class="label-text">Email</span>
           </div>
           <input
+            :defaultValue="userInfoSatate.userInfo?.email"
             type="email"
             placeholder="you@example.com"
             class="w-full input input-bordered"
@@ -50,6 +52,7 @@
             <span class="label-text">Your bio</span>
           </div>
           <textarea
+            :defaultValue="userInfoSatate.userInfo?.bio"
             class="h-24 textarea textarea-bordered"
             placeholder="Bio"
           ></textarea>
@@ -61,7 +64,22 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+import { onMounted, reactive } from "vue";
+const { getUserInfo, user } = useAuthenticationStore();
+
+const userInfoSatate = reactive({
+  userInfo: null,
+  loading: false,
+  error: null,
+});
+
+onMounted(async () => {
+  const userInfo = await getUserInfo(user.uid);
+  userInfoSatate.userInfo = userInfo;
+});
+</script>
 <style lang=""></style>
 
 <!-- 
