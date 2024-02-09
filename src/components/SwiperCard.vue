@@ -1,8 +1,8 @@
 <template lang="">
   <Swiper
     :loop="true"
-    :slides-per-view="isLargeScreen ? 4 : 1"
-    :slides-per-group="2"
+    :slides-per-view="isLargeScreen ? 3 : 1"
+    
     :space-between="50"
     :centered-slides="true"
     :navigation="true"
@@ -40,4 +40,5 @@ const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 .swiper-slide {
   @apply w-1/5;
 }
+
 </style>
