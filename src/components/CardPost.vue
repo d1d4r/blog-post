@@ -1,13 +1,13 @@
 <template lang="">
   <div
-    class="card w-full bg-base-100 border-solid m-auto lg:m-0 border-[1px] border-sky-500 shadow-xl"
+    class="w-full m-auto border border-solid shadow-xl card bg-base-100 lg:m-0"
   >
     <div class="card-body">
       <figure>
         <img
           :src="props.item.imageUrl"
           alt="Shoes"
-          class="w-8 h-8 border-2 border-white rounded-full shadow-xl"
+          class="w-8 h-8 border-2 border-white rounded-full "
         />
       </figure>
 
