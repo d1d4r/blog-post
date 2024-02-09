@@ -39,4 +39,16 @@ export default class User {
     });
     return users;
   };
+
+  updateUser = async (uid, data) => {
+    try {
+      if (!uid) {
+        throw new Error("User ID is required to update user");
+      }
+      await setDoc(doc(this.db, "Users", uid), data);
+    } catch (error) {
+      console.log("🚀 ~ User ~ updateUser ~ error", error);
+      return error;
+    }
+  };
 }
