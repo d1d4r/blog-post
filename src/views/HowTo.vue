@@ -1,6 +1,6 @@
 <template lang="">
   <div>HOWTO? page</div>
-  <ModalPopup />
+  <!-- <ModalPopup /> -->
 </template>
 <script setup>
 import ModalPopup from "@/components/ModalPopup.vue";
