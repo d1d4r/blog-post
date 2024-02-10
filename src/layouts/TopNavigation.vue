@@ -1,5 +1,5 @@
 <template lang="">
-  <div class=" navbar bg-base-100">
+  <div class="navbar bg-base-100">
     <div class="flex-1 hidden md:block">
       <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <router-link class="btn" to="/main/profile/create"
+    <router-link class="btn" to="/main/create"
       >create post <span>+</span></router-link
     >
 
