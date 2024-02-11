@@ -31,3 +31,4 @@ onMounted(async () => {
 });
 </script>
 <style lang=""></style>
+@/service/firestore/Post.js
