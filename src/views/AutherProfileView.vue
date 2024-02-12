@@ -55,6 +55,8 @@ onMounted(() => {
   fetchUser();
   fetchUserPosts();
 });
+
+
 </script>
 <style scoped>
 .grd {
