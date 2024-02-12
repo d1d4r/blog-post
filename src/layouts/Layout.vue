@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template lang="">
   <TopNavigation />
-  <div class=" drawer md:drawer-open">
+  <div class="drawer md:drawer-open">
     <input
-      id="my-drawer-4"
+      id="my-drawer"
       type="checkbox"
-      :checked="true"
+      :checked="open"
       class="drawer-toggle"
     />
     <MainContent />
@@ -16,8 +16,10 @@
 import LeftSide from "./LeftSide.vue";
 import MainContent from "./MainContent.vue";
 import TopNavigation from "./TopNavigation.vue";
-import { useDrawer } from "@/stores/openDrawer";
+import { useDrawer } from "@/stores/openDrawer.js";
 
-const { isOpen } = useDrawer();
+const {  open } = useDrawer();
+
+
 </script>
 <style lang=""></style>
