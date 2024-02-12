@@ -1,19 +1,17 @@
 <template lang="">
   <div class="p-0 border-r border-r-base-300 drawer-side">
     <label
-      for="my-drawer-4"
+      for="my-drawer"
       aria-label="close sidebar"
       class="drawer-overlay"
     ></label>
-    <ul
-      :class="'min-h-full  menu bg-base-200 text-base-content p-4 ' +
-        (isExpanded ? 'w-20' : 'w-80')
-      "
-    >
-      <label for="my-drawer-4" class="flex flex-row justify-between drawer-button sm:hidden">
-         <div class="w-1/2"></div>
-        <div tabindex="0" class=" btn active:bg-black btn-ghost btn-circle">
-         
+    <ul class="w-64 min-h-full p-4 menu bg-base-200 text-base-content">
+      <label
+        for="my-drawer"
+        class="flex flex-row justify-between drawer-button sm:hidden"
+      >
+        <div class="w-1/2"></div>
+        <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
           <svg
             class="w-6 h-6 fill-current swap-on"
             xmlns="http://www.w3.org/2000/svg"
@@ -27,71 +25,17 @@
           </svg>
         </div>
       </label>
-      <router-link
-        v-for="route in routes"
-        :key="route.name"
-        :to="`${route.path}`"
-        class="p-3 hover:bg-base-300 rounded-md text-[15px]"
-      >
-        <li>{{ route.name }}</li>
-      </router-link>
+      <li v-for="route in routes" :key="route.name" @click="toggleDrawer">
+        <router-link :to="`${route.path}`"> {{ route.name }}</router-link>
+      </li>
     </ul>
   </div>
-  <!-- <div>
-        <label class="btn btn-circle swap swap-rotate">
-          
-          <input type="checkbox" @click="toggle" />
-
-         
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 swap-off"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-
-          
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 swap-on"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
-            />
-          </svg>
-        </label>
-      </div> -->
 </template>
 <script setup>
 import { ref } from "vue";
-import router from "../router";
-const isExpanded = ref(false);
 import { useDrawer } from "@/stores/openDrawer.js";
-import { onMounted } from "vue";
 
-const { toggleDrawer } = useDrawer();
-// router.beforeEach((to, from, next) => {
-//   if (to.name !== "register" ) next({ name: "register" });
-//   else next();
-// });
-
-const toggle = () => {
-  isExpanded.value = !isExpanded.value;
-};
+let { toggleDrawer } = useDrawer();
 
 const routes = ref([
   {
@@ -116,5 +60,4 @@ const routes = ref([
 .active {
   @apply bg-base-100;
 }
-
 </style>
