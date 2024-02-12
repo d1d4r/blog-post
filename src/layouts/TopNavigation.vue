@@ -6,7 +6,7 @@
     <div class="navbar-start">
       <div id="tel" class="block">
         <div class="drawer-content">
-          <label for="my-drawer-4" class="drawer-button sm:hidden">
+          <label for="my-drawer" class="drawer-button sm:hidden">
             <div
               tabindex="0"
               class="btn btn-ghost btn-circle hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
