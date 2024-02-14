@@ -8,14 +8,13 @@
         <div>
           <label
             for="my-drawer"
-            class=" drawer-button sm:hidden"
+            class="drawer-button sm:hidden"
             aria-label="open sidebar"
-            
           >
             <div
               tabindex="0"
               @click="toggleDrawer"
-              class="bg-black btn btn-ghost btn-circle hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+              class="btn btn-ghost btn-circle hover:bg-base-100 active:bg-base-300 focus:outline-none focus:ring focus:ring-violet-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
