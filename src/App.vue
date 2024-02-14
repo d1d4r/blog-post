@@ -2,7 +2,7 @@
   <!-- <RootView /> -->
   <!-- <LayoutWrapper /> -->
   <!-- <SplashScreen v-if="showSplash" /> -->
-  <!-- <TopNavigation /> -->
+  <TopNavigation />
   <router-view></router-view>
   
   <ModalPopup />
