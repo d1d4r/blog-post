@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="gap-2 ">
+  <div class="gap-2">
     <div class="form-control">
       <input
         type="text"
@@ -7,13 +7,11 @@
         class="w-24 input input-bordered md:w-auto"
       />
     </div>
-    <div class="dropdown dropdown-end" v-if="isLogged">
+    <div class="dropdown dropdown-end" v-if="isAuthenticated">
       <div tabindex="0" role="button" class="ring btn btn-ghost btn-circle">
         <div class="avatar">
-          <div class="rounded-full" >
-            <img
-              src="../assets/img/no-profile-picture-icon.webp"
-            />
+          <div class="rounded-full">
+            <img src="../assets/img/no-profile-picture-icon.webp" />
           </div>
         </div>
       </div>
@@ -49,18 +47,19 @@
 </template>
 <script setup>
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
-import { computed } from "vue";
 import { useRouter } from "vue-router";
-const { getCurrentUser, signOut, isAuthenticated } = useAuthenticationStore();
+import { computed } from "vue";
+//const { getCurrentUser, signOut, isAuthenticated } = useAuthenticationStore();
+const authStore = useAuthenticationStore();
+
+const isAuthenticated = computed(() => {
+  return authStore.isAuthenticated;
+});
 
 const router = useRouter();
 
-const isLogged = computed(() => {
-  return isAuthenticated;
-});
-
 const handleSignOut = () => {
-  signOut();
+  authStore.signOut();
   router.push("/");
 };
 </script>
