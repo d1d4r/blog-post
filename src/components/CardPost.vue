@@ -1,21 +1,22 @@
 <template lang="">
   <div
-    class="w-full m-auto border border-solid shadow-xl card bg-base-100 lg:m-0"
+    class="w-full m-auto border border-solid shadow-xl card bg-base-100 lg:m-0 group"
   >
     <div class="card-body">
       <figure>
         <img
           :src="props.item.imageUrl"
           alt="Shoes"
-          class="w-8 h-8 border-2 border-white rounded-full "
+          class="w-8 h-8 border-2 border-white rounded-full"
         />
       </figure>
 
-      <router-link
-        :to="`/main/blogpost/${props.item.id}`"
-        class="hover:underline"
-      >
-        <h2 class="p-2 card-title">{{ props.item.title }}</h2>
+      <router-link :to="`/main/blogpost/${props.item.id}`" class="">
+        <h2
+          class="p-2 card-title group-hover:underline"
+        >
+          {{ props.item.title }}
+        </h2>
       </router-link>
       <h2 class="pl-2 text-sm">{{ props.item.date }}</h2>
       <figure>
