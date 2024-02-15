@@ -1,5 +1,5 @@
 <template lang="">
-  <button class="btn btn-square btn-outline">
+  <button class="btn btn-square btn-outline" @click="addBookMark">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -17,5 +17,24 @@
   </button>
 </template>
 <script setup>
+import BookMark from "@/service/firestore/BookMark";
+import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
+  },
+});
+
+const { user } = useAuthenticationStore();
+const bookmark = new BookMark();
+
+const addBookMark = () => {
+  try {
+    bookmark.addBookMark(user.uid, props.data);
+  } catch (error) {
+    console.log("🚀 ~ addBookMark ~ error:", error);
+  }
+};
 </script>
 <style lang=""></style>
