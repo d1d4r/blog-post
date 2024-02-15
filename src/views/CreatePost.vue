@@ -5,73 +5,72 @@
       <li>Create Post</li>
     </ul>
   </div>
-  <h1 class="text-2xl font-bold">Create Post</h1>
-  <form @submit="handleSubmit">
-    <label class="w-full max-w-xs form-control">
-      <div class="label">
-        <span class="label-text">Title</span>
+  <div class="flex flex-col items-center justify-center">
+    <h1 class="text-2xl font-bold">Create Post</h1>
+    <form @submit="handleSubmit">
+      <label class="w-full max-w-xs form-control">
+        <div class="label">
+          <span class="label-text">Title</span>
+        </div>
+        <input
+          required
+          type="text"
+          placeholder="Type here"
+          class="w-full max-w-xs input input-bordered"
+          v-model="formData.title"
+        />
+      </label>
+      <label class="w-full max-w-xs form-control">
+        <div class="label">
+          <span class="label-text">Pick the tags</span>
+        </div>
+        <select
+          class="select select-bordered"
+          v-model="formData.tags"
+          multiple
+          required
+        >
+          <option v-for="category in categories" :key="category">
+            {{ category }}
+          </option>
+        </select>
+      </label>
+      <label class="w-full max-w-xs space-x-1">
+        <div class="label">
+          <span class="label-text">Pick a file</span>
+        </div>
+        <input
+          required
+          type="file"
+          accept="image/png, image/jpeg"
+          class="w-full max-w-xs file-input file-input-bordered"
+          @change="handleFileChange"
+        />
+        <div class="label">
+          <span class="label-text"
+            >{{
+              fileData.progress ? `${fileData.progress} % image uploaded` : ""
+            }}
+          </span>
+        </div>
+      </label>
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Your Content</span>
+        </div>
+        <textarea
+          required
+          class="h-24 textarea textarea-bordered"
+          placeholder="content..."
+          v-model="formData.content"
+        ></textarea>
+      </label>
+      <div class="space-x-2">
+        <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+        <button type="reset" class="mt-3 btn btn-secondary">Cancel</button>
       </div>
-      <input
-        required
-        type="text"
-        placeholder="Type here"
-        class="w-full max-w-xs input input-bordered"
-        v-model="formData.title"
-      />
-    </label>
-
-    <label class="w-full max-w-xs form-control">
-      <div class="label">
-        <span class="label-text">Pick the tags</span>
-      </div>
-      <select
-        class="select select-bordered"
-        v-model="formData.tags"
-        multiple
-        required
-      >
-        <option v-for="category in categories" :key="category">
-          {{ category }}
-        </option>
-      </select>
-    </label>
-    <label class="w-full max-w-xs space-x-1">
-      <div class="label">
-        <span class="label-text">Pick a file</span>
-      </div>
-      <input
-        required
-        type="file"
-        accept="image/png, image/jpeg"
-        class="w-full max-w-xs file-input file-input-bordered"
-        @change="handleFileChange"
-      />
-      <div class="label">
-        <span class="label-text"
-          >{{
-            fileData.progress ? `${fileData.progress} % image uploaded` : ""
-          }}
-        </span>
-      </div>
-    </label>
-
-    <label class="form-control">
-      <div class="label">
-        <span class="label-text">Your Content</span>
-      </div>
-      <textarea
-        required
-        class="h-24 textarea textarea-bordered"
-        placeholder="content..."
-        v-model="formData.content"
-      ></textarea>
-    </label>
-
-    <div class="space-x-2">
-      <button type="submit" class="mt-3 btn btn-primary">Submit</button>
-      <button type="reset" class="mt-3 btn btn-secondary">Cancel</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script setup>
