@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="prose">
-    <h1>{{ state.postItem.title }}</h1>
+  <div class="m-auto prose">
+    <h1 class="text-center">{{ state.postItem.title }}</h1>
     <figure>
       <img :src="state.postItem.imageUrl" alt="" />
       <figcaption>Photo by John Doe</figcaption>
