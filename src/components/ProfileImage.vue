@@ -1,12 +1,6 @@
 <template lang="">
-  <div class="gap-2">
-    <div class="form-control">
-      <input
-        type="text"
-        placeholder="Search"
-        class="w-24 input input-bordered md:w-auto"
-      />
-    </div>
+  <div >
+   
     <div class="dropdown dropdown-end" v-if="isAuthenticated">
       <div tabindex="0" role="button" class="ring btn btn-ghost btn-circle">
         <div class="avatar">
