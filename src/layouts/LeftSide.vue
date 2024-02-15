@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="p-0 border-r border-r-base-300 drawer-side">
+  <div class="p-0 border-r border-r-base-300 drawer-side" >
     <label
       for="my-drawer"
       aria-label="close sidebar"
@@ -8,7 +8,8 @@
     <ul class="w-64 min-h-full p-4 menu bg-base-200 text-base-content">
       <label
         for="my-drawer"
-        class="flex flex-row justify-between drawer-button sm:hidden"
+        class="flex flex-row justify-between drawer-button "
+        @click="toggleDrawer"
       >
         <div class="w-1/2"></div>
         <div tabindex="0" class="btn active:bg-black btn-ghost btn-circle">
