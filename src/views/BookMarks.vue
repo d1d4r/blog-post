@@ -7,25 +7,11 @@
   </div>
   <div v-else>
     <div class="flex flex-wrap justify-center">
-      <div
-        v-for="bookmark in bookmarkState.bookMarks"
-        :key="bookmark.id"
-        class="m-5"
-      >
-        <div class="flex flex-col items-center">
-          <div class="w-64 h-96">
-            <img
-              :src="bookmark.image"
-              alt="image"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <div class="mt-5">
-            <h1 class="text-2xl font-bold">{{ bookmark.title }}</h1>
-            <p class="text-sm">{{ bookmark.description }}</p>
-          </div>
-        </div>
-      </div>
+      <CardPost
+        v-for="item in bookmarkState.bookMarks"
+        :key="item.id"
+        :item="item"
+      />
     </div>
   </div>
 </template>
@@ -33,6 +19,7 @@
 import BookMark from "@/service/firestore/BookMark.js";
 import { onMounted, computed, reactive } from "vue";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
+import CardPost from "@/components/CardPost.vue";
 
 const { user } = useAuthenticationStore();
 
@@ -48,8 +35,10 @@ const checkEmpty = computed(() => {
   return bookmarkState.bookMarks.length === 0;
 });
 
-onMounted(() => {
-  bookMark.fetchBookMarks(user.uid);
+onMounted(async() => {
+  const d = await bookMark.fetchBookMarks(user.uid);
+  console.log("🚀 ~ onMounted ~ d:", d)
+  bookmarkState.bookMarks = d;
 });
 </script>
 
