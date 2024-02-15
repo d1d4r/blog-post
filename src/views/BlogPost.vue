@@ -1,7 +1,7 @@
 <template lang="">
   <div class="flex flex-col items-center justify-center">
     <div class="prose">
-      <BookMarkButton />
+      <BookMarkButton :data="state.postItem" />
       <h1 class="text-center">{{ state.postItem.title }}</h1>
       <figure>
         <img :src="state.postItem.imageUrl" alt="" />
@@ -19,7 +19,15 @@ import Post from "@/service/firestore/post.js";
 import { useRoute } from "vue-router";
 import { onMounted, reactive } from "vue";
 import BookMarkButton from "@/components/BookMarkButton.vue";
+import { useBlogPostStore } from "@/stores/useBlogPostStore";
+
 const route = useRoute();
+// const stateBlogPost = useBlogPostStore();
+
+// onMounted(() => {
+//   stateBlogPost.getById(route.params.id);
+// });
+
 const post = new Post();
 
 const state = reactive({
@@ -35,4 +43,4 @@ onMounted(async () => {
 });
 </script>
 <style lang=""></style>
-@/service/firestore/Post.js
+//state.postItem // stateBlogPost.blogPostState.post
