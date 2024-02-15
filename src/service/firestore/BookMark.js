@@ -1,5 +1,5 @@
 import { app } from "@/firebase/index.js";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 class BookMark {
   constructor() {
     this.db = getFirestore(app);
@@ -13,7 +13,15 @@ class BookMark {
       id: doc.id,
       ...doc.data(),
     }));
-      return bookmarks;
+    return bookmarks;
+  };
+
+  addBookMark = async (uid, bookmark) => {
+    const docRef = await addDoc(
+      collection(this.db, `Users/${uid}/Bookmarks`),
+      bookmark
+    );
+    return docRef.id;
   };
 }
 
