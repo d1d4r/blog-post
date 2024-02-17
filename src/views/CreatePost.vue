@@ -8,11 +8,13 @@
   <div class="flex flex-col items-center justify-center">
     <h1 class="text-2xl font-bold">Create Post</h1>
     <form @submit="handleSubmit">
-      <label class="w-full max-w-xs form-control">
+      <label class="w-full max-w-xs form-control" for="title">
         <div class="label">
           <span class="label-text">Title</span>
         </div>
         <input
+          name="title"
+          id="title"
           required
           type="text"
           placeholder="Type here"
@@ -20,11 +22,13 @@
           v-model="formData.title"
         />
       </label>
-      <label class="w-full max-w-xs form-control">
+      <label class="w-full max-w-xs form-control" for="tags">
         <div class="label">
           <span class="label-text">Pick the tags</span>
         </div>
         <select
+          name="tags"
+          id="tags"
           class="select select-bordered"
           v-model="formData.tags"
           multiple
@@ -35,11 +39,13 @@
           </option>
         </select>
       </label>
-      <label class="w-full max-w-xs space-x-1">
+      <label class="w-full max-w-xs space-x-1" for="file">
         <div class="label">
           <span class="label-text">Pick a file</span>
         </div>
         <input
+          name="file"
+          id="file"
           required
           type="file"
           accept="image/png, image/jpeg"
@@ -54,11 +60,13 @@
           </span>
         </div>
       </label>
-      <label class="form-control">
+      <label class="form-control" for="content">
         <div class="label">
           <span class="label-text">Your Content</span>
         </div>
         <textarea
+          name="content"
+          id="content"
           required
           class="h-24 textarea textarea-bordered"
           placeholder="content..."
