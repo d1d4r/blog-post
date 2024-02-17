@@ -1,14 +1,11 @@
 <template lang="">
   <div class="navbar bg-base-100">
-    <div class="flex-1 hidden md:block">
-      <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
-    </div>
     <div class="navbar-start">
       <div id="tel" class="block">
         <div>
           <label
-            for="my-drawer"
-            class="drawer-button sm:hidden"
+            
+            class="drawer-button"
             aria-label="open sidebar"
           >
             <div
@@ -35,11 +32,24 @@
         </div>
       </div>
     </div>
-    <router-link class="btn" to="/main/create"
-      >create post <span>+</span></router-link
-    >
-
-    <ProfileImage />
+    <div class="navbar-center">
+      <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
+    </div>
+    <div class="gap-4 navbar-end">
+      <router-link class="btn" to="/main/create"
+        >create post <span>+</span></router-link
+      >
+      <div class="form-control">
+        <input
+          id="search"
+          name="search"
+          type="text"
+          placeholder="Search"
+          class="w-24 input input-bordered md:w-auto"
+        />
+      </div>
+      <ProfileImage />
+    </div>
     <!-- <ThemeDropdwon /> -->
   </div>
 </template>
