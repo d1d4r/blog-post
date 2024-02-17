@@ -7,6 +7,7 @@ import {
   addDoc,
   query,
   where,
+  limit,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 class Post {
@@ -16,12 +17,15 @@ class Post {
 
   async getAll() {
     try {
-      const querySnapshot = await getDocs(collection(this.db, "Posts"));
-      const posts = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const posts = [];
+      const postsRef = collection(this.db, "Posts");
+      //const q = query(postsRef,limit(3))
+      const querySnapshot = await getDocs(query(postsRef, limit(1)));
 
+      querySnapshot.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
+      });
+      console.log("🚀 ~ Post ~ getAll ~ querySnapshot:", posts);
       return posts;
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);
@@ -50,7 +54,6 @@ class Post {
     const filteredData = await getDocs(querySnapshot);
     filteredData.forEach((doc) => {
       posts.push({ ...doc.data(), id: doc.id });
-
     });
     return posts;
   }
