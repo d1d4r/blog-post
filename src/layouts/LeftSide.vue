@@ -1,14 +1,16 @@
 <template lang="">
-  <div class="p-0 border-r border-r-base-300 drawer-side" >
+  <div class="w-full p-0 drawer-side">
     <label
       for="my-drawer"
       aria-label="close sidebar"
       class="drawer-overlay"
-    ></label>
-    <ul class="w-64 min-h-full p-4 menu bg-base-200 text-base-content">
+      @click="toggleDrawer"
+    >
+    </label>
+    <ul class="w-64 min-h-full p-4 menu bg-base-100 text-base-content">
       <label
         for="my-drawer"
-        class="flex flex-row justify-between drawer-button "
+        class="flex flex-row justify-between drawer-button"
         @click="toggleDrawer"
       >
         <div class="w-1/2"></div>
