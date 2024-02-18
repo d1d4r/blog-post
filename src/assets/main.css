@@ -3,49 +3,66 @@
 @tailwind utilities;
 
 
+/* @font-face {
+  font-family: "Sixtyfour";
+  src: url("./font/Sixtyfour-Regular.ttf");
+} */
+
 @font-face {
-    font-family: "Sixtyfour";
-    src: url("./font/Sixtyfour-Regular.ttf");
+  font-family: "Playfairdisplay";
+  src: url("./font/PlayfairDisplay-Regular.ttf");
 }
 
 *,
 *::after,
 *::before {
-    /* border: solid 0.01rem darkblue; */
+  /* border: solid 0.01rem gray; */
+
+}
+
+html {
+  font-family: "Playfairdisplay";
+  /* border: 10px solid yellow; */
+}
+
+body {
+  /* height: 100%; */
+  /* border: 10px solid red; */
 }
 
 #app {
-    /* height: 100vh; */
-    /* background-color: aqua; */
+  /* height: 100%; */
+  /* border: 10px solid blue; */
+
 }
 
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: #3E3E3E #FFFFFF;
-  }
-  
-  /* Chrome, Edge and Safari */
-  *::-webkit-scrollbar {
-    height: 7px;
-    width: 7px;
-  }
-  *::-webkit-scrollbar-track {
-    border-radius: 6px;
-    background-color: #FFFFFF;
-  }
-  
+  scrollbar-width: thin;
+  scrollbar-color: #3E3E3E #FFFFFF;
+}
 
-  *::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background-color: #3E3E3E;
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-    background-color: #3E3E3E;
-  }
-  
-  *::-webkit-scrollbar-thumb:active {
-    background-color: #3E3E3E;
-  }
-  
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: #FFFFFF;
+}
+
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #3E3E3E;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #3E3E3E;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #3E3E3E;
+}
