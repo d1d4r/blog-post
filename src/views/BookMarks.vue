@@ -6,7 +6,7 @@
     nothing here
   </div>
   <div v-else>
-    <div class="flex flex-wrap justify-center">
+    <div class="grid gap-2 grid-cols-res">
       <CardPost
         v-for="item in bookmarkState.bookMarks"
         :key="item.id"
