@@ -14,7 +14,7 @@
     </div>
     <div class="divider divider-neutral">posts</div>
 
-    <div class="grid gap-2 grid-cols-res">
+    <div class="grid gap-2 justify-items-center grid-cols-res">
       <CardPost v-for="post in postState.post" :key="post.id" :item="post" />
     </div>
   </div>
