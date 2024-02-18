@@ -1,5 +1,5 @@
 <template lang="">
-  <div v-if="!blogPostState.loading" class="flex flex-col ">
+  <div v-if="!blogPostState.loading" class="flex flex-col">
     <div class="grid gap-2 justify-items-center grid-cols-res">
       <CardPost
         v-for="item in blogPostState.posts"
@@ -7,32 +7,15 @@
         :item="item"
       />
     </div>
-    <div class="p-5 m-auto join">
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="1"
-        checked
+    <div class="p-5 m-auto ">
+      <OffsetPagination
+        :total="blogPostState.total"
+        :page="blogPostState.page"
+        :pageSize="blogPostState.pageSize"
+        :onPageChange="fetchPosts"
+        :onPageSizeChange="fetchPosts"
       />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="2"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="3"
-      />
-      <input
-        class="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="4"
-      />
+      
     </div>
   </div>
 
@@ -46,6 +29,7 @@ import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 //import { app } from "@/firebase/index.js";
 import { onMounted } from "vue";
 import { useBlogPostStore } from "@/stores/useBlogPostStore";
+import  OffsetPagination  from "@/components/OffsetPagination.vue";
 
 const { blogPostState, fetchPosts } = useBlogPostStore();
 
