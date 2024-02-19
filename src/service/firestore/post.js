@@ -8,6 +8,10 @@ import {
   query,
   where,
   limit,
+  orderBy,
+  startAt,
+  endAt,
+  startAfter,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 class Post {
@@ -18,14 +22,31 @@ class Post {
   async getAll() {
     try {
       const posts = [];
+
       const postsRef = collection(this.db, "Posts");
-      //const q = query(postsRef,limit(3))
-      const querySnapshot = await getDocs(query(postsRef, limit(1)));
+      const first = query(postsRef, limit(3));
+      const querySnapshot = await getDocs(first);
 
       querySnapshot.forEach((doc) => {
         posts.push({ ...doc.data(), id: doc.id });
       });
-      console.log("🚀 ~ Post ~ getAll ~ querySnapshot:", posts);
+ 
+      return  posts ;
+    } catch (error) {
+      console.log("🚀 ~ Post ~ getAll ~ error", error);
+      return error;
+    }
+  }
+
+  async getPaginationOffcet(pageSize = 3, offset = 0) {
+    try {
+      const postRef = collection(this.db, "Posts");
+      const querys = query(postRef,  limit(pageSize));
+      const querySnapshot = await getDocs(querys);
+      const posts = [];
+      querySnapshot.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
+      });
       return posts;
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);

@@ -1,8 +1,7 @@
 <template lang="">
-  <div>HOWTO? page</div>
-  <!-- <ModalPopup /> -->
+  <div class="flex gap-1 p-10 bg-blue-400">
+
+  </div>
 </template>
-<script setup>
-import ModalPopup from "@/components/ModalPopup.vue";
-</script>
+<script setup></script>
 <style lang=""></style>
