@@ -1,16 +1,16 @@
 <template lang="">
   <div
-    class="min-h-screen  hero"
+    class="min-h-screen hero"
     style="
       background-image: url(https://miro.medium.com/v2/resize:fit:2000/0*dgJcrlUAb1F2_-jJ);
     "
   >
     <div class="hero-overlay bg-opacity-60"></div>
-    <div class="text-center hero-content text-neutral-content">
+    <div class="text-center backdrop-blur-sm hero-content text-neutral-content">
       <div class="max-w-md">
-        <div class="prose">
-          <h1 class="font-sixtyfour">Hello there</h1>
-          <p class="font-oswald">
+        <div class="prose text-white">
+          <h1 class="text-white font-Playfairdisplay">Hello there</h1>
+          <p class="font-Playfairdisplay">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
