@@ -30,20 +30,20 @@ class Post {
       querySnapshot.forEach((doc) => {
         posts.push({ ...doc.data(), id: doc.id });
       });
- 
-      return  posts ;
+
+      return posts;
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);
       return error;
     }
   }
 
-  async getPaginationOffcet(pageSize = 3, offset = 0) {
+  async getPaginationOffcet({ currentPage, currentPageSize }) {
     try {
-      const postRef = collection(this.db, "Posts");
-      const querys = query(postRef,  limit(pageSize));
-      const querySnapshot = await getDocs(querys);
       const posts = [];
+      const postsRef = collection(this.db, "Posts");
+      const first = query(postsRef, limit(currentPageSize));
+      const querySnapshot = await getDocs(first);
       querySnapshot.forEach((doc) => {
         posts.push({ ...doc.data(), id: doc.id });
       });
@@ -51,6 +51,35 @@ class Post {
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);
       return error;
+    }
+  }
+  async loadDocuments(pageSize = 1) {
+    let lastDocument = null;
+    let documents = [];
+    try {
+      const quer = query(
+        collection(this.db, "Posts"),
+        orderBy("title"),
+        limit(pageSize)
+      );
+
+      const snapshot = await getDocs(quer);
+
+      if (snapshot.empty) {
+        console.log("No documents found");
+        return;
+      }
+
+      lastDocument = snapshot.docs[snapshot.docs.length - 1];
+      console.log("🚀 ~ Post ~ loadDocuments ~ lastDocument:", lastDocument);
+
+      documents = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      console.log("documents", documents);
+    } catch (error) {
+      console.error("Error fetching documents:", error);
     }
   }
 
