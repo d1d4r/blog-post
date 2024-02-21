@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="h-full ">
+  <div class="min-h-screen">
     <div v-if="!state.loading" class="flex flex-col">
       <div class="grid gap-2 justify-items-center grid-cols-res">
         <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
@@ -16,7 +16,7 @@
     <div class="flex items-center justify-center gap-2">
       <button
         :disabled="isFirstPage"
-        @click="prev"
+        @click="prevTop"
         class="join-item btn btn-outline"
       >
         prev
@@ -27,13 +27,13 @@
         v-for="item in pageCount"
         :key="item"
         :disabled="currentPage === item"
-        @click="currentPage = item"
+        @click="itemTop"
       >
         {{ item }}
       </button>
       <button
         :disabled="isLastPage"
-        @click="next"
+        @click="nextTop"
         class="join-item btn btn-outline"
       >
         next
@@ -63,6 +63,19 @@ const state = reactive({
   lastDoc: null,
   loading: false,
 });
+
+const nextTop = () => {
+  next();
+  window.scrollTo(0, 0);
+};
+const prevTop = () => {
+  prev();
+  window.scrollTo(0, 0);
+};
+const itemTop = (currentPage, item) => {
+  currentPage = item;
+  window.scrollTo(0, 0);
+};
 
 const fetchPost = async ({ currentPage, currentPageSize }) => {
   try {
