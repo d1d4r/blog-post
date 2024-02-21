@@ -12,6 +12,7 @@ import {
   startAt,
   endAt,
   startAfter,
+  getCountFromServer,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 class Post {
@@ -37,51 +38,122 @@ class Post {
       return error;
     }
   }
+  async finalPagination(
+    currentPage,
+    currentPageSize,
+    startDocReference = null
+  ) {
+    try {
+      const postRef = collection(this.db, "Posts");
+      const total = (await getCountFromServer(postRef)).data().count;
+      //const last = total / currentPageSize;
+      let q;
+      if (startDocReference) {
+        q = query(
+          postRef,
+          orderBy("title"),
+          startAfter(startDocReference),
+          limit(1)
+        );
+      } else {
+        q = query(postRef, orderBy("title"), limit(1));
+      }
+      const snapshot = await getDocs(q);
+      const last = snapshot.docs[snapshot.docs.length - 1].id;
+      if (snapshot.empty) {
+        return null; // No documents found
+      }
+      const posts = [];
+      snapshot.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
+      });
+      return { posts, total, last };
+    } catch (error) {
+      console.log("🚀 ~ Post ~ finalPagination ~ error", error);
+      return error;
+    }
+  }
 
-  async getPaginationOffcet({ currentPage, currentPageSize }) {
+  async getPaginationOffcet(currentPage, currentPageSize) {
     try {
       const posts = [];
       const postsRef = collection(this.db, "Posts");
+      const total = (await getCountFromServer(postsRef)).data().count;
       const first = query(postsRef, limit(currentPageSize));
       const querySnapshot = await getDocs(first);
+      const lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1].id;
+
       querySnapshot.forEach((doc) => {
         posts.push({ ...doc.data(), id: doc.id });
       });
-      return posts;
+      return { posts, total, lastDocument };
     } catch (error) {
       console.log("🚀 ~ Post ~ getAll ~ error", error);
       return error;
     }
   }
-  async loadDocuments(pageSize = 1) {
-    let lastDocument = null;
-    let documents = [];
+  async loadDocuments(lastDocument, currentPageSize) {
+    console.log(
+      "🚀 ~ Post ~ loadDocuments ~ lastDocument, currentPageSiz:",
+      lastDocument,
+      currentPageSize
+    );
+    const after = lastDocument;
     try {
+      const posts = [];
       const quer = query(
         collection(this.db, "Posts"),
         orderBy("title"),
-        limit(pageSize)
+        startAfter(after),
+        limit(1)
       );
 
       const snapshot = await getDocs(quer);
+      const lastDocument = snapshot.docs[snapshot.docs.length - 1].id;
 
       if (snapshot.empty) {
         console.log("No documents found");
         return;
       }
 
-      lastDocument = snapshot.docs[snapshot.docs.length - 1];
-      console.log("🚀 ~ Post ~ loadDocuments ~ lastDocument:", lastDocument);
-
-      documents = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
-      console.log("documents", documents);
+      snapshot.forEach((doc) => {
+        posts.push({ ...doc.data(), id: doc.id });
+      });
+      console.log("🚀 ~ Post ~ loadDocuments ~ posts:", posts);
+      return { posts, lastDocument };
     } catch (error) {
       console.error("Error fetching documents:", error);
     }
   }
+  // async loadMore() {
+  //   try {
+  //     const quer = query(
+  //       collection(this.db, "Posts"),
+  //       orderBy("title"),
+  //       startAfter(lastDocument),
+  //       limit(pageSize)
+  //     );
+
+  //     const snapshot = await getDocs(quer);
+
+  //     if (snapshot.empty) {
+  //       console.log("No more documents to load");
+  //       return;
+  //     }
+
+  //     lastDocument = snapshot.docs[snapshot.docs.length - 1];
+
+  //     documents.value = [
+  //       ...documents.value,
+  //       ...snapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         data: doc.data(),
+  //       })),
+  //     ];
+  //   } catch (error) {
+  //     console.error("Error loading more documents:", error);
+  //   }
+  // }
 
   async get(id) {
     const docRef = doc(this.db, "Posts", id);
