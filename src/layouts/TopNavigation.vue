@@ -70,7 +70,7 @@ const { toggleDrawer } = useDrawer();
 //   console.log("🚀 ~ onMounted ~ uc:", uc);
 // });
 </script>
-<style>
+<style scoped>
 .btn {
   @apply mr-2;
 }
