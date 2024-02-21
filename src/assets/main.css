@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Playfairdisplay";
-  src: url("./font/PlayfairDisplay-Regular.ttf");
+  src: url("./font/PlayfairDisplay-Regular.ttf") format('woff2');
 }
 
 *,
