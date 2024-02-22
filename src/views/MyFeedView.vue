@@ -4,9 +4,6 @@
       <div class="grid gap-2 justify-items-center grid-cols-res">
         <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
       </div>
-      <div class="p-5 m-auto">
-        <OffsetPagination />
-      </div>
     </div>
     <div v-else class="grid gap-2 grid-cols-res h-96">
       <SkeletonCardPost v-for="item in 4" :key="item.id" />
@@ -27,7 +24,12 @@
         v-for="item in pageCount"
         :key="item"
         :disabled="currentPage === item"
-        @click="itemTop"
+        @click="
+          () => {
+            itemTop();
+            currentPage = item;
+          }
+        "
       >
         {{ item }}
       </button>
@@ -72,8 +74,9 @@ const prevTop = () => {
   prev();
   window.scrollTo(0, 0);
 };
-const itemTop = (currentPage, item) => {
-  currentPage = item;
+const itemTop = () => {
+  //this.currentPage = currentPage;
+  //currentPage = item;
   window.scrollTo(0, 0);
 };
 
