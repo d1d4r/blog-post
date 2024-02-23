@@ -4,13 +4,16 @@
     @click="goToPost(item.id)"
   >
     <div class="card-body">
-      <figure>
-        <img
-          :src="item.imageUrl"
-          alt="Shoes"
-          class="w-8 h-8 border-2 border-white rounded-full"
-        />
-      </figure>
+      <div class="flex items-center">
+        <figure>
+          <img
+            :src="item.photoURL"
+            alt="Shoes"
+            class="w-8 h-8 border-2 border-white rounded-full"
+          />
+        </figure>
+        <span>{{ item.displayName }}</span>
+      </div>
 
       <router-link :to="`/main/blogpost/${item.id}`" class="">
         <h2 class="pl-2 card-title group-hover:underline line-clamp-1">
