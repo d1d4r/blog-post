@@ -48,8 +48,11 @@ import { UseOffsetPagination } from "@vueuse/components";
 import Post from "@/service/firestore/Post";
 import { app } from "@/firebase";
 import { getFirestore } from "firebase/firestore";
+import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
 
+const { getUserInfo } = useAuthenticationStore();
 const post = new Post();
+
 const db = getFirestore(app);
 
 const state = reactive({
@@ -78,15 +81,37 @@ const itemTop = () => {
 const fetchPost = async ({ currentPage, currentPageSize }) => {
   try {
     state.loading = true;
-    const { posts, total,postarr } = await post.paginatePosts(
+    const { total, postarr } = await post.paginatePosts(
       db,
       "Posts",
       currentPage,
       currentPageSize
     );
+    //const em = getUserInfo(postarr)
 
+    const posts = [];
+    // postarr.forEach(async (post) => {
+    //   const { displayName, photoURL } = await getUserInfo(post.userId);
+
+    //   posts.push({
+    //     displayName,
+    //     photoURL,
+    //     ...post,
+    //   });
+    // });
+    for (let post = 0; post < postarr.length; post++) {
+      //console.log(postarr[post].userId)
+      const { displayName, photoURL } = await getUserInfo(postarr[post].userId);
+      posts.push({
+        displayName,
+        photoURL,
+        ...postarr[post],
+      });
+    }
+    console.log("🚀 posts", posts);
+    console.log("🚀 postarr:", postarr);
     state.total = total;
-    state.posts = postarr;
+    state.posts = posts;
     //state.lastDoc = last;
 
     return posts;
