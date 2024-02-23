@@ -99,6 +99,7 @@ import { MdEditor, config } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import "md-editor-v3/lib/preview.css";
 import EN_US from "@/english.js";
+import { Timestamp } from "firebase/firestore";
 
 config({
   editorConfig: {
@@ -116,6 +117,8 @@ const uploadPostImage = new UploadPostImage();
 
 const markdown = reactive({
   content: "",
+  userId: user.uid,
+  createAt : new Date()
 });
 
 const onChange = () => {

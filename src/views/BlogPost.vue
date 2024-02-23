@@ -8,21 +8,26 @@
       <div class="w-full h-4 skeleton"></div>
       <div class="w-full h-4 skeleton"></div>
     </div>
-    <div class="w-1/2" v-else>
+    <div class="w-full sm:w-1/2" v-else>
       <BookMarkButton :data="state.postItem" />
-
-      <h1 class="p-5 text-4xl text-center">{{ state.postItem.title }}</h1>
+      <MdPreview
+        editorId="id"
+        :modelValue="state.postItem.content"
+        language="en-US"
+      />
+      <!-- <h1 class="p-5 text-center">{{ state.postItem.title }}</h1>
       <figure>
         <img
           class="object-cover w-full h-96"
           :src="state.postItem.imageUrl"
           alt=""
         />
-        <!-- <figcaption>Photo by John Doe</figcaption> -->
+        <figcaption>Photo by John Doe</figcaption>
       </figure>
-      <p class="text-xl leading-loose tracking-wide hyphens-auto">
+
+      <p class="leading-loose tracking-wide hyphens-auto">
         {{ state.postItem.content }}
-      </p>
+      </p> -->
     </div>
   </div>
 </template>
@@ -33,7 +38,17 @@ import { useRoute } from "vue-router";
 import { onMounted, reactive } from "vue";
 import BookMarkButton from "@/components/BookMarkButton.vue";
 import { useBlogPostStore } from "@/stores/useBlogPostStore";
+import { MdPreview, config } from "md-editor-v3";
+import "md-editor-v3/lib/preview.css";
+import EN_US from "@/english.js";
 
+config({
+  editorConfig: {
+    languageUserDefined: {
+      "en-US": EN_US,
+    },
+  },
+});
 const route = useRoute();
 // const stateBlogPost = useBlogPostStore();
 
@@ -57,5 +72,9 @@ onMounted(async () => {
   state.loading = false;
 });
 </script>
-<style lang=""></style>
+<style>
+#id .md-editor-preview-wrapper {
+  padding: 0;
+}
+</style>
 //state.postItem // stateBlogPost.blogPostState.post

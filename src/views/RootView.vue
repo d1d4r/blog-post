@@ -54,9 +54,11 @@ import { SwiperSlide } from "swiper/vue";
 
 import Post from "@/service/firestore/post.js";
 import { reactive, onMounted } from "vue";
+import { getFirestore } from "firebase/firestore";
+import { app } from "@/firebase";
 
 //register();
-
+const db = getFirestore(app);
 const post = new Post();
 
 const state = reactive({
@@ -69,7 +71,8 @@ const state = reactive({
 onMounted(async () => {
   try {
     state.loading = true;
-    state.posts = await post.getAll();
+    const { postarr } = await post.paginatePosts(db, "Posts", 1, 4);
+    state.posts = postarr;
     //console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
     state.loading = false;
   } catch (error) {

@@ -1,36 +1,65 @@
 <script setup>
 import { ref } from "vue";
 import { useOffsetPagination } from "@vueuse/core";
+import { onMounted, reactive } from "vue";
+import Post from "@/service/firestore/Post.js";
 
-const database = ref([]);
+// const props = defineProps({
+//   currentPage: {
+//     type: Number,
+//     required: true,
+//   },
+//   currentPageSize: {
+//     type: Number,
+//     required: true,
+//   },
+//   pageCount: {
+//     type: Number,
+//     required: true,
+//   },
+//   isFirstPage: {
+//     type: Boolean,
+//     required: true,
+//   },
+//   isLastPage: {
+//     type: Boolean,
+//     required: true,
+//   },
+//   prev: {
+//     type: Function,
+//     required: true,
+//   },
+//   next: {
+//     type: Function,
+//     required: true,
+//   },
+// });
+const post = new Post();
 
-for (let i = 0; i < 80; i++) database.value.push({ id: i, name: `user ${i}` });
-
-function fetch(page, pageSize) {
-  return new Promise((resolve) => {
-    const start = (page - 1) * pageSize;
-    const end = start + pageSize;
-    setTimeout(() => {
-      resolve(database.value.slice(start, end));
-    }, 100);
-  });
-}
-
-const data = ref([]);
-
-const page = ref(1);
-const pageSize = ref(10);
-
-fetchData({
-  currentPage: page.value,
-  currentPageSize: pageSize.value,
+const blogPostState = reactive({
+  posts: [],
+  total: 0,
+  page: 1,
+  pageSize: 1,
+  loading: true,
 });
 
-function fetchData({ currentPage, currentPageSize }) {
-  fetch(currentPage, currentPageSize).then((responseData) => {
-    data.value = responseData;
-  });
-}
+const fetchPosts = async () => {
+  blogPostState.loading = true;
+  try {
+    const posts = await post.getAll();
+    blogPostState.posts = posts;
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    blogPostState.loading = false;
+  }
+};
+
+onMounted(() => {
+  fetchPosts();
+});
 
 const {
   currentPage,
@@ -41,18 +70,18 @@ const {
   prev,
   next,
 } = useOffsetPagination({
-  total: database.value.length,
+  total: blogPostState.posts.length,
   page: 1,
-  pageSize,
-  onPageChange: fetchData,
-  onPageSizeChange: fetchData,
+  pageSize: blogPostState.pageSize,
+  onPageChange: fetchPosts,
+  onPageSizeChange: fetchPosts,
 });
 </script>
 
 <template>
-  <!-- <div class="inline-grid items-center grid-cols-2 gap-x-4 gap-y-2">
+  <div class="inline-grid items-center grid-cols-2 gap-x-4 gap-y-2">
     <div opacity="50">total:</div>
-    <div>{{ database.length }}</div>
+    <div>{{}}</div>
     <div opacity="50">pageCount:</div>
     <div>{{ pageCount }}</div>
     <div opacity="50">currentPageSize:</div>
@@ -63,12 +92,12 @@ const {
     <div>{{ isFirstPage }}</div>
     <div opacity="50">isLastPage:</div>
     <div>{{ isLastPage }}</div>
-  </div> -->
+  </div>
   <div class="my-4 join">
     <button
       :disabled="isFirstPage"
       @click="prev"
-      class="join-item btn btn-outline"
+      class="mr-2 join-item btn btn-outline"
     >
       prev
     </button>
@@ -85,26 +114,38 @@ const {
     <button
       :disabled="isLastPage"
       @click="next"
-      class="join-item btn btn-outline"
+      class="ml-2 join-item btn btn-outline"
     >
       next
     </button>
   </div>
 
-  <!-- <table>
+  <table>
     <thead>
       <tr>
         <td>id</td>
         <td>name</td>
       </tr>
     </thead>
-    <tr v-for="d in data" :key="d.id">
-      <td>{{ d.id }}</td>
-      <td>{{ d.name }}</td>
+    <tr v-for="d in blogPostState.posts" :key="d.id">
+      <td class="p-3 border">{{ d.id }}</td>
+      <td class="p-3 border">{{ d.title }}</td>
     </tr>
-  </table> -->
+  </table>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
+import { collection, getDocs, query, limit, orderBy, startAfter, getFirestore }
+from "firebase/firestore"; import { useOffsetPagination } from "@vueuse/core";
+import {app} from "@/firebase/index.js"; export default { setup() { const db =
+getFirestore(app); const postsCollection = collection(db, "Posts"); // Replace
+with your collection name const { currentPage, itemsPerPage, // Use 10 for 10
+posts per page data: posts, isLoading, hasMorePosts, next, previous,
+isFirstPage, isLastPage, } = useOffsetPagination({ // Customize data fetch logic
+async initialQuery() { return await getDocs( query(postsCollection,
+orderBy("title"), limit(itemsPerPage)) // Order and limit ); }, async
+nextQuery() { const lastDoc = posts[posts.length - 1]; // Use last document as
+starting point return await getDocs( query( postsCollection,
+orderBy("creationDate"), startAfter(lastDoc), limit(itemsPerPage) ) ); }, });
+const loadMorePosts = () => { next(); }; return { posts, isLoading,
+hasMorePosts, loadMorePosts }; }, };

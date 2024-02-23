@@ -13,6 +13,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import Layout from "@/layouts/Layout.vue";
 // import MainContent from "@/layouts/MainContent.vue";
 import { useModalStore } from "@/stores/useModalStore.js";
+import { defineAsyncComponent } from "vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,7 @@ const router = createRouter({
             default: () => import("@/views/MyFeedView.vue"),
             MainContent: () => import("@/layouts/MainContent.vue"),
           },
+         
         },
         {
           path: "blogpost/:id",

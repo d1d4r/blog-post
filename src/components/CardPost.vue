@@ -13,7 +13,7 @@
       </figure>
 
       <router-link :to="`/main/blogpost/${item.id}`" class="">
-        <h2 class="p-2 card-title group-hover:underline">
+        <h2 class="pl-2 card-title group-hover:underline line-clamp-1">
           {{ item.title }}
         </h2>
       </router-link>

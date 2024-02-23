@@ -24,12 +24,7 @@
         v-for="item in pageCount"
         :key="item"
         :disabled="currentPage === item"
-        @click="
-          () => {
-            itemTop();
-            currentPage = item;
-          }
-        "
+        @click="currentPage = item"
       >
         {{ item }}
       </button>
@@ -61,7 +56,7 @@ const state = reactive({
   posts: [],
   total: null,
   page: 1,
-  pageSize: 2,
+  pageSize: 5,
   lastDoc: null,
   loading: false,
 });
@@ -83,7 +78,7 @@ const itemTop = () => {
 const fetchPost = async ({ currentPage, currentPageSize }) => {
   try {
     state.loading = true;
-    const { posts, total } = await post.paginatePosts(
+    const { posts, total,postarr } = await post.paginatePosts(
       db,
       "Posts",
       currentPage,
@@ -91,7 +86,7 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
     );
 
     state.total = total;
-    state.posts = posts;
+    state.posts = postarr;
     //state.lastDoc = last;
 
     return posts;
