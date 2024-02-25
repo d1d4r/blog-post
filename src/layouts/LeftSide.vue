@@ -29,7 +29,18 @@
         </div>
       </label>
       <li v-for="route in routes" :key="route.name" @click="toggleDrawer">
-        <router-link :to="`${route.path}`"> {{ route.name }}</router-link>
+        <router-link :to="`${route.path}`">
+          <template v-if="route.icon === 'BookmarkIcon'">
+            <BookmarkIcon class="size-7" />
+          </template>
+          <template v-else-if="route.icon === 'UserGroupIcon'">
+            <UserGroupIcon class="size-7" />
+          </template>
+          <template v-else-if="route.icon === 'BookOpenIcon'">
+            <BookOpenIcon class="size-7" />
+          </template>
+          {{ route.name }}
+        </router-link>
       </li>
     </ul>
   </div>
@@ -37,25 +48,34 @@
 <script setup>
 import { ref } from "vue";
 import { useDrawer } from "@/stores/openDrawer.js";
-
+import {
+  BeakerIcon,
+  BookmarkIcon,
+  UserGroupIcon,
+  BookOpenIcon,
+} from "@heroicons/vue/16/solid";
 let { toggleDrawer } = useDrawer();
 
 const routes = ref([
   {
     name: "auhters",
-    path: "/main/auhters",
+    path: "/auhters",
+    icon: "UserGroupIcon",
   },
   {
     name: "feed",
-    path: "/main/my-feed",
+    path: "/my-feed",
+    icon: "BookOpenIcon",
   },
-  {
-    name: "HOWTO ",
-    path: "/main/how-to",
-  },
+  // {
+  //   name: "howto ",
+  //   path: "/how-to",
+  //   icon: BeakerIcon,
+  // },
   {
     name: "bookmarks ",
-    path: "/main/bookmarks",
+    path: "/bookmarks",
+    icon: "BookmarkIcon",
   },
 ]);
 </script>
