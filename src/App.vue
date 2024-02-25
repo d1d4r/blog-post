@@ -1,17 +1,18 @@
 <template>
-  <!-- <RootView /> -->
-  <!-- <LayoutWrapper /> -->
-  <!-- <SplashScreen v-if="showSplash" /> -->
+
   <TopNavigation />
-  <router-view></router-view>
-  
-  <ModalPopup />
+  <Layout >
+    
+  </Layout>
+
 </template>
 <script setup>
 import TopNavigation from "./layouts/TopNavigation.vue";
 import ModalPopup from "./components/ModalPopup.vue";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore.js";
 import { onBeforeMount } from "vue";
+import LoadingOverlay from "./components/LoadingOverlay.vue";
+import Layout from "./layouts/Layout.vue";
 
 const { tryLoadingUser } = useAuthenticationStore();
 
