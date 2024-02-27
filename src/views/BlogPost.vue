@@ -1,7 +1,7 @@
 <template lang="">
-  <div class="flex flex-col items-center justify-center">
-    <div class="flex flex-col w-1/2 gap-5" v-if="state.loading">
-      <BookMarkButton :data="state.postItem" :disabled="state.loading" />
+  <div class="flex flex-col items-center justify-center mt-24">
+    <div class="flex flex-col w-1/2 gap-5" v-if="state.loading" >
+      
       <div class="w-full h-4 skeleton"></div>
       <div class="w-full h-96 skeleton"></div>
       <div class="h-4 skeleton w-28"></div>
@@ -9,7 +9,7 @@
       <div class="w-full h-4 skeleton"></div>
     </div>
     <div class="w-full sm:w-1/2" v-else>
-      <BookMarkButton :data="state.postItem" />
+      <BookMarkButton :data="state.postItem" :id="id"  />
       <MdPreview
         editorId="id"
         :modelValue="state.postItem.content"
@@ -50,6 +50,7 @@ config({
   },
 });
 const route = useRoute();
+const { id } = route.params;
 // const stateBlogPost = useBlogPostStore();
 
 // onMounted(() => {
@@ -64,13 +65,19 @@ const state = reactive({
   loading: false,
   error: null,
 });
-
-onMounted(async () => {
+const fetchData = async () => {
   state.loading = true;
-  const postItem = await post.get(route.params.id);
+  const postItem = await post.get(id);
   state.postItem = postItem;
   state.loading = false;
-});
+} 
+fetchData()
+// onMounted(async () => {
+//   state.loading = true;
+//   const postItem = await post.get(id);
+//   state.postItem = postItem;
+//   state.loading = false;
+// });
 </script>
 <style>
 #id .md-editor-preview-wrapper {
