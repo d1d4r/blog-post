@@ -1,5 +1,9 @@
 <template lang="">
-  <button class="btn btn-square btn-outline" v-if="isSaved">
+  <button
+    class="btn btn-square btn-outline"
+    v-if="isSaved"
+    @click="deleteBookMark"
+  >
     <BookmarkSlashIcon class="size-10" />
   </button>
   <button class="btn btn-square btn-outline" @click="addBookMark" v-else>
@@ -35,6 +39,9 @@ const addBookMark = async () => {
   } catch (error) {
     console.log("🚀 ~ addBookMark ~ error:", error);
   }
+};
+const deleteBookMark = async () => {
+  await bookmark.deleteBookMark(user.uid, props.id);
 };
 const fetchSavedData = async () => {
   const save = await bookmark.fetchBookMarkById(props.id, user.uid);
