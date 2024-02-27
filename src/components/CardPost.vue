@@ -15,7 +15,7 @@
         <span>{{ item.displayName }}</span>
       </div>
 
-      <router-link :to="`/main/blogpost/${item.id}`" class="">
+      <router-link :to="`/blogpost/${item.id}`" class="">
         <h2 class="pl-2 card-title group-hover:underline line-clamp-1">
           {{ item.title }}
         </h2>
@@ -48,7 +48,7 @@ import { useRouter } from "vue-router";
 
 const route = useRouter();
 const goToPost = (id) => {
-  route.push(`/main/blogpost/${id}`);
+  route.push(`/blogpost/${id}`);
 };
 </script>
 <style scoped>
