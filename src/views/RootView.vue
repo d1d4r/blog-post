@@ -15,7 +15,7 @@
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <router-link to="/main/my-feed" class="w-2/5 btn"
+          <router-link to="/my-feed" class="w-2/5 btn"
             >strat reading & writing</router-link
           >
         </div>

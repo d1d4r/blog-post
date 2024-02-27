@@ -16,7 +16,7 @@
         <!-- <li>
           <span class="btn" @click="getCurrentUser">show user</span>
         </li> -->
-        <li><router-link to="/main/profile">profile</router-link></li>
+        <li><router-link to="/profile">profile</router-link></li>
         <li @click="handleSignOut" class="btn btn-ghost">sign out</li>
       </ul>
     </div>
