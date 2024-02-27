@@ -2,12 +2,15 @@ import { app } from "@/firebase/index.js";
 import {
   addDoc,
   collection,
+  doc,
   getCountFromServer,
+  getDoc,
   getDocs,
   getFirestore,
   limit,
   orderBy,
   query,
+  setDoc,
   startAt,
 } from "firebase/firestore";
 class BookMark {
@@ -26,17 +29,26 @@ class BookMark {
     return bookmarks;
   };
 
+  fetchBookMarkById = async (bookmarkid, userid) => {
+    const bookmarkdoc = doc(this.db, `Users/${userid}/Bookmarks/${bookmarkid}`);
+    const bookmark = await getDoc(bookmarkdoc);
+
+    if (bookmark.exists()) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   addBookMark = async (uid, bookmark) => {
-    const docRef = await addDoc(
-      collection(this.db, `Users/${uid}/Bookmarks`),
-      bookmark
-    );
-    return docRef.id;
+    const { data, id } = bookmark;
+    const bookmarkdoc = doc(this.db, `Users/${uid}/Bookmarks`, id);
+    await setDoc(bookmarkdoc, data);
   };
 
   async paginateBookMarks(
     db,
-    collectionPath ,
+    collectionPath,
     currentPage,
     currentPageSize,
     orderByField = "title"
