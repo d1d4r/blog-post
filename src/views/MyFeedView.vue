@@ -1,13 +1,15 @@
 <template lang="">
-  <div class="min-h-screen">
-    <div v-if="!state.loading" class="flex flex-col">
-      <div class="grid gap-2 justify-items-center grid-cols-res">
-        <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
+  <div class="min-h-screen mt-24">
+    <Transition>
+      <div v-if="!state.loading" class="flex flex-col">
+        <div class="grid gap-2 justify-items-center grid-cols-res">
+          <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
+        </div>
       </div>
-    </div>
-    <div v-else class="grid gap-2 grid-cols-res h-96">
-      <SkeletonCardPost v-for="item in 4" :key="item.id" />
-    </div>
+      <!-- <div v-else class="grid gap-2 grid-cols-res h-96">
+        <SkeletonCardPost v-for="item in 4" :key="item.id" />
+      </div> -->
+    </Transition>
   </div>
   <UseOffsetPagination>
     <div class="flex items-center justify-center gap-2">
@@ -49,9 +51,11 @@ import Post from "@/service/firestore/Post";
 import { app } from "@/firebase";
 import { getFirestore } from "firebase/firestore";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
+import User from "@/service/firestore/User";
 
 const { getUserInfo } = useAuthenticationStore();
 const post = new Post();
+const user = new User()
 
 const db = getFirestore(app);
 
@@ -59,7 +63,7 @@ const state = reactive({
   posts: [],
   total: null,
   page: 1,
-  pageSize: 5,
+  pageSize: 3,
   lastDoc: null,
   loading: false,
 });
@@ -87,29 +91,18 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
       currentPage,
       currentPageSize
     );
-    //const em = getUserInfo(postarr)
 
     const posts = [];
-    // postarr.forEach(async (post) => {
-    //   const { displayName, photoURL } = await getUserInfo(post.userId);
-
-    //   posts.push({
-    //     displayName,
-    //     photoURL,
-    //     ...post,
-    //   });
-    // });
     for (let post = 0; post < postarr.length; post++) {
       //console.log(postarr[post].userId)
-      const { displayName, photoURL } = await getUserInfo(postarr[post].userId);
+      const { displayName, photoURL } = await user.getUser(postarr[post].userId);
       posts.push({
         displayName,
         photoURL,
         ...postarr[post],
       });
     }
-    console.log("🚀 posts", posts);
-    console.log("🚀 postarr:", postarr);
+
     state.total = total;
     state.posts = posts;
     //state.lastDoc = last;
@@ -144,5 +137,16 @@ const {
   onPageSizeChange: fetchPost,
 });
 </script>
-<style lang=""></style>
+<style scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
 @/service/firestore/Post.js
