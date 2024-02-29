@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="min-h-screen">
-    <div class="grid gap-5 grid-cols-res2" v-if="!state.loading">
+  <div class="min-h-screen ">
+    <div class="grid gap-5 grid-cols-res2 w-full" v-if="!state.loading">
       <AutherCard v-for="user in state.users" :key="user.uid" :item="user" />
     </div>
     <div class="grid gap-5 grid-cols-res2" v-else>loading...</div>
