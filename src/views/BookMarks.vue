@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="min-h-screen">
+  <div class="min-h-screen mt-24">
     <div
       v-if="state.bookmarks.length === 0"
       class="flex items-center justify-center h-full text-5xl"
@@ -59,8 +59,10 @@ import { UseOffsetPagination } from "@vueuse/components";
 import { app } from "@/firebase";
 import { getFirestore } from "firebase/firestore";
 import { useOffsetPagination } from "@vueuse/core";
+import User from "@/service/firestore/User";
 
 const { user } = useAuthenticationStore();
+const users = new User()
 
 const db = getFirestore(app);
 const bookMark = new BookMark();
@@ -86,22 +88,37 @@ const itemTop = () => {
   window.scrollTo(0, 0);
 };
 
+const d = () => {
+  bookMark.fetchBookMarks(user.uid);
+};
+
 const fetchPost = async ({ currentPage, currentPageSize }) => {
   try {
     state.loading = true;
-    const { bookmarks, total } = await bookMark.paginateBookMarks(
+    const { postarr, total } = await bookMark.paginateBookMarks(
       db,
-      `Users/${user.uid}/Bookmarks`,
+      user.uid,
       currentPage,
       currentPageSize
     );
+    //console.log("🚀 ~ fetchPost ~ bookmarks:", bookmarks)
+    const posts = [];
+    for (let post = 0; post < postarr.length; post++) {
+      //console.log(postarr[post].userId)
+      const { displayName, photoURL } = await users.getUser(postarr[post].userId);
+      posts.push({
+        displayName,
+        photoURL,
+        ...postarr[post],
+      });
+    }
 
     state.total = total;
-    state.bookmarks = bookmarks;
+    state.bookmarks = posts;
 
     //state.lastDoc = last;
 
-    return bookmarks;
+    return postarr;
   } catch (error) {
     console.log("🚀 ~ fetchPost ~ error:", error);
   } finally {
@@ -110,7 +127,7 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
 };
 
 fetchPost({ currentPage: state.page, currentPageSize: state.pageSize });
-
+//d()
 const t = computed(() => {
   return state.total;
 });
