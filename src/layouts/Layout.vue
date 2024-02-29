@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template lang="">
-  <!-- <TopNavigation /> -->
+
   <div class="h-full drawer" >
     <DrawerToggle />
     <MainContent />
