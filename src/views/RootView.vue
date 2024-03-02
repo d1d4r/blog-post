@@ -23,22 +23,14 @@
     </div>
   </div>
 
-  <div class="">
-    <div class="flex justify-between p-5">
-      <h1 class="text-3xl font-bold text-center">My Feed</h1>
-      <router-link to="/main/my-feed" class="text-xl underline"
-        >see more</router-link
-      >
+  <SwiperCard >
+    <div class="flex justify-between pb-3">
+      <h1 class="text-3xl font-bold text-center">Feeds</h1>
+      <router-link to="/my-feed" class="text-xl underline">
+        see more
+      </router-link>
     </div>
-    <SwiperCard>
-      <swiper-slide :key="item.id" v-for="item in state.posts">
-        <CardPost :item="item" />
-      </swiper-slide>
-    </SwiperCard>
-  </div>
-
-  <SwiperCard>
-    <swiper-slide :key="item.id" v-for="item in state.posts">
+    <swiper-slide :key="item.id" v-for="item in state.posts" >
       <CardPost :item="item" />
     </swiper-slide>
   </SwiperCard>
@@ -51,15 +43,16 @@
 import SwiperCard from "@/components/SwiperCard.vue";
 import CardPost from "@/components/CardPost.vue";
 import { SwiperSlide } from "swiper/vue";
-
 import Post from "@/service/firestore/post.js";
-import { reactive, onMounted } from "vue";
+import { reactive } from "vue";
 import { getFirestore } from "firebase/firestore";
 import { app } from "@/firebase";
+import User from "@/service/firestore/User";
 
 //register();
 const db = getFirestore(app);
 const post = new Post();
+const user = new User();
 
 const state = reactive({
   posts: [],
@@ -68,22 +61,46 @@ const state = reactive({
   error: null,
 });
 
-onMounted(async () => {
+const fetchPost = async () => {
   try {
     state.loading = true;
     const { postarr } = await post.paginatePosts(db, "Posts", 1, 4);
-    state.posts = postarr;
-    //console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
-    state.loading = false;
+
+    const posts = [];
+    for (let post = 0; post < postarr.length; post++) {
+      //console.log(postarr[post].userId)
+      const { displayName, photoURL } = await user.getUser(
+        postarr[post].userId
+      );
+      posts.push({
+        displayName,
+        photoURL,
+        ...postarr[post],
+      });
+    }
+
+    state.posts = posts;
+    //state.lastDoc = last;
+
+    return posts;
   } catch (error) {
-    console.log("🚀 ~ onMounted ~ error:", error);
-    state.error = error;
+    console.log("🚀 ~ fetchPost ~ error:", error);
   } finally {
     state.loading = false;
   }
-});
+};
+
+fetchPost();
 </script>
-<style></style>
+<style scoped>
+.swiper {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.swiper-slide{
+  flex-shrink: inherit;
+}
+</style>
 <!-- <div class="flex flex-col items-center justify-center py-20">
     <div class="prose text-center">
       <h1>Hello there</h1>
@@ -95,3 +112,17 @@ onMounted(async () => {
     </div>
   </div> -->
 @/service/firestore/Post.js
+<!-- // onMounted(async () => {
+//   try {
+//     state.loading = true;
+//     const { postarr } = await post.paginatePosts(db, "Posts", 1, 4);
+//     state.posts = postarr;
+//     //console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
+//     state.loading = false;
+//   } catch (error) {
+//     console.log("🚀 ~ onMounted ~ error:", error);
+//     state.error = error;
+//   } finally {
+//     state.loading = false;
+//   }
+// }); -->
