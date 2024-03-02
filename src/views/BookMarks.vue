@@ -10,44 +10,48 @@
       <SkeletonCardPost v-for="item in 4" :key="item.id" />
     </div>
     <div v-else>
-      <div class="grid gap-2 grid-cols-res">
+      <div class="grid gap-2 justify-items-center grid-cols-res">
         <CardPost v-for="item in state.bookmarks" :key="item.id" :item="item" />
       </div>
     </div>
+
+    <UseOffsetPagination>
+      <div
+        class="flex items-center justify-center gap-2 mt-10"
+        :class="{ hidden: state.loading }"
+      >
+        <button
+          :disabled="isFirstPage"
+          @click="prevTop"
+          class="join-item btn btn-outline"
+        >
+          prev
+        </button>
+        <button
+          type="button"
+          class="border border-black disabled:border-base-100 btn btn-md bg-base-100 disabled:bg-black disabled:text-base-100 disabled:cursor-not-allowed"
+          v-for="item in pageCount"
+          :key="item"
+          :disabled="currentPage === item"
+          @click="
+            () => {
+              itemTop();
+              currentPage = item;
+            }
+          "
+        >
+          {{ item }}
+        </button>
+        <button
+          :disabled="isLastPage"
+          @click="nextTop"
+          class="join-item btn btn-outline"
+        >
+          next
+        </button>
+      </div>
+    </UseOffsetPagination>
   </div>
-  <UseOffsetPagination>
-    <div class="flex items-center justify-center gap-2">
-      <button
-        :disabled="isFirstPage"
-        @click="prevTop"
-        class="join-item btn btn-outline"
-      >
-        prev
-      </button>
-      <button
-        type="button"
-        class="border border-black disabled:border-base-100 btn btn-md bg-base-100 disabled:bg-black disabled:text-base-100 disabled:cursor-not-allowed"
-        v-for="item in pageCount"
-        :key="item"
-        :disabled="currentPage === item"
-        @click="
-          () => {
-            itemTop();
-            currentPage = item;
-          }
-        "
-      >
-        {{ item }}
-      </button>
-      <button
-        :disabled="isLastPage"
-        @click="nextTop"
-        class="join-item btn btn-outline"
-      >
-        next
-      </button>
-    </div>
-  </UseOffsetPagination>
 </template>
 <script setup>
 import BookMark from "@/service/firestore/BookMark.js";
@@ -62,7 +66,7 @@ import { useOffsetPagination } from "@vueuse/core";
 import User from "@/service/firestore/User";
 
 const { user } = useAuthenticationStore();
-const users = new User()
+const users = new User();
 
 const db = getFirestore(app);
 const bookMark = new BookMark();
@@ -105,7 +109,9 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
     const posts = [];
     for (let post = 0; post < postarr.length; post++) {
       //console.log(postarr[post].userId)
-      const { displayName, photoURL } = await users.getUser(postarr[post].userId);
+      const { displayName, photoURL } = await users.getUser(
+        postarr[post].userId
+      );
       posts.push({
         displayName,
         photoURL,
