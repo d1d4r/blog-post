@@ -1,47 +1,57 @@
 <template lang="">
-  <div class="min-h-screen ">
-    <div class="grid gap-5 grid-cols-res2 w-full" v-if="!state.loading">
+  <div class="min-h-screen px-5 mt-24">
+    <div
+      class="flex flex-col gap-4 justify-evenly sm:flex-row"
+      v-if="!state.loading"
+    >
       <AutherCard v-for="user in state.users" :key="user.uid" :item="user" />
     </div>
-    <div class="grid gap-5 grid-cols-res2" v-else>loading...</div>
-  </div>
-  <UseOffsetPagination>
-    <div class="flex items-center justify-center gap-2">
-      <button
-        :disabled="isFirstPage"
-        @click="prevTop"
-        class="join-item btn btn-outline"
-      >
-        prev
-      </button>
-      <button
-        type="button"
-        class="border border-black disabled:border-base-100 btn btn-md bg-base-100 disabled:bg-black disabled:text-base-100 disabled:cursor-not-allowed"
-        v-for="item in pageCount"
-        :key="item"
-        :disabled="currentPage === item"
-        @click="
-          () => {
-            itemTop();
-            currentPage = item;
-          }
-        "
-      >
-        {{ item }}
-      </button>
-      <button
-        :disabled="isLastPage"
-        @click="nextTop"
-        class="join-item btn btn-outline"
-      >
-        next
-      </button>
+    <div class="grid gap-5 justify-items-center grid-cols-res2" v-else>
+      <SkeletonCardPost v-for="item in 8" :key="item" />
     </div>
-  </UseOffsetPagination>
+
+    <UseOffsetPagination>
+      <div
+        class="flex items-center justify-center gap-2 mt-10"
+        :class="{ hidden: state.loading }"
+      >
+        <button
+          :disabled="isFirstPage"
+          @click="prevTop"
+          class="join-item btn btn-outline"
+        >
+          prev
+        </button>
+        <button
+          type="button"
+          class="border border-black disabled:border-base-100 btn btn-md bg-base-100 disabled:bg-black disabled:text-base-100 disabled:cursor-not-allowed"
+          v-for="item in pageCount"
+          :key="item"
+          :disabled="currentPage === item"
+          @click="
+            () => {
+              itemTop();
+              currentPage = item;
+            }
+          "
+        >
+          {{ item }}
+        </button>
+        <button
+          :disabled="isLastPage"
+          @click="nextTop"
+          class="join-item btn btn-outline"
+        >
+          next
+        </button>
+      </div>
+    </UseOffsetPagination>
+  </div>
 </template>
 <script setup>
 import User from "@/service/firestore/User.js";
 import AutherCard from "@/components/AutherCard.vue";
+import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 import { reactive, computed } from "vue";
 import { UseOffsetPagination } from "@vueuse/components";
 import { app } from "@/firebase";
@@ -55,7 +65,7 @@ const state = reactive({
   users: [],
   total: null,
   page: 1,
-  pageSize: 1,
+  pageSize: 2,
   lastDoc: null,
   loading: false,
 });
