@@ -6,7 +6,7 @@
     "
   >
     <div class="hero-overlay bg-opacity-60"></div>
-    <div class="text-center backdrop-blur-sm hero-content text-neutral-content">
+    <div class="text-center border backdrop-blur-sm hero-content">
       <div class="max-w-md">
         <div class="prose text-white">
           <h1 class="text-white font-Playfairdisplay">Hello there</h1>
@@ -23,15 +23,28 @@
     </div>
   </div>
 
-  <SwiperCard >
+  <SwiperCard v-if="!state.loading">
     <div class="flex justify-between pb-3">
       <h1 class="text-3xl font-bold text-center">Feeds</h1>
       <router-link to="/my-feed" class="text-xl underline">
         see more
       </router-link>
     </div>
-    <swiper-slide :key="item.id" v-for="item in state.posts" >
+
+    <swiper-slide :key="item.id" v-for="item in state.posts">
       <CardPost :item="item" />
+    </swiper-slide>
+  </SwiperCard>
+
+  <SwiperCard v-else>
+    <div class="flex justify-between pb-3">
+      <h1 class="text-3xl font-bold text-center">Feeds</h1>
+      <router-link to="/my-feed" class="text-xl underline">
+        see more
+      </router-link>
+    </div>
+    <swiper-slide :key="item.id" v-for="item in 4">
+      <SkeletonCardPost />
     </swiper-slide>
   </SwiperCard>
 
@@ -42,12 +55,14 @@
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
 import CardPost from "@/components/CardPost.vue";
+
 import { SwiperSlide } from "swiper/vue";
 import Post from "@/service/firestore/post.js";
 import { reactive } from "vue";
 import { getFirestore } from "firebase/firestore";
 import { app } from "@/firebase";
 import User from "@/service/firestore/User";
+import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 
 //register();
 const db = getFirestore(app);
@@ -97,8 +112,11 @@ fetchPost();
   display: flex;
   flex-direction: column-reverse;
 }
-.swiper-slide{
+.swiper-slide {
   flex-shrink: inherit;
+}
+.swiper-button-prev {
+  color: black;
 }
 </style>
 <!-- <div class="flex flex-col items-center justify-center py-20">
