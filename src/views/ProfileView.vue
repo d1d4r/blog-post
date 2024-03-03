@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="grid grid-cols-1 grid-rows-1 sm:grid-cols-3">
+  <div class="grid min-h-screen grid-cols-1 grid-rows-1 mt-24 sm:grid-cols-3">
     <div class="h-full">
       <div class="text-center">
         <img
