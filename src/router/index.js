@@ -167,7 +167,7 @@ const router = createRouter({
 
       beforeEnter: (to, from, next) => {
         if (localStorage.getItem("accessToken")) next();
-        else next({ name: "loging" });
+        else next({ name: "signIn" });
       },
     },
 
@@ -176,13 +176,13 @@ const router = createRouter({
       component: () => import("@/views/CreatePost.vue"),
 
       beforeEnter: (to, from, next) => {
-        const { openModal } = useModalStore();
+        // const { openModal } = useModalStore();
 
         if (localStorage.getItem("accessToken")) {
           next();
         } else {
-          openModal();
-          //next({ name: "loging" });
+         //openModal();
+          next({ name: "signIn" });
         }
       },
     },
