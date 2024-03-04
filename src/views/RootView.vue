@@ -56,7 +56,7 @@ import CardPost from "@/components/CardPost.vue";
 import { SwiperSlide } from "swiper/vue";
 import { reactive } from "vue";
 import User from "@/service/firestore/User";
-import Post from "@/service/firestore/Post"
+import Post from "@/service/firestore/Post";
 import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 
 const post = new Post();
