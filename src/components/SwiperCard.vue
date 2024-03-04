@@ -1,8 +1,7 @@
-<template lang="">
+<template>
   <Swiper
-    :loop="true"
-    :slides-per-view="isLargeScreen ? 3 : 1"
-    
+    class="w-[90%] mb-5 mt-5"
+    :slides-per-view="isLargeScreen ? 2 : 1"
     :space-between="50"
     :centered-slides="true"
     :navigation="true"
@@ -22,23 +21,5 @@ import { useMediaQuery } from "@vueuse/core";
 register();
 
 const isLargeScreen = useMediaQuery("(min-width: 1024px)");
-
-// const onProgress = (e) => {
-//   const [swiper, progress] = e.detail;
-//   console.log(progress);
-// };
-
-// const onSlideChange = (e) => {
-//   console.log("slide changed");
-// };
 </script>
-<style>
-.swiper {
-  @apply w-[90%]  mb-5 mt-5;
-}
-
-.swiper-slide {
-  @apply w-1/5;
-}
-
-</style>
+<style></style>

@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="w-fit bg-white border rounded-none card shadow-gl">
-    <div class="flex-row gap-4 p-5 card-body">
+  <div class="bg-white border rounded-none card shadow-gl">
+    <div class="flex-row gap-4 card-body">
       <div class="m-auto avatar">
         <div class="w-24 h-24 rounded-full">
           <img :src="item.photoURL" />

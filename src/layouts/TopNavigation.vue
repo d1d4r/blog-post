@@ -1,13 +1,9 @@
-<template lang="">
-  <div class="fixed z-10 bg-white border navbar">
+<template>
+  <div class="fixed z-10 bg-white navbar">
     <div class="navbar-start">
       <div id="tel" class="block">
         <div>
-          <label
-            
-            class="drawer-button"
-            aria-label="open sidebar"
-          >
+          <label class="drawer-button" aria-label="open sidebar">
             <div
               tabindex="0"
               @click="toggleDrawer"
@@ -36,10 +32,13 @@
       <router-link class="text-xl btn btn-ghost" to="/">K-Blog</router-link>
     </div>
     <div class="gap-4 navbar-end">
-      <router-link class="btn " to="/main/create"
-        >create post <span>+</span></router-link
-      >
-      <div class="form-control">
+      <div class="flex">
+        <div class="hidden sm:block">
+          <router-link class="btn" to="/create">create post </router-link>
+        </div>
+        <router-link class="text-xl btn sm:hidden" to="/create">+ </router-link>
+      </div>
+      <!-- <div class="form-control">
         <input
           id="search"
           name="search"
@@ -47,31 +46,14 @@
           placeholder="Search"
           class="w-24 input input-bordered md:w-auto"
         />
-      </div>
+      </div> -->
       <ProfileImage />
     </div>
-    <!-- <ThemeDropdwon /> -->
   </div>
 </template>
 <script setup>
 import ProfileImage from "@/components/ProfileImage.vue";
-import ThemeDropdwon from "@/components/ThemeDropdwon.vue";
-//import { app } from "@/firebase/index.js";
-import Authentication from "@/service/auth/authentication";
-import { onMounted } from "vue";
 import { useDrawer } from "@/stores/openDrawer";
-
 const { toggleDrawer } = useDrawer();
-
-// const authentication = new Authentication();
-
-// onMounted(async () => {
-//   const uc = await authentication.getAuth();
-//   console.log("🚀 ~ onMounted ~ uc:", uc);
-// });
 </script>
-<style scoped>
-.btn {
-  @apply mr-2;
-}
-</style>
+<style scoped></style>

@@ -1,11 +1,11 @@
 <template lang="">
   <div
-    class="m-auto border border-solid shadow-xl cursor-pointer w-72 card bg-base-100 lg:m-0 group"
+    class="m-auto bg-transparent border cursor-pointer backdrop-blur-3xl w-72 card lg:m-0 group"
     @click="goToPost(item.id)"
   >
-    <div class="card-body">
+    <div class="p-2 text-sec card-body">
       <div class="flex items-center">
-        <figure>
+        <figure class="justify-start p-2;">
           <img
             :src="item.photoURL"
             alt="Shoes"
@@ -47,15 +47,11 @@ defineProps({
 import { useRouter } from "vue-router";
 
 const route = useRouter();
+
 const goToPost = (id) => {
   route.push(`/blogpost/${id}`);
 };
 </script>
 <style scoped>
-figure {
-  @apply justify-start p-2;
-}
-.card-body {
-  @apply p-1;
-}
+
 </style>

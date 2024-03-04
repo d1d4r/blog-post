@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="w-full p-0 drawer-side">
+  <div class="z-20 w-full p-0 drawer-side">
     <label
       for="my-drawer"
       aria-label="close sidebar"
@@ -7,7 +7,9 @@
       @click="toggleDrawer"
     >
     </label>
-    <ul class="w-64 min-h-full p-4 menu bg-base-100 text-base-content">
+    <ul
+      class="w-64 min-h-full p-4 bg-white border-r menu text-base-content"
+    >
       <label
         for="my-drawer"
         class="flex flex-row justify-between drawer-button"
@@ -28,7 +30,7 @@
           </svg>
         </div>
       </label>
-      <li v-for="route in routes" :key="route.name" @click="toggleDrawer">
+      <li v-for="route in routes" :key="route.name" @click="toggleDrawer" class="text-sec">
         <router-link :to="`${route.path}`">
           <template v-if="route.icon === 'BookmarkIcon'">
             <BookmarkIcon class="size-7" />
@@ -80,7 +82,5 @@ const routes = ref([
 ]);
 </script>
 <style scoped>
-.active {
-  @apply bg-base-100;
-}
+
 </style>
