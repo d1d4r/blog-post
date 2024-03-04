@@ -15,7 +15,7 @@ import BookMark from "@/service/firestore/BookMark";
 import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
 import { BookmarkIcon, BookmarkSlashIcon } from "@heroicons/vue/16/solid";
 import { ref } from "vue";
-
+const emit = defineEmits(["bookmark-added"]);
 const props = defineProps({
   data: {
     type: Object,
@@ -25,9 +25,11 @@ const props = defineProps({
     type: String,
   },
 });
+//console.log("🚀 ~ id:", props.id);
 
 const { user } = useAuthenticationStore();
 const bookmark = new BookMark();
+const error = ref(null);
 
 const isSaved = ref(false);
 const addBookMark = async () => {
@@ -36,8 +38,11 @@ const addBookMark = async () => {
       data: props.data,
       id: props.id,
     });
-  } catch (error) {
-    console.log("🚀 ~ addBookMark ~ error:", error);
+  } catch (err) {
+    //console.log("🚀  error:", err.message);
+    //alert(error.message)
+    //error.value = err;
+    emit("bookmark-added", { err });
   }
 };
 const deleteBookMark = async () => {
