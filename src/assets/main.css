@@ -55,6 +55,19 @@ body {
 
 }
 
+.active {
+  background-color: white;
+}
+
+.grd {
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.39539565826330536) 17%,
+    rgba(255, 255, 255, 1) 97%
+  );
+}
+
 /* Firefox */
 * {
   scrollbar-width: thin;
