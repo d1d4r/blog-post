@@ -41,7 +41,6 @@ export const useAuthenticationStore = defineStore("authentication", () => {
         password
       );
 
-      console.log("🚀 ~ signIn ~ userCredential.user:", userCredential.user);
       setUser(userCredential.user);
 
       //return userCredential.user;
@@ -65,9 +64,13 @@ export const useAuthenticationStore = defineStore("authentication", () => {
       );
 
       const newUser = new User();
+      await newUser.createUser({
+        displayName,
+        uid: userCredential.user.uid,
+        bio: null,
+        photoURL: null,
+      });
 
-      await newUser.createUser({ displayName, uid: userCredential.user.uid });
-      console.log("🚀 ~ signup ~ userCredential.user:", userCredential.user);
       setUser(userCredential.user);
 
       //return userCredential;
