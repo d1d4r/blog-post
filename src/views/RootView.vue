@@ -48,9 +48,7 @@
     </swiper-slide>
   </SwiperCard>
 
-  <!-- <div v-else>
-    <LoadingOverlay />
-  </div> -->
+
 </template>
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
