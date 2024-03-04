@@ -10,6 +10,7 @@ import {
   query,
   setDoc,
   startAt,
+  updateDoc,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
 export default class User {
@@ -26,14 +27,24 @@ export default class User {
     }
   };
 
+  updateUser = async (data, uid) => {
+    try {
+      await updateDoc(doc(this.db, "Users", uid, data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   getUser = async (uid) => {
     const docRef = doc(this.db, "Users", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+      
       return docSnap.data();
     } else {
       console.log("No such document!");
     }
+      
   };
 
   getAllUsers = async () => {
@@ -45,17 +56,6 @@ export default class User {
     return users;
   };
 
-  updateUser = async (uid, data) => {
-    try {
-      if (!uid) {
-        throw new Error("User ID is required to update user");
-      }
-      await setDoc(doc(this.db, "Users", uid), data);
-    } catch (error) {
-      console.log("🚀 ~ User ~ updateUser ~ error", error);
-      return error;
-    }
-  };
 
   //////////////////////
   async paginateUsers(
