@@ -1,14 +1,14 @@
 <template lang="">
-  <div class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse items-stretch">
-      <div class="text-center w-full lg:text-left prose">
+  <div class="min-h-screen hero bg-base-200">
+    <div class="flex-col items-stretch hero-content lg:flex-row-reverse">
+      <div class="w-full prose text-center lg:text-left">
         <h1>SignIn</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum
           totam quidem minus enim nam? Omnis provident animi atque dolor.
         </p>
       </div>
-      <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="w-full max-w-sm shadow-2xl card shrink-0 bg-base-100">
         <form @submit.prevent="submit" class="card-body">
           <div class="form-control">
             <label class="label">
@@ -35,7 +35,7 @@
             />
           </div>
 
-          <div class="form-control mt-6">
+          <div class="mt-6 form-control">
             <button
               type="submit"
               class="btn btn-primary"
@@ -84,7 +84,7 @@ const submit = async () => {
     userData.loading = true;
     await signIn(userData.email, userData.password);
     //console.log("🚀 ~ submit ~ user:", user);
-    router.push("/main/my-feed");
+    router.push("/my-feed");
   } catch (error) {
     userData.error = error.message;
   } finally {
