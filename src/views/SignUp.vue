@@ -103,7 +103,7 @@ const submit = async () => {
   errorMessage.value = null;
   try {
     await signup(userData.email, userData.password, userData.displayname);
-    router.push("/main/my-feed");
+    router.push("/my-feed");
   } catch (error) {
     switch (error.code) {
       case "auth/email-already-in-use":
