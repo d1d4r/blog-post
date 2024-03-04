@@ -1,12 +1,13 @@
 <template lang="">
   <div class="min-h-screen mt-24">
+  
     <div v-if="!state.loading" class="flex flex-col">
       <div class="grid gap-2 justify-items-center grid-cols-res">
         <CardPost v-for="item in state.posts" :key="item.id" :item="item" />
       </div>
     </div>
-    <div v-else class="grid gap-2 grid-cols-res h-96">
-      <SkeletonCardPost v-for="item in 4" :key="item.id" />
+    <div v-else class="grid gap-3 justify-items-center grid-cols-res h-96">
+      <SkeletonCardPost v-for="item in 8" :key="item.id" />
     </div>
 
     <UseOffsetPagination>
@@ -47,25 +48,19 @@
 import CardPost from "@/components/CardPost.vue";
 import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 import { useOffsetPagination } from "@vueuse/core";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed } from "vue";
 import { UseOffsetPagination } from "@vueuse/components";
-import Post from "@/service/firestore/Post";
-import { app } from "@/firebase";
-import { getFirestore } from "firebase/firestore";
-import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
+import Post from "@/service/firestore/Post.js";
 import User from "@/service/firestore/User";
 
-const { getUserInfo } = useAuthenticationStore();
 const post = new Post();
 const user = new User();
-
-const db = getFirestore(app);
 
 const state = reactive({
   posts: [],
   total: null,
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   lastDoc: null,
   loading: false,
 });
@@ -78,17 +73,12 @@ const prevTop = () => {
   prev();
   window.scrollTo(0, 0);
 };
-const itemTop = () => {
-  //this.currentPage = currentPage;
-  //currentPage = item;
-  window.scrollTo(0, 0);
-};
+
 
 const fetchPost = async ({ currentPage, currentPageSize }) => {
   try {
     state.loading = true;
     const { total, postarr } = await post.paginatePosts(
-      db,
       "Posts",
       currentPage,
       currentPageSize
@@ -96,7 +86,7 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
 
     const posts = [];
     for (let post = 0; post < postarr.length; post++) {
-      //console.log(postarr[post].userId)
+      
       const { displayName, photoURL } = await user.getUser(
         postarr[post].userId
       );
@@ -118,6 +108,7 @@ const fetchPost = async ({ currentPage, currentPageSize }) => {
     state.loading = false;
   }
 };
+
 
 fetchPost({ currentPage: state.page, currentPageSize: state.pageSize });
 
@@ -142,15 +133,6 @@ const {
 });
 </script>
 <style scoped>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
 </style>
-@/service/firestore/Post.js
+

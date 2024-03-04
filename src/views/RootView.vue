@@ -7,9 +7,9 @@
   >
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="text-center border backdrop-blur-sm hero-content">
-      <div class="max-w-md">
-        <div class="prose text-white">
-          <h1 class="text-white font-Playfairdisplay">Hello there</h1>
+      <div class="max-w-md ">
+        <div class="text-white ">
+          <h1 class="text-white text-clamp font-Playfairdisplay ">Hello there</h1>
           <p class="font-Playfairdisplay">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
@@ -55,17 +55,12 @@
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
 import CardPost from "@/components/CardPost.vue";
-
 import { SwiperSlide } from "swiper/vue";
-import Post from "@/service/firestore/post.js";
+import Post from "@/service/firestore/Post.js";
 import { reactive } from "vue";
-import { getFirestore } from "firebase/firestore";
-import { app } from "@/firebase";
 import User from "@/service/firestore/User";
 import SkeletonCardPost from "@/components/SkeletonCardPost.vue";
 
-//register();
-const db = getFirestore(app);
 const post = new Post();
 const user = new User();
 
@@ -79,11 +74,10 @@ const state = reactive({
 const fetchPost = async () => {
   try {
     state.loading = true;
-    const { postarr } = await post.paginatePosts(db, "Posts", 1, 4);
+    const { postarr } = await post.paginatePosts( "Posts", 1, 4);
 
     const posts = [];
     for (let post = 0; post < postarr.length; post++) {
-      //console.log(postarr[post].userId)
       const { displayName, photoURL } = await user.getUser(
         postarr[post].userId
       );
@@ -119,28 +113,4 @@ fetchPost();
   color: black;
 }
 </style>
-<!-- <div class="flex flex-col items-center justify-center py-20">
-    <div class="prose text-center">
-      <h1>Hello there</h1>
-      <p>
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-        excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-        id nisi.
-      </p>
-    </div>
-  </div> -->
-@/service/firestore/Post.js
-<!-- // onMounted(async () => {
-//   try {
-//     state.loading = true;
-//     const { postarr } = await post.paginatePosts(db, "Posts", 1, 4);
-//     state.posts = postarr;
-//     //console.log("🚀 ~ onMounted ~  state.posts:", state.posts);
-//     state.loading = false;
-//   } catch (error) {
-//     console.log("🚀 ~ onMounted ~ error:", error);
-//     state.error = error;
-//   } finally {
-//     state.loading = false;
-//   }
-// }); -->
+
