@@ -65,7 +65,7 @@ const state = reactive({
   users: [],
   total: null,
   page: 1,
-  pageSize: 2,
+  pageSize: 10,
   lastDoc: null,
   loading: false,
 });

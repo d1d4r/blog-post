@@ -34,7 +34,7 @@
       >
         <li><router-link to="/signIn">signIn</router-link></li>
         <li><router-link to="/signup">signup</router-link></li>
-        <li @click="getCurrentUser()" class="btn">current user</li>
+        <!-- <li @click="getCurrentUser()" class="btn">current user</li> -->
       </ul>
     </div>
   </div>
