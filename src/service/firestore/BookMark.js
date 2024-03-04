@@ -2,6 +2,7 @@ import { app } from "@/firebase/index.js";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getCountFromServer,
   getDoc,
@@ -26,6 +27,7 @@ class BookMark {
       id: doc.id,
       ...doc.data(),
     }));
+    console.log("🚀 ~ BookMark ~ bookmarks ~ bookmarks:", bookmarks);
     return bookmarks;
   };
 
@@ -41,18 +43,32 @@ class BookMark {
   };
 
   addBookMark = async (uid, bookmark) => {
-    const { data, id } = bookmark;
-    const bookmarkdoc = doc(this.db, `Users/${uid}/Bookmarks`, id);
-    await setDoc(bookmarkdoc, data);
+    try {
+      const { data, id } = bookmark;
+
+      if (!uid) {
+        throw Error("plase log");
+      }
+      const bookmarkdoc = doc(this.db, `Users/${uid}/Bookmarks`, id);
+      await setDoc(bookmarkdoc, data);
+    } catch (error) {
+      console.log("🚀error:", error.message);
+      throw error;
+    }
+  };
+
+  deleteBookMark = async (uid, id) => {
+    await deleteDoc(doc(this.db, `Users/${uid}/Bookmarks`, id));
   };
 
   async paginateBookMarks(
     db,
-    collectionPath,
+    uid,
     currentPage,
     currentPageSize,
-    orderByField = "title"
+    orderByField = "content"
   ) {
+    const collectionPath = `Users/${uid}/Bookmarks`;
     try {
       // Validate currentPage and currentPageSize
       if (currentPage < 1 || currentPageSize < 1) {
@@ -72,7 +88,8 @@ class BookMark {
               orderByField
             );
 
-      const bookmarksRef = collection(db, collectionPath);
+      const bookmarksRef = collection(this.db, collectionPath);
+
       const q = query(
         bookmarksRef,
         orderBy(orderByField),
@@ -81,23 +98,44 @@ class BookMark {
       );
 
       const snapshot = await getDocs(q);
-
+      
       // Handle no documents found gracefully
       if (snapshot.empty) {
         return { bookmarks: [], total: 0, last: null };
       }
 
       // Extract and format data, calculate nextPageToken
-      const bookmarks = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+      // const bookmarks = snapshot.docs.map((doc) => ({
+      //   ...doc.data(),
+      //   id: doc.id,
+      // }));
+      const postarr = [];
+      snapshot.docs.forEach((doc) => {
+        const inputString = doc.data().content;
+        const hashTextMatch = inputString.match(/#(.+?)\n/);
+        const hashText = hashTextMatch ? hashTextMatch[1].trim() : "";
+
+        // Extract text after ! symbol
+        const exclamationTextMatch = inputString.match(/!\[.+?\]\((.+?)\)/);
+        const exclamationText = exclamationTextMatch
+          ? exclamationTextMatch[1].trim()
+          : "";
+
+        postarr.push({
+          title: hashText ? hashText : "default",
+          imageUrl: exclamationText
+            ? exclamationText
+            : "https://www.invoicera.com/wp-content/uploads/2023/11/default-image.jpg",
+          id: doc.id,
+          userId: doc.data().userId,
+        });
+      });
       //const total = await this.getTotalCount(db, collectionPath);
       const total = (await getCountFromServer(bookmarksRef)).data().count;
       const last = snapshot.docs[snapshot.docs.length - 1].id;
       //const nextPageToken = currentPage * currentPageSize < total ? last : null;
 
-      return { bookmarks, total, last };
+      return { postarr, total, last };
     } catch (error) {
       console.error("Error paginating posts:", error);
       return null; // Or handle errors more gracefully
@@ -106,7 +144,7 @@ class BookMark {
 
   // Helper function to get the Nth document based on a field
   async getNthDocBasedOnField(db, collectionPath, index, orderByField) {
-    const usersRef = collection(db, collectionPath);
+    const usersRef = collection(this.db, collectionPath);
     const q = query(usersRef, orderBy(orderByField), limit(index + 1));
     // const query = collection(db, collectionPath)
     //   .orderBy(orderByField)
