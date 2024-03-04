@@ -14,7 +14,7 @@ import {
   getCountFromServer,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
-class Post {
+export default class Post {
   constructor() {
     this.db = getFirestore(app);
   }
@@ -146,4 +146,4 @@ class Post {
   }
 }
 
-export default Post;
+
