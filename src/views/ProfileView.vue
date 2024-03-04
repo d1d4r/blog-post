@@ -75,9 +75,14 @@ const userInfoSatate = reactive({
   error: null,
 });
 
-onMounted(async () => {
+const fetch = async () => {
   const userInfo = await getUserInfo(user.uid);
   userInfoSatate.userInfo = userInfo;
+};
+
+
+onMounted(() => {
+  fetch();
 });
 </script>
 <style lang=""></style>
