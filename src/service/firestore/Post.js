@@ -10,7 +10,6 @@ import {
   limit,
   orderBy,
   startAt,
-
   getCountFromServer,
 } from "firebase/firestore";
 import { app } from "@/firebase/index.js";
@@ -30,8 +29,6 @@ export default class Post {
       return [];
     }
   }
-
-
 
   async create(data) {
     const post = await addDoc(collection(this.db, "Posts"), data);
@@ -145,5 +142,3 @@ export default class Post {
     return snapshot.docs[index];
   }
 }
-
-

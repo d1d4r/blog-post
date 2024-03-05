@@ -7,9 +7,11 @@
   >
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="text-center border backdrop-blur-sm hero-content">
-      <div class="max-w-md ">
-        <div class="text-white ">
-          <h1 class="text-white text-clamp font-Playfairdisplay ">Hello there</h1>
+      <div class="max-w-md">
+        <div class="text-white">
+          <h1 class="text-white text-clamp font-Playfairdisplay">
+            Hello there
+          </h1>
           <p class="font-Playfairdisplay">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
@@ -47,8 +49,6 @@
       <SkeletonCardPost />
     </swiper-slide>
   </SwiperCard>
-
-
 </template>
 <script setup>
 import SwiperCard from "@/components/SwiperCard.vue";
@@ -72,7 +72,7 @@ const state = reactive({
 const fetchPost = async () => {
   try {
     state.loading = true;
-    const { postarr } = await post.paginatePosts( "Posts", 1, 4);
+    const { postarr } = await post.paginatePosts("Posts", 1, 4);
 
     const posts = [];
     for (let post = 0; post < postarr.length; post++) {
@@ -111,4 +111,3 @@ fetchPost();
   color: black;
 }
 </style>
-
